@@ -29,21 +29,15 @@ dependencies {
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	implementation 'com.auth0:java-jwt:4.0.0'
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.1'
-	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
-	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	testImplementation("org.junit.vintage:junit-vintage-engine") {
 		exclude group: "org.hamcrest", module: "hamcrest-core"
 	}
 	implementation'org.modelmapper:modelmapper:3.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
+
