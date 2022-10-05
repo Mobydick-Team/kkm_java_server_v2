@@ -15,10 +15,13 @@ import java.util.List;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long userId;
     private String nickname;
-    private String k_id;
-    private String k_img_url;
+    @Column(name = "k_id")
+    private String kId;
+    @Column(name = "k_img_url")
+    private String kImgUrl;
     private double lat;
     private double lon;
     private String address;
@@ -27,31 +30,31 @@ public class Users {
     private List<Post> post = new ArrayList<Post>();
 
 
-    public Users( Long user_id,String nickname, String k_id, String k_img_url, double lat, double lon, String address, long kkm) {
-        this.user_id=user_id;
-        this.k_id = k_id;
+    public Users( Long userId,String nickname, String kId, String kImgUrl, double lat, double lon, String address, long kkm) {
+        this.userId=userId;
+        this.kId = kId;
         this.nickname = nickname;
-        this.k_img_url = k_img_url;
+        this.kImgUrl = kImgUrl;
         this.lat = lat;
         this.lon = lon;
         this.address = address;
         this.kkm=kkm;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
     public String getNickname() {
         return nickname;
     }
 
-    public String getK_id() {
-        return k_id;
+    public String getKId() {
+        return kId;
     }
 
-    public String getK_img_url() {
-        return k_img_url;
+    public String getKImgUrl() {
+        return kImgUrl;
     }
 
     public double getLat() {

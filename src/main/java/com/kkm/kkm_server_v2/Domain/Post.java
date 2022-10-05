@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.Domain;
 
+import jdk.jfr.Name;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,13 +13,18 @@ import java.time.LocalDateTime;
 public class Post  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_id;
+    @Column(name = "post_id")
+    private Long postId;
     private String title;
-    private String image_1;
-    private String image_2;
-    private String image_3;
+    @Column(name = "image_1")
+    private String image1;
+    @Column(name = "image_2")
+    private String image2;
+    @Column(name = "image_3")
+    private String image3;
     private String description;
-    private LocalDateTime write_time = LocalDateTime.now();
+    @Column(name = "write_time")
+    private LocalDateTime writeTime = LocalDateTime.now();
     private long cost;
     private long state;
     private long type;
@@ -26,11 +32,11 @@ public class Post  {
     @JoinColumn(name = "post_owner_id")
     private Users user;
 
-    public Post( String title, String image_1, String image_2, String image_3, String description, long cost, long state, long type) {
+    public Post( String title, String image1, String image2, String image3, String description, long cost, long state, long type) {
         this.title = title;
-        this.image_1 = image_1;
-        this.image_2 = image_2;
-        this.image_3 = image_3;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
         this.description = description;
         this.cost = cost;
         this.state = state;
