@@ -13,8 +13,6 @@ public class Post  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long post_id;
-
-    private Long post_owner_id;
     private String title;
     private String image_1;
     private String image_2;
@@ -24,10 +22,18 @@ public class Post  {
     private long cost;
     private long state;
     private long type;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private Users user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_owner_id")
+    private Users user;
 
-
-
+    public Post( String title, String image_1, String image_2, String image_3, String description, long cost, long state, long type) {
+        this.title = title;
+        this.image_1 = image_1;
+        this.image_2 = image_2;
+        this.image_3 = image_3;
+        this.description = description;
+        this.cost = cost;
+        this.state = state;
+        this.type = type;
+    }
 }
