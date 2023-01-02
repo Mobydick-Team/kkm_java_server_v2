@@ -15,12 +15,9 @@ import java.util.List;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
     private String nickname;
-    @Column(name = "k_id")
     private String kId;
-    @Column(name = "k_img_url")
     private String kImgUrl;
     private double lat;
     private double lon;

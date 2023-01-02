@@ -13,17 +13,12 @@ import java.time.LocalDateTime;
 public class Post  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
     private Long postId;
     private String title;
-    @Column(name = "image_1")
     private String image1;
-    @Column(name = "image_2")
     private String image2;
-    @Column(name = "image_3")
     private String image3;
     private String description;
-    @Column(name = "write_time")
     private LocalDateTime writeTime = LocalDateTime.now();
     private long cost;
     private long state;

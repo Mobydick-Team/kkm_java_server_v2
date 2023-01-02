@@ -1,6 +1,5 @@
 package com.kkm.kkm_server_v2.Controller;
 
-import com.kkm.kkm_server_v2.Domain.Post;
 import com.kkm.kkm_server_v2.Domain.Users;
 import com.kkm.kkm_server_v2.Repository.UserRepository;
 import com.kkm.kkm_server_v2.Service.JwtService;
@@ -8,8 +7,8 @@ import com.kkm.kkm_server_v2.Service.KakaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -35,20 +34,20 @@ public Users Users(Users users)throws Exception{
 //
 //    // user가 회원가입 되어 있는지 체크 후 true라면 로그인 처리 + JWT token 발급 false라면 회원가입 절차
     @RequestMapping(value = "/user/kakaoLogin", method = RequestMethod.POST)
-    public String KakaoLogin(@RequestParam(value = "k_id", required = true) long k_id) throws Exception {
-        Users exist = userRepository.findByK_id(k_id); // user table에 존재하면 존재하는 정보, 존재하지 않으면
-        Map<String, Object> userInfo = kakaoService.getUserInfoById(k_id);
+    public String KakaoLogin(@RequestParam(value = "k_id", required = true) String kId) throws Exception {
+        Users exist = userRepository.findByKId(kId); // user table에 존재하면 존재하는 정보, 존재하지 않으면
+        Map<String, Object> userInfo = kakaoService.getUserInfoById(kId);
         String current_profile_img = userInfo.get("k_img_url").toString().replace("\"", "");
         if (exist == null) { // 회원 가입이 안 되어 있다면
             return "guest";
         } else { // 회원 가입이 되어있다면 JWT token 보내줘야 함
-            if (!current_profile_img.equals(exist.getK_img_url().toString())) {
-                userRepository.updateKImg(userInfo.get("k_img_url").toString().replace("\"", ""), k_id);
+            if (!current_profile_img.equals(exist.getKImgUrl().toString())) {
+                userRepository.updateKImg(userInfo.get("k_img_url").toString().replace("\"", ""), kId);
             }
 
-            Users user = new Users(exist.getUser_id(),
+            Users user = new Users(exist.getUserId(),
                     exist.getNickname(),
-                    exist.getK_id(),
+                    exist.getKId(),
                     current_profile_img,
                     exist.getLat(),
                     exist.getLon(),

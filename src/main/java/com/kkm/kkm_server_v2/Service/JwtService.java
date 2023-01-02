@@ -24,10 +24,10 @@ public class JwtService {
         headers.put("alg", "HS256");
 
         Map<String, Object> payloads = new HashMap<>();
-        payloads.put("user_id", user.getUser_id());
+        payloads.put("user_id", user.getUserId());
         payloads.put("nickname", user.getNickname());
-        payloads.put("k_id", user.getK_id());
-        payloads.put("k_img_url", user.getK_img_url());
+        payloads.put("k_id", user.getKId());
+        payloads.put("k_img_url", user.getKImgUrl());
         payloads.put("lat", user.getLat());
         payloads.put("lon", user.getLon());
         payloads.put("address", user.getAddress());

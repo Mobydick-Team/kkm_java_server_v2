@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users,Long> {
-    Users findByK_id(long k_id);
-    @Query("update Users set k_img_url=:k_img_url where IFNULL(k_id, 0)=:k_id")
-    void updateKImg(String k_img_url, long k_id);
+    Users findByKId(String kId);
+    @Query("update Users set kImgUrl=:kImgUrl where IFNULL(kId, 0)=:kId")
+    void updateKImg(String kImgUrl, String kId);
 
 }

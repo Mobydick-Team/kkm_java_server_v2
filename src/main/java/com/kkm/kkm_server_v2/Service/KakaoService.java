@@ -119,11 +119,11 @@ public class KakaoService {
     }
 
 
-    public Map<String, Object> getUserInfoById(long k_id) throws IOException {
+    public Map<String, Object> getUserInfoById(String kId) throws IOException {
         String host = "https://kapi.kakao.com/v2/user/me";
         Map<String, Object> result = new HashMap<>();
         try {
-            URL url = new URL(host+"?secure_resource=false&property_keys=%5B%22properties.profile_image%22%5D&target_id_type=user_id&target_id="+k_id);
+            URL url = new URL(host+"?secure_resource=false&property_keys=%5B%22properties.profile_image%22%5D&target_id_type=user_id&target_id="+kId);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Authorization", "KakaoAK "+ "58c4971e0d44ebafc559b0388b33dbdf");
