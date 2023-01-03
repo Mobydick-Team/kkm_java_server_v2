@@ -19,13 +19,8 @@ import java.util.Date;
 @Component
 @Slf4j
 public class JwtTokenProvider {
-    @Value("${token.refresh.secretKey}")
+    @Value("${token.secretKey}")
     private String secretKey;
-    @Value("${token.access.expired}")
-    private final Long accessTokenValidTime;
-    @Value("${token.refresh.expired}")
-    private Long refreshTokenValidTime;
-
     private final UserDetailsService userDetailsService;
 
     @PostConstruct
@@ -46,11 +41,14 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+
     public String createAccessToken(String username){
+        Long accessTokenValidTime = 30 * 60 * 1000L;
         return createToken(username, accessTokenValidTime);
     }
 
     public String createRefreshToken(String username){
+        Long refreshTokenValidTime = 1000L * 60 * 60 * 24 * 14;
         return createToken(username, refreshTokenValidTime);
     }
 
