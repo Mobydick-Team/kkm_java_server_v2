@@ -1,6 +1,6 @@
-package global.security;
+package com.kkm.kkm_server_v2.global.security;
 
-import global.security.jwt.JwtAuthenticationFilter;
+import com.kkm.kkm_server_v2.global.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
