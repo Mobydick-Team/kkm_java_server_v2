@@ -1,6 +1,6 @@
-package global.security.service;
+package com.kkm.kkm_server_v2.global.security.service;
 
-import domian.user.entity.repository.UserRepository;
+import com.kkm.kkm_server_v2.domian.user.entity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

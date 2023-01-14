@@ -1,4 +1,4 @@
-package global.web.config;
+package com.kkm.kkm_server_v2.global.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

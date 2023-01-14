@@ -32,6 +32,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 	testImplementation("org.junit.vintage:junit-vintage-engine") {
 		exclude group: "org.hamcrest", module: "hamcrest-core"
 	}

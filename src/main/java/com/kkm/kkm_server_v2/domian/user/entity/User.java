@@ -1,4 +1,4 @@
-package domian.user.entity;
+package com.kkm.kkm_server_v2.domian.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

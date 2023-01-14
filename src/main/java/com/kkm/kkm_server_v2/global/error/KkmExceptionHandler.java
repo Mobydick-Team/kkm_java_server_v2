@@ -1,7 +1,7 @@
-package global.error;
+package com.kkm.kkm_server_v2.global.error;
 
-import global.error.exception.ErrorCode;
-import global.error.exception.KkmException;
+import com.kkm.kkm_server_v2.global.error.exception.ErrorCode;
+import com.kkm.kkm_server_v2.global.error.exception.KkmException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

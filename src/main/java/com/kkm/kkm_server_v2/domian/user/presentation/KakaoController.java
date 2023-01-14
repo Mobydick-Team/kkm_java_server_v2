@@ -1,4 +1,4 @@
-package domian.user.presentation;
+package com.kkm.kkm_server_v2.domian.user.presentation;
 
 import org.springframework.stereotype.Controller;
 

@@ -1,6 +1,6 @@
-package domian.user.entity.repository;
+package com.kkm.kkm_server_v2.domian.user.entity.repository;
 
-import domian.user.entity.User;
+import com.kkm.kkm_server_v2.domian.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

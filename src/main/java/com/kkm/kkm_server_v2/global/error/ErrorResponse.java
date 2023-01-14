@@ -1,4 +1,4 @@
-package global.error;
+package com.kkm.kkm_server_v2.global.error;
 
 import lombok.Builder;
 import lombok.Getter;

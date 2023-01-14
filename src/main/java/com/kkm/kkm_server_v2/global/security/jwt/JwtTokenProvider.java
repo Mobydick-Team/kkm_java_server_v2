@@ -1,4 +1,4 @@
-package global.security.jwt;
+package com.kkm.kkm_server_v2.global.security.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
