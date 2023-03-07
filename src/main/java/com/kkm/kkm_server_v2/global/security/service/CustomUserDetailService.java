@@ -13,8 +13,8 @@ public class CustomUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String k_id) throws UsernameNotFoundException{
-        return (UserDetails) userRepository.findByKId(k_id)
+    public UserDetails loadUserByUsername(String kId) throws UsernameNotFoundException{
+        return userRepository.findByKId(kId)
                 .orElseThrow(() ->new UsernameNotFoundException("사용자가 없음"));
     }
 }
