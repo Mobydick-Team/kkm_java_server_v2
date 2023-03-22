@@ -1,9 +1,6 @@
-package com.kkm.kkm_server_v2.domian.user.entity;
+package com.kkm.kkm_server_v2.domian.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,11 +8,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-@Data
-@Entity
+@Entity(name = "tb_user")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,19 +20,19 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true,nullable = false,length = 38)
-    private String nickname;
+    private String name;
 
     @Column(unique = true,nullable = false)
-    private String kId;
+    private String userId;
 
     @Column(nullable = false)
-    private String kImgUrl;
+    private String imgUrl;
 
     @Column(nullable = false)
-    private double lat;
+    private double latitude;
 
     @Column(nullable = false)
-    private double lon;
+    private double longitude;
 
     @Column(nullable = false)
     private String address;
@@ -84,6 +81,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+    public void updateName(String name) {
+        this.name = name;
     }
 
 }

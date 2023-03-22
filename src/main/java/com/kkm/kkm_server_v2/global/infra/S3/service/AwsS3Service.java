@@ -1,4 +1,4 @@
-package com.kkm.kkm_server_v2.global.image.service;
+package com.kkm.kkm_server_v2.global.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;

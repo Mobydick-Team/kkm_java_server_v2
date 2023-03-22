@@ -17,5 +17,8 @@ public class Category {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private CategoryType type;
+    public enum CategoryType {
+        상의, 치마, 바지, 악세사리, 신발, 가방, 원피스, 패션소품, 기타
+    }
 }

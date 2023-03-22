@@ -1,4 +1,4 @@
-package com.kkm.kkm_server_v2.global.security.config;
+package com.kkm.kkm_server_v2.global.config;
 
 import com.kkm.kkm_server_v2.global.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
