@@ -1,50 +1,45 @@
 package com.kkm.kkm_server_v2.global.error;
 
-import com.kkm.kkm_server_v2.global.error.exception.ErrorCode;
-import com.kkm.kkm_server_v2.global.error.exception.KkmException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import javax.servlet.http.HttpServletRequest;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
 public class KkmExceptionHandler {
 
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    @ExceptionHandler(KkmException.class)
-    public ErrorResponse handleStupetitionException(KkmException e, HttpServletRequest request){
-        log.error("errorCode: {}, url: {}, message: {}",
-                e.getErrorCode(), request.getRequestURI(), e.getMessage());
+    @ExceptionHandler({BindException.class})
+    public ResponseEntity<Map<String, String>> bindException(BindException e) {
+        Map<String, String> errorMap = new HashMap<>();
 
-        return ErrorResponse.builder()
-                .status(e.getErrorCode().getStatus())
-                .message(e.getMessage())
-                .build();
-    }
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ErrorResponse handleBadRequest(MethodArgumentNotValidException e, HttpServletRequest request) {
-        log.error("url: {}, message: {}", request.getRequestURI(), e.getMessage());
-
-        return ErrorResponse.builder()
-                .status(ErrorCode.BAD_REQUEST.getStatus())
-                .message(
-                        e.getBindingResult().getFieldErrors().get(0).getField() + "의 " +
-                                e.getBindingResult().getFieldErrors().get(0).getDefaultMessage())
-                .build();
+        for (FieldError error : e.getFieldErrors()) {
+            errorMap.put(error.getField(), error.getDefaultMessage());
+        }
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handleException(Exception e, HttpServletRequest request) {
-        log.error("url: {}, message: {}", request.getRequestURI(), e.getMessage());
+    @ExceptionHandler({ConstraintViolationException.class})
+    public ResponseEntity<Map<String, Object>> handleConstraintViolation(ConstraintViolationException e) {
+        Map<String, Object> errorMap = new HashMap<>();
+        List<String> errors = new ArrayList<>();
+        for (ConstraintViolation<?> violation : e.getConstraintViolations()) {
+            errors.add(violation.getRootBeanClass().getName() + " " +
+                    violation.getPropertyPath() + ": " + violation.getMessage());
+        }
+        errorMap.put("errors", errors);
+        errorMap.put("message", e.getMessage());
 
-        return ErrorResponse.builder()
-                .status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus())
-                .message(ErrorCode.INTERNAL_SERVER_ERROR.getMessage())
-                .build();
+        return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
 }
-
