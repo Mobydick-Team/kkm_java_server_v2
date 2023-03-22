@@ -1,4 +1,4 @@
-package com.kkm.kkm_server_v2.global.config;
+package com.kkm.kkm_server_v2.global.infra.S3.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
