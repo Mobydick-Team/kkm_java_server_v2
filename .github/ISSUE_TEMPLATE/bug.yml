@@ -6,7 +6,7 @@ body:
     attributes:
       label: ✍️ DESCRIPTION
       description: 오류에 대한 설명을 작성해 주세요.
-      placeholder: `ERROR :: error message`
+      placeholder: (에러코드) ___할 때 오류가 발생했어요 ㅜ
     validations: 
       required: true
   - type: textarea
@@ -19,4 +19,4 @@ body:
   - type: textarea
     attributes:
       label: ✅ WORKAROUND
-      description: - [ ] props drilling 해결
+      description: props drilling 해결
