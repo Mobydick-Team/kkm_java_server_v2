@@ -1,0 +1,22 @@
+name: "⚠️ BUG"
+description: "오류 혹은 장애가 생겼을 떄 작성해 주세요!"
+labels: "⚠️ BUG"
+body:
+  - type: textarea
+    attributes:
+      label: ✍️ DESCRIPTION
+      description: 오류에 대한 설명을 작성해 주세요.
+      placeholder: `ERROR :: error message`
+    validations: 
+      required: true
+  - type: textarea
+    attributes:
+      label: ❔ WHY?
+      description: 오류가 발생한 이유에 대해 자세히 작성해 주세요.
+      placeholder: 1. DOM이 마운트 되기 전...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: ✅ WORKAROUND
+      description: - [ ] props drilling 해결
