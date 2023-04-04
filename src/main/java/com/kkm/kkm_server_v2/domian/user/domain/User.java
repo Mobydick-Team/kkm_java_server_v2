@@ -3,14 +3,12 @@ package com.kkm.kkm_server_v2.domian.user.domain;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+
 @Entity
 @Table(name = "tb_user")
-//@NoArgsConstructor(access = AccessLevel.)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class User implements UserDetails {
     @Id
@@ -18,10 +16,10 @@ public class User implements UserDetails {
     @Column
     private Long id;
 
-    @Column(unique = true,nullable = false,length = 38)
-    private String name;
+    @Column(unique = true, nullable = false, length = 38)
+    private String nickname;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String userId;
 
     @Column(nullable = false)
@@ -39,13 +37,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private long kkm;
 
-    @Column(name = "ROLE",length = 4, nullable = false)
+    @Column(name = "ROLE", length = 4, nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -81,8 +75,15 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
-    public void updateName(String name) {
-        this.name = name;
-    }
 
+    @Builder
+    public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role) {
+        this.nickname = nickname;
+        this.userId = userId;
+        this.imgUrl = imgUrl;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+        this.role = role;
+    }
 }
