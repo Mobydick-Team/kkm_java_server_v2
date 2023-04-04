@@ -19,7 +19,7 @@ public class RefreshTokenService {
         RefreshToken refreshToken = getRefreshToken(token);
         return AccessTokenResponse.builder()
                 .accessToken(jwtTokenProvider
-                        .createAccessToken(refreshToken.getUserId()))
+                        .generateAccessToken(refreshToken.getUserId()))
                 .build();
     }
 

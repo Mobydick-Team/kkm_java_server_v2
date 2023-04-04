@@ -5,7 +5,6 @@ import com.kkm.kkm_server_v2.domian.auth.presentation.dto.response.TokenResponse
 import com.kkm.kkm_server_v2.domian.user.domain.User;
 import com.kkm.kkm_server_v2.domian.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.kkm.kkm_server_v2.global.security.jwt.JwtTokenProvider;
 
@@ -20,8 +19,8 @@ public class LoginService {
         User user = userFacade.findUserByUserId(request.getUserId());
 
         return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.createAccessToken(user.getUserId()))
-                .refreshToken(jwtTokenProvider.createRefreshToken(user.getUserId()))
+                .accessToken(jwtTokenProvider.generateAccessToken(user.getUserId()))
+                .refreshToken(jwtTokenProvider.generateRefreshToken(user.getUserId()))
                 .isLogin(!(user.getNickname() == null || user.getNickname().equals("")))
                 .build();
     }

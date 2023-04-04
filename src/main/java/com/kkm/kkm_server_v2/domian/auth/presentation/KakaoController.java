@@ -4,14 +4,12 @@ import com.kkm.kkm_server_v2.domian.auth.presentation.dto.response.AccessTokenRe
 import com.kkm.kkm_server_v2.domian.auth.service.KakaoAuthService;
 import com.kkm.kkm_server_v2.domian.auth.service.LoginService;
 import com.kkm.kkm_server_v2.domian.auth.service.RefreshTokenService;
-import com.kkm.kkm_server_v2.domian.user.domain.User;
 import com.kkm.kkm_server_v2.domian.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
