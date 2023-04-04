@@ -7,8 +7,7 @@ import com.kkm.kkm_server_v2.domian.user.service.CheckUserService;
 import com.kkm.kkm_server_v2.domian.user.service.SignUpService;
 import com.kkm.kkm_server_v2.domian.user.service.UpdateAddressService;
 import com.kkm.kkm_server_v2.domian.user.service.UpdateUserInfoService;
-import com.kkm.kkm_server_v2.global.infra.S3.service.
-        AwsS3Service;
+import com.kkm.kkm_server_v2.global.infra.S3.service.AwsS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
