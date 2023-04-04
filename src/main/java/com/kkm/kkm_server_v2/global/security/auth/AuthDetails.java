@@ -17,7 +17,7 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton((GrantedAuthority) () -> user.getName());
+        return Collections.singleton((GrantedAuthority) user::getNickname);
     }
 
     @Override

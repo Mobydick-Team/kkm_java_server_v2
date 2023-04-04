@@ -1,11 +1,11 @@
 package com.kkm.kkm_server_v2.global.security.jwt.exception.error;
 import com.kkm.kkm_server_v2.global.error.exception.ErrorProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public enum JwtErrorProperty implements ErrorProperty {
 
     EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "만료된 토큰입니다."),
