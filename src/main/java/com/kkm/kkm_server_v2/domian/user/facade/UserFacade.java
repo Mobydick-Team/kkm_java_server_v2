@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -15,17 +14,24 @@ public class UserFacade {
     private final UserRepository userRepository;
 
     @Transactional
-    public User getCurrentUser(long id)throws Exception{
+    public User getCurrentUser(long id){
         return userRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
     @Transactional
     public User findUserByUserId(String userId){
         return userRepository.findByUserId(userId)
-                .orElseThrow( ()-> UserNotFoundException.EXCEPTION);
+                .orElseThrow(() ->UserNotFoundException.EXCEPTION);
     }
     @Transactional
-    public Optional<User> isUserExist(String userId){
-        return userRepository.findByUserId(userId);
+    public boolean isUserExistByNickName(String nickname) {
+        return userRepository.existsUserByNickname(nickname);
+    }
+
+    public boolean existsUserByUserId(String userId) {
+        if(!userRepository.existsUserByUserId(userId)){
+            throw UserNotFoundException.EXCEPTION;
+        }
+        return true;
     }
 }

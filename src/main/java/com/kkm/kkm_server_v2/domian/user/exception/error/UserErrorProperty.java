@@ -1,7 +1,6 @@
 package com.kkm.kkm_server_v2.domian.user.exception.error;
 
 import com.kkm.kkm_server_v2.global.error.exception.ErrorProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

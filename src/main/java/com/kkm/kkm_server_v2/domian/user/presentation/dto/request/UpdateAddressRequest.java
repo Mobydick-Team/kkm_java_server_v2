@@ -5,13 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UpdateUserInfoRequest {
-    @NotBlank
-    private String nickname;
-
+public class UpdateAddressRequest {
     @NotBlank
     private long id;
 
+    @NotBlank
+    private long latitude;
+
+    @NotBlank
+    private long longitude;
+
+    @NotBlank
+    private String address;
 }
