@@ -22,7 +22,7 @@ public class LoginService {
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.createAccessToken(user.getUserId()))
                 .refreshToken(jwtTokenProvider.createRefreshToken(user.getUserId()))
-                .isLogin(!(user.getName() == null || user.getName().equals("")))
+                .isLogin(!(user.getNickname() == null || user.getNickname().equals("")))
                 .build();
     }
 
