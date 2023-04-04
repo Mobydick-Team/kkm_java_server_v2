@@ -1,19 +1,17 @@
 package com.kkm.kkm_server_v2.domian.user.presentation.dto.request;
 
-import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 @Getter
-@AllArgsConstructor
-public class UpdateUserRequest {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class UpdateNicknameRequest {
     @NotBlank
-    private String name;
+    private String nickname;
 
     @NotBlank
     private long id;
-
 
 }

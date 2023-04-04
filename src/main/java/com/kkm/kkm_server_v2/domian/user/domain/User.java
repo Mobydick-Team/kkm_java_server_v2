@@ -8,15 +8,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-@Entity(name = "tb_user")
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "tb_user")
+//@NoArgsConstructor(access = AccessLevel.)
 @Getter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column
     private Long id;
 
     @Column(unique = true,nullable = false,length = 38)
