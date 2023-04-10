@@ -9,6 +9,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class LoginRequest {
     @NotNull
-    private String userId;
+    private Long userId;
 
 }

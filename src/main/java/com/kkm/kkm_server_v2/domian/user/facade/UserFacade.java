@@ -20,7 +20,7 @@ public class UserFacade {
     }
 
     @Transactional
-    public User findUserByUserId(String userId) {
+    public User findUserByUserId(Long userId) {
         return userRepository.findByUserId(userId)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
@@ -30,7 +30,7 @@ public class UserFacade {
         return userRepository.existsUserByNickname(nickname);
     }
 
-    public boolean existsUserByUserId(String userId) {
+    public boolean existsUserByUserId(Long userId) {
         if (!userRepository.existsUserByUserId(userId)) {
             throw UserNotFoundException.EXCEPTION;
         }
