@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PutMapping("/update/address")
-    public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request) throws Exception {
+    public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request){
         updateAddressService.execute(request);
     }
 

@@ -16,7 +16,7 @@ public class UpdateUserInfoService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void execute(UpdateUserInfoRequest request, String imgUrl) throws Exception {
+    public void execute(UpdateUserInfoRequest request, String imgUrl){
         User user = userFacade.getCurrentUser(request.getId());
         userRepository.save(
                 User.builder()

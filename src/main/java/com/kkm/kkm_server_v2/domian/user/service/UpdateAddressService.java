@@ -16,7 +16,7 @@ public class UpdateAddressService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void execute(UpdateAddressRequest request) throws Exception {
+    public void execute(UpdateAddressRequest request) {
         User user = userFacade.getCurrentUser(request.getId());
         userRepository.save(
                 User.builder()
