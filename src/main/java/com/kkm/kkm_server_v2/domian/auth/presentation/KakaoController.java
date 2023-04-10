@@ -2,6 +2,7 @@ package com.kkm.kkm_server_v2.domian.auth.presentation;
 
 import com.kkm.kkm_server_v2.domian.auth.presentation.dto.request.LoginRequest;
 import com.kkm.kkm_server_v2.domian.auth.presentation.dto.response.AccessTokenResponse;
+import com.kkm.kkm_server_v2.domian.auth.presentation.dto.response.KakaoUserInfoResponse;
 import com.kkm.kkm_server_v2.domian.auth.service.KakaoAuthService;
 import com.kkm.kkm_server_v2.domian.auth.service.LoginService;
 import com.kkm.kkm_server_v2.domian.auth.service.RefreshTokenService;
@@ -32,7 +33,7 @@ public class KakaoController {
     private final UserFacade userFacade;
 
     @GetMapping("/info")
-    public Map<String, Object> GetKakaoUserInfo(@RequestParam String code) throws Exception {
+    public KakaoUserInfoResponse GetKakaoUserInfo(@RequestParam String code) throws Exception {
         return kakaoAuthService.getUserInfo(kakaoAuthService.getAccessToken(code));
     }
 
