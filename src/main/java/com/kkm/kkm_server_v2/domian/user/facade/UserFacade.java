@@ -14,22 +14,24 @@ public class UserFacade {
     private final UserRepository userRepository;
 
     @Transactional
-    public User getCurrentUser(long id){
+    public User getCurrentUser(long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
+
     @Transactional
-    public User findUserByUserId(String userId){
+    public User findUserByUserId(String userId) {
         return userRepository.findByUserId(userId)
-                .orElseThrow(() ->UserNotFoundException.EXCEPTION);
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
+
     @Transactional
     public boolean isUserExistByNickName(String nickname) {
         return userRepository.existsUserByNickname(nickname);
     }
 
     public boolean existsUserByUserId(String userId) {
-        if(!userRepository.existsUserByUserId(userId)){
+        if (!userRepository.existsUserByUserId(userId)) {
             throw UserNotFoundException.EXCEPTION;
         }
         return true;

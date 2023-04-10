@@ -30,12 +30,12 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String createAccessToken(String userId) {
-        return createToken(userId, jwtProperties.getAccessTime());
+    public String generateAccessToken(String userId) {
+        return generateToken(userId, jwtProperties.getAccessTime());
     }
 
-    public String createRefreshToken(String userId) {
-        String token = createToken(userId, jwtProperties.getRefreshTime());
+    public String generateRefreshToken(String userId) {
+        String token = generateToken(userId, jwtProperties.getRefreshTime());
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
@@ -47,7 +47,7 @@ public class JwtTokenProvider {
         return token;
     }
 
-    public String createToken(String userId, Long time) {
+    public String generateToken(String userId, Long time) {
         Claims claims = Jwts.claims();
         claims.put("userId", userId);
         Date now = new Date();

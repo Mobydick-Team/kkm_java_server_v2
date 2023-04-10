@@ -10,9 +10,8 @@ import org.springframework.http.HttpStatus;
 public enum S3ErrorProperty implements ErrorProperty {
 
     AUTHORITY_MISMATCH(HttpStatus.FORBIDDEN, "권한이 없습니다."),
-    FILE_UPLOAD_FAILED(HttpStatus.INTERNAL_SERVER_ERROR,"파일 업로드에 실패했습니다."),
-    FORM_MISMATCH(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일입니다.")
-    ;
+    FILE_UPLOAD_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다."),
+    FORM_MISMATCH(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일입니다.");
 
     private final HttpStatus status;
     private final String message;

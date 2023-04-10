@@ -50,7 +50,7 @@ public class AwsS3Service {
         return fileNameList;
     }
 
-    public void (String fileName) {
+    public void deleteFile(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
 

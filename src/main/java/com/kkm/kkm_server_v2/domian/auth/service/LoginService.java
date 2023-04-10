@@ -4,9 +4,9 @@ import com.kkm.kkm_server_v2.domian.auth.presentation.dto.request.LoginRequest;
 import com.kkm.kkm_server_v2.domian.auth.presentation.dto.response.TokenResponse;
 import com.kkm.kkm_server_v2.domian.user.domain.User;
 import com.kkm.kkm_server_v2.domian.user.facade.UserFacade;
+import com.kkm.kkm_server_v2.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.kkm.kkm_server_v2.global.security.jwt.JwtTokenProvider;
 
 @Service
 @RequiredArgsConstructor

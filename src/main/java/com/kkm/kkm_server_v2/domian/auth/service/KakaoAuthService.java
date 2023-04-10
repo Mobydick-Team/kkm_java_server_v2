@@ -5,14 +5,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class  KakaoAuthService {
+public class KakaoAuthService {
     public String getAccessToken(String auth_code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -98,7 +102,7 @@ public class  KakaoAuthService {
 
             String userId = obj.get("id").toString();
 
-            result.put("userId",userId);
+            result.put("userId", userId);
             br.close();
 
 

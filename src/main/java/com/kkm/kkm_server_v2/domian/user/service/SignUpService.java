@@ -15,7 +15,7 @@ public class SignUpService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void execute(SignUpRequest request,String imgUrl){
+    public void execute(SignUpRequest request, String imgUrl) {
         userRepository.save(
                 User.builder()
                         .userId(request.getUserId())

@@ -17,15 +17,11 @@ public class RefreshTokenService {
 
     public AccessTokenResponse execute(String token) {
         RefreshToken refreshToken = getRefreshToken(token);
-        return AccessTokenResponse.builder()
-                .accessToken(jwtTokenProvider
-                        .generateAccessToken(refreshToken.getUserId()))
-                .build();
+        return AccessTokenResponse.builder().accessToken(jwtTokenProvider.generateAccessToken(refreshToken.getUserId())).build();
     }
 
     private RefreshToken getRefreshToken(String token) {
-        return refreshTokenRepository.findById(token)
-                .orElseThrow(() -> ExpiredTokenException.EXCEPTION);
+        return refreshTokenRepository.findById(token).orElseThrow(() -> ExpiredTokenException.EXCEPTION);
     }
 }
 
