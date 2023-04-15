@@ -1,4 +1,5 @@
 package com.kkm.kkm_server_v2.global.security.jwt;
+
 import com.kkm.kkm_server_v2.domian.auth.domain.RefreshToken;
 import com.kkm.kkm_server_v2.domian.auth.domain.repository.RefreshTokenRepository;
 import com.kkm.kkm_server_v2.global.config.properties.JwtProperties;
@@ -11,11 +12,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-
 
 
 @Component
@@ -31,11 +32,11 @@ public class JwtTokenProvider {
     }
 
     public String generateAccessToken(String userId) {
-        return generateToken(userId, jwtProperties.getAccessTime());
+        return generateToken(userId, jwtProperties.getAccessExp());
     }
 
     public String generateRefreshToken(String userId) {
-        String token = generateToken(userId, jwtProperties.getRefreshTime());
+        String token = generateToken(userId, jwtProperties.getRefreshExp());
 
         refreshTokenRepository.save(
                 RefreshToken.builder()
