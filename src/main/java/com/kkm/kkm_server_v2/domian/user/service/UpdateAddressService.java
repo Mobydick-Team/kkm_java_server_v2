@@ -17,17 +17,9 @@ public class UpdateAddressService {
 
     @Transactional
     public void execute(UpdateAddressRequest request) {
-        User user = userFacade.getCurrentUser(request.getId());
+        User user = userFacade.getCurrentUser();
         userRepository.save(
-                User.builder()
-                        .userId(user.getUserId())
-                        .imgUrl(user.getImgUrl())
-                        .address(request.getAddress())
-                        .longitude(request.getLongitude())
-                        .latitude(request.getLatitude())
-                        .nickname(user.getNickname())
-                        .role(user.getRole())
-                        .build()
+                request.toEntity(user)
         );
     }
 }

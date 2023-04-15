@@ -16,18 +16,10 @@ public class UpdateUserInfoService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void execute(UpdateUserInfoRequest request, String imgUrl){
-        User user = userFacade.getCurrentUser(request.getId());
+    public void execute(UpdateUserInfoRequest request, String imgUrl) {
+        User user = userFacade.getCurrentUser();
         userRepository.save(
-                User.builder()
-                        .userId(user.getUserId())
-                        .imgUrl(imgUrl)
-                        .address(user.getAddress())
-                        .longitude(user.getLongitude())
-                        .latitude(user.getLatitude())
-                        .nickname(request.getNickname())
-                        .role(user.getRole())
-                        .build()
+                request.toEntity(user, imgUrl)
         );
     }
 }

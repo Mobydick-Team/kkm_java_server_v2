@@ -1,7 +1,5 @@
 package com.kkm.kkm_server_v2.domian.user.service;
 
-import com.kkm.kkm_server_v2.domian.user.domain.Role;
-import com.kkm.kkm_server_v2.domian.user.domain.User;
 import com.kkm.kkm_server_v2.domian.user.domain.repository.UserRepository;
 import com.kkm.kkm_server_v2.domian.user.presentation.dto.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +15,7 @@ public class SignUpService {
     @Transactional
     public void execute(SignUpRequest request, String imgUrl) {
         userRepository.save(
-                User.builder()
-                        .userId(request.getUserId())
-                        .imgUrl(imgUrl)
-                        .address(request.getAddress())
-                        .longitude(request.getLongitude())
-                        .latitude(request.getLatitude())
-                        .nickname(request.getNickname())
-                        .role(Role.USER)
-                        .build()
+                request.toEntity(imgUrl)
         );
     }
 }
