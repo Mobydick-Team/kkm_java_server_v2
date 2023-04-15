@@ -13,11 +13,9 @@ public class CheckUserService {
     private final UserFacade userFacade;
 
     @Transactional
-    public boolean execute(String nickname) {
-        boolean user = userFacade.isUserExistByNickName(nickname);
-        if (user) {
+    public void execute(String nickname) {
+        if (userFacade.isUserExistByNickName(nickname)) {
             throw UserAlreadyExistsException.EXCEPTION;
         }
-        return false;
     }
 }
