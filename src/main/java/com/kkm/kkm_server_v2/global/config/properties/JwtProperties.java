@@ -3,16 +3,16 @@ package com.kkm.kkm_server_v2.global.config.properties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
 @Setter
 @Getter
-@Configuration
+@ConstructorBinding
 @ConfigurationProperties("jwt")
 public class JwtProperties {
 
-    private Long accessTime;
-    private Long refreshTime;
+    private Long accessExp;
+    private Long refreshExp;
     private String prefix;
     private String header;
     private String secretKey;
