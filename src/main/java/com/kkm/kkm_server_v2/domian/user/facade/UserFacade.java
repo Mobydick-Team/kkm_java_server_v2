@@ -3,7 +3,9 @@ package com.kkm.kkm_server_v2.domian.user.facade;
 import com.kkm.kkm_server_v2.domian.user.domain.User;
 import com.kkm.kkm_server_v2.domian.user.domain.repository.UserRepository;
 import com.kkm.kkm_server_v2.domian.user.exception.UserNotFoundException;
+import com.kkm.kkm_server_v2.global.security.auth.AuthDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +22,8 @@ public class UserFacade {
     }
 
     @Transactional
-    public User findUserByUserId(Long userId) {
-        return userRepository.findByUserId(userId)
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    public User findUserByUserId(String userId) {
+        return userRepository.findByUserId(userId).orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
     @Transactional
@@ -30,10 +31,8 @@ public class UserFacade {
         return userRepository.existsUserByNickname(nickname);
     }
 
-    public boolean existsUserByUserId(Long userId) {
-        if (!userRepository.existsUserByUserId(userId)) {
-            throw UserNotFoundException.EXCEPTION;
-        }
-        return true;
+    @Transactional(readOnly = true)
+    public void existsUserByUserId(String userId) {
+        if (!userRepository.existsUserByUserId(userId)) throw UserNotFoundException.EXCEPTION;
     }
 }
