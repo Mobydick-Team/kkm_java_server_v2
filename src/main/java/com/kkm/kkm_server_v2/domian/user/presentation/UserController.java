@@ -4,12 +4,13 @@ import com.kkm.kkm_server_v2.domian.user.presentation.dto.request.SignUpRequest;
 import com.kkm.kkm_server_v2.domian.user.presentation.dto.request.UpdateAddressRequest;
 import com.kkm.kkm_server_v2.domian.user.presentation.dto.request.UpdateUserInfoRequest;
 import com.kkm.kkm_server_v2.domian.user.service.CheckUserService;
+import com.kkm.kkm_server_v2.domian.user.service.DivideImageService;
 import com.kkm.kkm_server_v2.domian.user.service.SignUpService;
 import com.kkm.kkm_server_v2.domian.user.service.UpdateAddressService;
 import com.kkm.kkm_server_v2.domian.user.service.UpdateUserInfoService;
-import com.kkm.kkm_server_v2.global.infra.S3.service.AwsS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.List;
 
 
 @RestController
@@ -29,34 +29,30 @@ import java.util.List;
 public class UserController {
 
     private final CheckUserService checkUserService;
-    private final AwsS3Service awsS3Service;
     private final SignUpService signUpService;
     private final UpdateUserInfoService updateUserInfoService;
     private final UpdateAddressService updateAddressService;
+    private final DivideImageService divideImageService;
 
     @PostMapping("/signup")
     public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart MultipartFile profileImg) {
-        List<MultipartFile> list = null;
-        list.add(profileImg);
-        List<String> imgList = awsS3Service.uploadFile(list);
-        signUpService.execute(request, imgList.get(0));
+
+        signUpService.execute(request, divideImageService.execute(profileImg));
     }
 
     @GetMapping("/check/{nickname}")
-    public boolean IsNicknameExist(@PathVariable String nickname) {
-        return checkUserService.execute(nickname);
+    public void IsNicknameExist(@PathVariable String nickname) {
+        checkUserService.execute(nickname);
     }
 
-    @PutMapping("/update/info")
+    @PatchMapping("/update/info")
     public void UpdateUserInfo(@RequestPart(value = "data") @Valid UpdateUserInfoRequest request, @RequestPart MultipartFile profileImg) throws Exception {
-        List<MultipartFile> list = null;
-        list.add(profileImg);
-        List<String> imgList = awsS3Service.uploadFile(list);
-        updateUserInfoService.execute(request, imgList.get(0));
+
+        updateUserInfoService.execute(request, divideImageService.execute(profileImg));
     }
 
     @PutMapping("/update/address")
-    public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request){
+    public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request) {
         updateAddressService.execute(request);
     }
 
