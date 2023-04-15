@@ -24,7 +24,6 @@ import java.util.Collection;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column(unique = true, nullable = false, length = 38)
@@ -48,7 +47,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private long kkm;
 
-    @Column(name = "ROLE", length = 4, nullable = false)
+    @Column(name = "role", length = 4, nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
