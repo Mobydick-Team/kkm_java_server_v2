@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domian.user.presentation.dto.request;
 
+import com.kkm.kkm_server_v2.domian.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,22 @@ public class UpdateUserInfoRequest {
     private String nickname;
 
     @NotBlank
-    private long id;
+    private String userId;
 
+    public UpdateUserInfoRequest(String nickname, String userId) {
+        this.nickname = nickname;
+        this.userId = userId;
+    }
+
+    public User toEntity(User user, String imgUrl) {
+        return User.builder()
+                .userId(userId)
+                .latitude(user.getLatitude())
+                .longitude(user.getLongitude())
+                .address(user.getAddress())
+                .imgUrl(imgUrl)
+                .nickname(nickname)
+                .role(user.getRole())
+                .build();
+    }
 }
