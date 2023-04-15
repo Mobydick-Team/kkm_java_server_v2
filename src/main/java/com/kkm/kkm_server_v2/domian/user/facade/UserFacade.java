@@ -16,9 +16,9 @@ public class UserFacade {
     private final UserRepository userRepository;
 
     @Transactional
-    public User getCurrentUser(long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    public User getCurrentUser() {
+        AuthDetails auth = (AuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return auth.getUser();
     }
 
     @Transactional
