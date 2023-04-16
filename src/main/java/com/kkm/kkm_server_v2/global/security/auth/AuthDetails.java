@@ -1,6 +1,6 @@
 package com.kkm.kkm_server_v2.global.security.auth;
 
-import com.kkm.kkm_server_v2.domian.user.domain.User;
+import com.kkm.kkm_server_v2.domain.user.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
