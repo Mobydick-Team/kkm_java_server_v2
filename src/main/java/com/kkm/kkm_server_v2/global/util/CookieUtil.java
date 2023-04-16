@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class CookieUtil {
-    public ResponseCookie createCookie(String name, String token, Long time){
+    public ResponseCookie createCookie(String name, String token, Long time) {
         return ResponseCookie.from(name, token)
                 .httpOnly(true)
                 .sameSite("Strict")
