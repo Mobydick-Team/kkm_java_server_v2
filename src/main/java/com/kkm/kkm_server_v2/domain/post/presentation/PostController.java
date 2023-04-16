@@ -3,6 +3,7 @@ package com.kkm.kkm_server_v2.domain.post.presentation;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.CreatePostRequest;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.kkm.kkm_server_v2.domain.post.service.CreatePostService;
+import com.kkm.kkm_server_v2.domain.post.service.DeletePostService;
 import com.kkm.kkm_server_v2.domain.post.service.UpdatePostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ public class PostController {
 
     private final CreatePostService createPostService;
     private final UpdatePostService updatePostService;
+    private final DeletePostService deletePostService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -30,6 +32,14 @@ public class PostController {
             @RequestBody UpdatePostRequest request
     ) {
         updatePostService.execute(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePost(
+            @PathVariable("id") Long id
+    ) {
+        deletePostService.execute(id);
     }
 
 }
