@@ -2,11 +2,9 @@ package com.kkm.kkm_server_v2.domain.post.presentation;
 
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.CreatePostRequest;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
+import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostListResponse;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
-import com.kkm.kkm_server_v2.domain.post.service.CreatePostService;
-import com.kkm.kkm_server_v2.domain.post.service.DeletePostService;
-import com.kkm.kkm_server_v2.domain.post.service.SearchPostService;
-import com.kkm.kkm_server_v2.domain.post.service.UpdatePostService;
+import com.kkm.kkm_server_v2.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +18,7 @@ public class PostController {
     private final UpdatePostService updatePostService;
     private final DeletePostService deletePostService;
     private final SearchPostService searchPostService;
+    private final SearchAllPostService searchAllPostService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -52,5 +51,12 @@ public class PostController {
         return searchPostService.execute(id);
     }
 
+    @GetMapping("/list")
+    public PostListResponse getAllPost(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size
+    ) {
+        return searchAllPostService.execute(page,size);
+    }
 
 }
