@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SearchAllPostService {
+public class FindAllPostService {
 
     private final PostRepository postRepository;
 

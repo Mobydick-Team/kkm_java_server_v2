@@ -17,8 +17,8 @@ public class PostController {
     private final CreatePostService createPostService;
     private final UpdatePostService updatePostService;
     private final DeletePostService deletePostService;
-    private final SearchPostService searchPostService;
-    private final SearchAllPostService searchAllPostService;
+    private final FindPostService findPostService;
+    private final FindAllPostService findAllPostService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -48,7 +48,7 @@ public class PostController {
     public PostResponse getPost(
             @PathVariable("id") Long id
     ) {
-        return searchPostService.execute(id);
+        return findPostService.execute(id);
     }
 
     @GetMapping("/list")
@@ -56,7 +56,7 @@ public class PostController {
             @RequestParam("page") int page,
             @RequestParam("size") int size
     ) {
-        return searchAllPostService.execute(page,size);
+        return findAllPostService.execute(page,size);
     }
 
 }
