@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_post")
@@ -39,6 +41,14 @@ public class Post extends BaseTime {
         this.author = author;
     }
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> imageList;
+    public void addImage(List<Image> images) {
+        images.stream().map(item ->
+                getImageList().add(item)
+        ).close();
+    }
+
     public void updatePost(String title, String content, int price, String process, PostCategory category) {
         this.title = title;
         this.content = content;
@@ -54,5 +64,6 @@ public class Post extends BaseTime {
         this.price = price;
         this.process = process;
         this.category = category;
+        this.imageList = new ArrayList<>();
     }
 }
