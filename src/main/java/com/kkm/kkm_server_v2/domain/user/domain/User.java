@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -48,6 +49,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> postList;
+    public void addPost(Post post) {
+        getPostList().add(post);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -93,5 +97,6 @@ public class User implements UserDetails {
         this.longitude = longitude;
         this.address = address;
         this.role = role;
+        this.postList = new ArrayList<>();
     }
 }
