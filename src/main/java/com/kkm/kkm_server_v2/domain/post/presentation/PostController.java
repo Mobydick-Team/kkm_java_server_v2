@@ -21,6 +21,7 @@ public class PostController {
     private final FindPostService findPostService;
     private final FindAllPostService findAllPostService;
     private final FindByCategoryPostService findByCategoryPostService;
+    private final SearchPostService searchPostService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -68,6 +69,15 @@ public class PostController {
             @RequestParam("category") PostCategory category
     ) {
         return findByCategoryPostService.execute(page, size, category);
+    }
+
+    @GetMapping("/search")
+    public PostListResponse searchPost(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("content") String content
+    ) {
+        return searchPostService.execute(page, size, content);
     }
 
 }
