@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.presentation.dto.request;
 
+import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,5 +15,15 @@ public class CreatePostRequest {
     private int price;
     private String process;
     private PostCategory category;
+
+    public Post toEntity() {
+        return Post.builder()
+                .title(this.title)
+                .content(this.content)
+                .price(this.price)
+                .process(this.process)
+                .category(this.category)
+                .build();
+    }
 
 }
