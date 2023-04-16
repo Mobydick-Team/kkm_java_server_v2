@@ -1,6 +1,7 @@
 package com.kkm.kkm_server_v2.domain.post.domain;
 
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
+import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,6 +31,13 @@ public class Post extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     private PostCategory category;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_user")
+    private User author;
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 
     public void updatePost(String title, String content, int price, String process, PostCategory category) {
         this.title = title;
