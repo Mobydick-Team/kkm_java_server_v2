@@ -1,2 +1,17 @@
-package com.kkm.kkm_server_v2.domain.post.exception.error;public class PostErrorProperty {
+package com.kkm.kkm_server_v2.domain.post.exception.error;
+
+import com.kkm.kkm_server_v2.global.error.exception.ErrorProperty;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+
+@Getter
+@RequiredArgsConstructor
+public enum PostErrorProperty implements ErrorProperty {
+
+    POST_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다.");
+
+    private final HttpStatus status;
+    private final String message;
+
 }
