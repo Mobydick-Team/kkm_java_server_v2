@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreatePostRequest {
@@ -15,6 +17,7 @@ public class CreatePostRequest {
     private int price;
     private String process;
     private PostCategory category;
+    private List<String> urls;
 
     public Post toEntity() {
         return Post.builder()
