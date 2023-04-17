@@ -35,10 +35,9 @@ public class Jjam extends BaseTime {
     @JoinColumn(name = "fk_post")
     private Post post;
 
-    public void setPost(User post) {
-        this.agent = post;
+    public void setPost(Post post) {
+        this.post = post;
     }
-
 
 
 }
