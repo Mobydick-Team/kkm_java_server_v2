@@ -9,7 +9,6 @@ import com.kkm.kkm_server_v2.global.infra.S3.config.AwsProperties;
 import com.kkm.kkm_server_v2.global.infra.S3.exception.FileUploadFailedException;
 import com.kkm.kkm_server_v2.global.infra.S3.exception.ResponseStatusException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
