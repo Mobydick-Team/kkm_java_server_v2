@@ -4,6 +4,7 @@ import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -39,5 +40,8 @@ public class Jjam extends BaseTime {
         this.post = post;
     }
 
-
+    @Builder
+    public Jjam(Post post) {
+        this.post = post;
+    }
 }
