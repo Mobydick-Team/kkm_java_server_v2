@@ -1,6 +1,7 @@
 package com.kkm.kkm_server_v2.domain.post.domain;
 
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
+import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
@@ -39,10 +40,27 @@ public class Post extends BaseTime {
     @ColumnDefault("0")
     private int price;
 
+    @ColumnDefault("0")
+    private int deposit;
+
     private String process; // 거래 방법 추후 변경 예정
 
     @Enumerated(EnumType.STRING)
     private PostCategory category;
+
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
+    public void updateStatus(PostStatus status) {
+        this.status = status;
+    }
+
+    private boolean crumpled; // 구겨짐
+
+    private boolean discoloration; // 변색
+
+    private boolean pollution; // 오염
+
+    private boolean ripped; // 찢어짐
 
     @ManyToOne
     @JoinColumn(name = "fk_user")
@@ -59,21 +77,34 @@ public class Post extends BaseTime {
         ).close();
     }
 
-    public void updatePost(String title, String content, int price, String process, PostCategory category) {
+    public void updatePost(String title, String content, int price, int deposit, String process, PostCategory category,
+                           boolean crumpled, boolean discoloration, boolean pollution, boolean ripped) {
         this.title = title;
         this.content = content;
         this.price = price;
+        this.deposit = deposit;
         this.process = process;
         this.category = category;
+        this.crumpled = crumpled;
+        this.discoloration = discoloration;
+        this.pollution = pollution;
+        this.ripped = ripped;
     }
 
     @Builder
-    public Post(String title, String content, int price, String process, PostCategory category) {
+    public Post(String title, String content, int price, int deposit, String process, PostCategory category,
+                boolean crumpled, boolean discoloration, boolean pollution, boolean ripped) {
         this.title = title;
         this.content = content;
         this.price = price;
+        this.deposit = deposit;
         this.process = process;
         this.category = category;
+        this.crumpled = crumpled;
+        this.discoloration = discoloration;
+        this.pollution = pollution;
+        this.ripped = ripped;
+        this.status = PostStatus.ACTIVE;
         this.imageList = new ArrayList<>();
     }
 }
