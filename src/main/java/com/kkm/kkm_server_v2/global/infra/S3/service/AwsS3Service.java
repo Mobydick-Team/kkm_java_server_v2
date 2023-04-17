@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.kkm.kkm_server_v2.global.infra.S3.config.AwsProperties;
 import com.kkm.kkm_server_v2.global.infra.S3.exception.FileUploadFailedException;
 import com.kkm.kkm_server_v2.global.infra.S3.exception.ResponseStatusException;
 import lombok.RequiredArgsConstructor;
@@ -22,34 +23,29 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AwsS3Service {
 
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucket;
-    @Value("${cloud.aws.s3.address}")
-    private String address;
+    private final AwsProperties awsProperties;
 
     private final AmazonS3 amazonS3;
 
     public List<String> uploadFile(List<MultipartFile> multipartFile) {
-
         return multipartFile.stream().map(item -> {
-
             String fileName = createFileName(item.getOriginalFilename());
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentLength(item.getSize());
             objectMetadata.setContentType(item.getContentType());
 
             try (InputStream inputStream = item.getInputStream()) {
-                amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+                amazonS3.putObject(new PutObjectRequest(awsProperties.getBucket(), fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
             } catch (IOException e) {
                 throw FileUploadFailedException.EXCEPTION;
             }
-            return address + fileName;
+            return awsProperties.getUrl() + fileName;
         }).collect(Collectors.toList());
     }
 
     public void deleteFile(String fileName) {
-        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+        amazonS3.deleteObject(new DeleteObjectRequest(awsProperties.getBucket(), fileName));
     }
 
     private String createFileName(String fileName) {
