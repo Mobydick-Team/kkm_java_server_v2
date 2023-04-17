@@ -3,12 +3,16 @@ package com.kkm.kkm_server_v2.domain.post.presentation;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.CreatePostRequest;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
+import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.ImageResponse;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostListResponse;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
 import com.kkm.kkm_server_v2.domain.post.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/post")
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final CreatePostService createPostService;
+    private final UploadImageService uploadImageService;
     private final UpdatePostService updatePostService;
     private final DeletePostService deletePostService;
     private final FindPostService findPostService;
@@ -29,6 +34,14 @@ public class PostController {
             @RequestBody CreatePostRequest request
     ) {
         createPostService.execute(request);
+    }
+
+    @PostMapping("/image")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ImageResponse uploadImage(
+            @RequestPart(value = "images") List<MultipartFile> files
+    ) {
+        return uploadImageService.execute(files);
     }
 
     @PatchMapping("/{id}")
