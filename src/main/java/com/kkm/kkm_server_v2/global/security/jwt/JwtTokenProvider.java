@@ -1,7 +1,7 @@
 package com.kkm.kkm_server_v2.global.security.jwt;
 
-import com.kkm.kkm_server_v2.domian.auth.domain.RefreshToken;
-import com.kkm.kkm_server_v2.domian.auth.domain.repository.RefreshTokenRepository;
+import com.kkm.kkm_server_v2.domain.auth.domain.RefreshToken;
+import com.kkm.kkm_server_v2.domain.auth.domain.repository.RefreshTokenRepository;
 import com.kkm.kkm_server_v2.global.config.properties.JwtProperties;
 import com.kkm.kkm_server_v2.global.security.jwt.exception.ExpiredTokenException;
 import com.kkm.kkm_server_v2.global.security.jwt.exception.InvalidTokenException;
