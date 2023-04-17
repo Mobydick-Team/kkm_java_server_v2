@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.user.domain;
 
+import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -58,9 +59,18 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> postList;
+
     public void addPost(Post post) {
         getPostList().add(post);
     }
+
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Jjam> jjamList;
+
+    public void addJjam(Jjam jjam) {
+        getJjamList().add(jjam);
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
