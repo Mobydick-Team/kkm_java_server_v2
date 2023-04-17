@@ -19,8 +19,9 @@ public class UpdatePostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
-        post.updatePost(request.getTitle(), request.getContent(), request.getPrice(),
-                request.getProcess(), request.getCategory());
+        post.updatePost(request.getTitle(), request.getContent(), request.getPrice(), request.getDeposit(),
+                request.getProcess(), request.getCategory(), request.isCrumpled(),
+                request.isDiscoloration(), request.isPollution(), request.isRipped());
 
         postRepository.save(post);
     }
