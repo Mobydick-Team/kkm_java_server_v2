@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.jjam.domain;
 
+import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
@@ -32,11 +33,12 @@ public class Jjam extends BaseTime {
 
     @ManyToOne
     @JoinColumn(name = "fk_post")
-    private User post;
+    private Post post;
 
     public void setPost(User post) {
         this.agent = post;
     }
+
 
 
 }
