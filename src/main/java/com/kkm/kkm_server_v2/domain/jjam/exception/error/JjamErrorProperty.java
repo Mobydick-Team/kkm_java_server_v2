@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum JjamErrorProperty implements ErrorProperty {
-    JJAM_NOT_FOUND(HttpStatus.NOT_FOUND, "쨈을 찾을 수 없습니다.");
+    JJAM_NOT_FOUND(HttpStatus.NOT_FOUND, "쨈을 찾을 수 없습니다."),
+    JJAM_ACCESS_WRONG(HttpStatus.FORBIDDEN,"쨈 접근권한이 없습니다.");
 
     private final HttpStatus status;
     private final String message;
