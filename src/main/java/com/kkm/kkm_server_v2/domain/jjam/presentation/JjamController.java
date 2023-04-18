@@ -36,7 +36,7 @@ public class JjamController {
         deleteJjamService.execute(id);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public CountJjamResponse countJjam(@PathVariable("id") Long id) {
         return countJjamService.execute(id);
     }
