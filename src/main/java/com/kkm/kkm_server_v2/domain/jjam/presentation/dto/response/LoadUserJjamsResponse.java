@@ -5,11 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 @Builder
 @AllArgsConstructor
 public class LoadUserJjamsResponse {
-    List<Post> userjjams;
+    private Long postId;
+    private String title;
+    private String thumbnailUrl;
+    private int price;
+    private int deposit;
+
+    public static LoadUserJjamsResponse of(Post post) {
+        String thumbnailUrl = post.getImageList().get(0).getUrl();
+        return LoadUserJjamsResponse.builder()
+                .postId(post.getPostId())
+                .title(post.getTitle())
+                .thumbnailUrl(thumbnailUrl)
+                .price(post.getPrice())
+                .deposit(post.getDeposit())
+                .build();
+    }
 }

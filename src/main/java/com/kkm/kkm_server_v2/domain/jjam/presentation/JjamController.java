@@ -2,7 +2,7 @@ package com.kkm.kkm_server_v2.domain.jjam.presentation;
 
 import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.request.CreateJjamRequest;
 import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.response.CountJjamsResponse;
-import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.response.LoadUserJjamsResponse;
+import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.response.LoadUserJjamsListResponse;
 import com.kkm.kkm_server_v2.domain.jjam.service.CountJjamsService;
 import com.kkm.kkm_server_v2.domain.jjam.service.CreateJjamService;
 import com.kkm.kkm_server_v2.domain.jjam.service.DeleteJjamService;
@@ -43,8 +43,9 @@ public class JjamController {
     public CountJjamsResponse countJjams(@PathVariable("id") Long id) {
         return countJjamsService.execute(id);
     }
+
     @GetMapping("/my")
-    public LoadUserJjamsResponse loadUserJJams() {
+    public LoadUserJjamsListResponse loadUserJJams() {
         return loadUserJjamsService.execute();
     }
 }
