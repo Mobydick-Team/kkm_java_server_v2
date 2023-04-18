@@ -1,32 +1,26 @@
-package com.kkm.kkm_server_v2.domain.post.service;
+package com.kkm.kkm_server_v2.domain.jjam.service;
 
+import com.kkm.kkm_server_v2.domain.jjam.domain.repository.JjamRepository;
+import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.response.CountJjamsResponse;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
-import com.kkm.kkm_server_v2.domain.post.exception.PostAccessWrongException;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
-import com.kkm.kkm_server_v2.domain.user.domain.User;
-import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class DeletePostService {
-
-    private final UserFacade userFacade;
+public class CountJjamsService {
     private final PostRepository postRepository;
+    private final JjamRepository jjamRepository;
 
     @Transactional
-    public void execute(Long postId) {
-        User user = userFacade.getCurrentUser();
+    public CountJjamsResponse execute(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        return CountJjamsResponse.builder()
+                .countJjams((jjamRepository.findAllByPost(post)).size()).build();
 
-        if (!post.getAuthor().equals(user))
-            throw PostAccessWrongException.EXCEPTION;
-
-        postRepository.delete(post);
     }
-
 }
