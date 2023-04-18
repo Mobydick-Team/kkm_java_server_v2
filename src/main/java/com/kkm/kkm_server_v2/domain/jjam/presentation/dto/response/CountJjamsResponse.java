@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class CountJjamResponse {
+public class CountJjamsResponse {
     int countJjams;
 }
 
