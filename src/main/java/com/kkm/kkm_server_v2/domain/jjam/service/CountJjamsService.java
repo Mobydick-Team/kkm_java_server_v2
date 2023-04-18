@@ -16,8 +16,8 @@ public class CountJjamsService {
     private final JjamRepository jjamRepository;
 
     @Transactional
-    public CountJjamsResponse execute(Long post_id) {
-        Post post = postRepository.findById(post_id)
+    public CountJjamsResponse execute(Long postId) {
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
         return CountJjamsResponse.builder()
                 .countJjams((jjamRepository.findAllByPost(post)).size()).build();

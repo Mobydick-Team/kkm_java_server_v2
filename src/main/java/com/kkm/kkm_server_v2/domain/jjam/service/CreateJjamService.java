@@ -23,7 +23,7 @@ public class CreateJjamService {
     @Transactional
     public void execute(CreateJjamRequest request) {
         User user = userFacade.getCurrentUser();
-        Post post = postRepository.findById(request.getPost_id())
+        Post post = postRepository.findById(request.getPostId())
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
         Jjam jjam = Jjam.builder()
                 .post(post)

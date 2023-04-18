@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateJjamRequest {
 
-    private Long post_id;
+    private Long postId;
 }
