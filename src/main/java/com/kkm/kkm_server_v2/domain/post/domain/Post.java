@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.domain;
 
+import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
@@ -26,7 +27,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_post")
-@Getter @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseTime {
 
     @Id
@@ -50,6 +52,7 @@ public class Post extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
+
     public void updateStatus(PostStatus status) {
         this.status = status;
     }
@@ -65,16 +68,25 @@ public class Post extends BaseTime {
     @ManyToOne
     @JoinColumn(name = "fk_user")
     private User author;
+
     public void setAuthor(User author) {
         this.author = author;
     }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> imageList;
+
     public void addImage(List<Image> images) {
         images.stream().map(item ->
                 getImageList().add(item)
         ).close();
+    }
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Jjam> jjamList;
+
+    public void addJjam(Jjam jjam) {
+        getJjamList().add(jjam);
     }
 
     public void updatePost(String title, String content, int price, int deposit, String process, PostCategory category,
