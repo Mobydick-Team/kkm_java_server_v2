@@ -2,8 +2,11 @@ package com.kkm.kkm_server_v2.domain.jjam.presentation;
 
 import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.request.CreateJjamRequest;
 import com.kkm.kkm_server_v2.domain.jjam.service.CreateJjamService;
+import com.kkm.kkm_server_v2.domain.jjam.service.DeleteJjamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class JjamController {
     private final CreateJjamService createJjamService;
+    private final DeleteJjamService deleteJjamService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -22,4 +26,9 @@ public class JjamController {
         createJjamService.execute(request);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteJjam(@PathVariable("id") Long id) {
+        deleteJjamService.execute(id);
+    }
 }
