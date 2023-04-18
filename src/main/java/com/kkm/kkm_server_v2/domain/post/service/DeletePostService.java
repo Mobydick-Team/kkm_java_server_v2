@@ -23,7 +23,7 @@ public class DeletePostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
-        if(post.getAuthor().equals(user))
+        if (!post.getAuthor().equals(user))
             throw PostAccessWrongException.EXCEPTION;
 
         postRepository.delete(post);
