@@ -27,8 +27,8 @@ public class CreateJjamService {
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
         Jjam jjam = Jjam.builder()
                 .post(post)
+                .agent(user)
                 .build();
-        jjam.setAgent(user);
         user.addJjam(jjam);
         jjamRepository.save(jjam);
 

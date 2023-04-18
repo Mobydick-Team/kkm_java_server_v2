@@ -28,10 +28,6 @@ public class Jjam extends BaseTime {
     @JoinColumn(name = "fk_user")
     private User agent;
 
-    public void setAgent(User agent) {
-        this.agent = agent;
-    }
-
     @ManyToOne
     @JoinColumn(name = "fk_post")
     private Post post;
@@ -41,7 +37,9 @@ public class Jjam extends BaseTime {
     }
 
     @Builder
-    public Jjam(Post post) {
+    public Jjam(Post post, User agent) {
+
         this.post = post;
+        this.agent = agent;
     }
 }
