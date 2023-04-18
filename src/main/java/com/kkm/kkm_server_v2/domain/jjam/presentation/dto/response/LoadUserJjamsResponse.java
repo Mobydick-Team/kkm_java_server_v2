@@ -16,11 +16,10 @@ public class LoadUserJjamsResponse {
     private int deposit;
 
     public static LoadUserJjamsResponse of(Post post) {
-        String thumbnailUrl = post.getImageList().get(0).getUrl();
         return LoadUserJjamsResponse.builder()
                 .postId(post.getPostId())
                 .title(post.getTitle())
-                .thumbnailUrl(thumbnailUrl)
+                .thumbnailUrl(post.getImageList().get(0).getUrl())
                 .price(post.getPrice())
                 .deposit(post.getDeposit())
                 .build();
