@@ -7,6 +7,7 @@ import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,7 @@ public class CountJjamsService {
     private final PostRepository postRepository;
     private final JjamRepository jjamRepository;
 
+    @Transactional
     public CountJjamsResponse execute(Long post_id) {
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
