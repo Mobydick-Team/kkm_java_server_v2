@@ -8,6 +8,7 @@ import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostListRespo
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
 import com.kkm.kkm_server_v2.domain.post.service.CreatePostService;
 import com.kkm.kkm_server_v2.domain.post.service.DeletePostService;
+import com.kkm.kkm_server_v2.domain.post.service.DistancePostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindAllPostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindByCategoryPostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindPostService;
@@ -44,6 +45,7 @@ public class PostController {
     private final FindAllPostService findAllPostService;
     private final FindByCategoryPostService findByCategoryPostService;
     private final SearchPostService searchPostService;
+    private final DistancePostService distancePostService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -108,6 +110,16 @@ public class PostController {
             @RequestParam("content") String content
     ) {
         return searchPostService.execute(page, size, content);
+    }
+
+    @GetMapping("/distance")
+    public PostListResponse distancePost(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("longitude") double longitude,
+            @RequestParam("latitude") double latitude
+    ) {
+        return distancePostService.execute(page, size, longitude, latitude);
     }
 
 }
