@@ -1,11 +1,14 @@
 package com.kkm.kkm_server_v2.domain.jjam.presentation;
 
 import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.request.CreateJjamRequest;
+import com.kkm.kkm_server_v2.domain.jjam.presentation.dto.response.CountJjamResponse;
+import com.kkm.kkm_server_v2.domain.jjam.service.CountJjamService;
 import com.kkm.kkm_server_v2.domain.jjam.service.CreateJjamService;
 import com.kkm.kkm_server_v2.domain.jjam.service.DeleteJjamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JjamController {
     private final CreateJjamService createJjamService;
     private final DeleteJjamService deleteJjamService;
+    private final CountJjamService countJjamService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -30,5 +34,10 @@ public class JjamController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteJjam(@PathVariable("id") Long id) {
         deleteJjamService.execute(id);
+    }
+
+    @GetMapping("{id}")
+    public CountJjamResponse countJjam(@PathVariable("id") Long id) {
+        return countJjamService.execute(id);
     }
 }
