@@ -68,7 +68,7 @@ public class PostController {
             @PathVariable("id") Long id,
             @RequestBody UpdatePostRequest request
     ) {
-        updatePostService.execute(id, request);
+         updatePostService.execute(id, request);
     }
 
     @DeleteMapping("/{id}")
@@ -117,9 +117,10 @@ public class PostController {
             @RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("longitude") double longitude,
-            @RequestParam("latitude") double latitude
+            @RequestParam("latitude") double latitude,
+            @RequestParam("distance") int distance
     ) {
-        return distancePostService.execute(page, size, longitude, latitude);
+        return distancePostService.execute(page, size, longitude, latitude, distance);
     }
 
 }
