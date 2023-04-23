@@ -3,6 +3,7 @@ package com.kkm.kkm_server_v2.domain.trade.domain;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -37,4 +38,12 @@ public class Trade extends BaseTime {
     @ManyToOne
     @JoinColumn(name = "fk_post")
     private Post postId;
+
+    @Builder
+    public Trade(Long giverId, Long receiverId, LocalDateTime tradeTime, Post postId) {
+        this.giverId = giverId;
+        this.receiverId = receiverId;
+        this.tradeTime = tradeTime;
+        this.postId = postId;
+    }
 }
