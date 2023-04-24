@@ -23,14 +23,15 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private RecieveKkomak kkomak;
+    private RecieveKkomak kkm;
     private String content;
     @OneToOne
     @JoinColumn(name = "fk_trade")
     private Trade source;
+
     @Builder
-    public Review(RecieveKkomak kkomak, String content, Trade source) {
-        this.kkomak = kkomak;
+    public Review(RecieveKkomak kkm, String content, Trade source) {
+        this.kkm = kkm;
         this.content = content;
         this.source = source;
     }
