@@ -2,11 +2,13 @@ package com.kkm.kkm_server_v2.domain.post.presentation.dto.response;
 
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
+import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-@Getter @Builder
+@Getter
+@Builder
 @AllArgsConstructor
 public class PostResponse {
 
@@ -16,8 +18,10 @@ public class PostResponse {
     private int price;
     private String process;
     private PostCategory category;
+    private PostStatus status;
 
-    public static PostResponse of(Post post) {
+    //TODO status 추가
+    public static PostResponse of(Post post, PostStatus status) {
         return PostResponse.builder()
                 .postId(post.getPostId())
                 .title(post.getTitle())
@@ -25,6 +29,7 @@ public class PostResponse {
                 .price(post.getPrice())
                 .process(post.getProcess())
                 .category(post.getCategory())
+                .status(status)
                 .build();
     }
 
