@@ -27,7 +27,7 @@ public class CreateReviewService {
         if (request.getKkm().equals(RecieveKkomak.HAVING_KKOMAK)) {
             User giver = userRepository.findById(trade.getGiverId())
                     .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-             userRepository.save(
+            userRepository.save(
                     User.builder()
                             .userId(giver.getUserId())
                             .imgUrl(giver.getImgUrl())
