@@ -1,4 +1,7 @@
 package com.kkm.kkm_server_v2.domain.review.domain.repository;
 
-public interface ReviewRepository {
+import com.kkm.kkm_server_v2.domain.review.domain.Review;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 }
