@@ -34,7 +34,6 @@ public class Trade extends BaseTime {
 
     private Long receiverId;
 
-    @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime tradeTime;
 
