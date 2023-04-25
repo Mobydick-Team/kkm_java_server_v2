@@ -2,6 +2,7 @@ package com.kkm.kkm_server_v2.domain.user.domain;
 
 import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
+import com.kkm.kkm_server_v2.domain.review.domain.Review;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -70,6 +71,8 @@ public class User implements UserDetails {
     public void addJjam(Jjam jjam) {
         getJjamList().add(jjam);
     }
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviewList;
 
 
     @Override
