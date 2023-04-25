@@ -51,7 +51,7 @@ public class User implements UserDetails {
     private String address;
 
     @Column(nullable = false)
-    private long kkm;
+    private int kkm;
 
     @Column(name = "role", length = 4, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -108,7 +108,7 @@ public class User implements UserDetails {
     }
 
     @Builder
-    public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role) {
+    public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role, int kkm) {
         this.nickname = nickname;
         this.userId = userId;
         this.imgUrl = imgUrl;
@@ -117,5 +117,7 @@ public class User implements UserDetails {
         this.address = address;
         this.role = role;
         this.postList = new ArrayList<>();
+        this.kkm = kkm;
+
     }
 }
