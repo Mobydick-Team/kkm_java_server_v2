@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class IsEmptyTradeListService {
     public boolean execute(List<Trade> tradeList){
         return tradeList.equals(Collections.emptyList());
