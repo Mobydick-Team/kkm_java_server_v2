@@ -124,6 +124,7 @@ public class Post extends BaseTime {
         this.discoloration = discoloration;
         this.pollution = pollution;
         this.ripped = ripped;
+        this.pullDate = LocalDateTime.now();
         this.status = PostStatus.ACTIVE;
         this.imageList = new ArrayList<>();
     }
