@@ -22,7 +22,7 @@ public class SearchPostService {
 
     @Transactional(readOnly = true)
     public PostListResponse execute(int page, int size, String content) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "modifiedDateTime");
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
         Page<Post> list = postRepository.findByTitleOrContent(content, pageable);
 
         return PostListResponse.builder()
