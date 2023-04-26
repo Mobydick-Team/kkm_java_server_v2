@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +66,12 @@ public class Post extends BaseTime {
     private boolean pollution; // 오염
 
     private boolean ripped; // 찢어짐
+
+    private LocalDateTime pullDate;
+    public void updatePullDate() {
+        this.pullDate = LocalDateTime.now();
+    }
+
 
     @ManyToOne
     @JoinColumn(name = "fk_user")
