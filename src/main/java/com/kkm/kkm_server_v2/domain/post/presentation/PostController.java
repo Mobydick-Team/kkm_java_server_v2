@@ -12,6 +12,7 @@ import com.kkm.kkm_server_v2.domain.post.service.DistancePostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindAllPostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindByCategoryPostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindPostService;
+import com.kkm.kkm_server_v2.domain.post.service.PullPostService;
 import com.kkm.kkm_server_v2.domain.post.service.SearchPostService;
 import com.kkm.kkm_server_v2.domain.post.service.UpdatePostService;
 import com.kkm.kkm_server_v2.domain.post.service.UploadImageService;
@@ -46,6 +47,7 @@ public class PostController {
     private final FindByCategoryPostService findByCategoryPostService;
     private final SearchPostService searchPostService;
     private final DistancePostService distancePostService;
+    private final PullPostService pullPostService;
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -121,6 +123,13 @@ public class PostController {
             @RequestParam("distance") int distance
     ) {
         return distancePostService.execute(page, size, longitude, latitude, distance);
+    }
+
+    @PatchMapping("/pull/{id}")
+    public void pullPost(
+            @PathVariable("id") Long id
+    ) {
+        pullPostService.execute(id);
     }
 
 }
