@@ -29,34 +29,9 @@ public class CreateReviewService {
         if (request.getKkm().equals(RecieveKkomak.HAVING_KKOMAK)) {
             User giver = userRepository.findById(trade.getGiverId())
                     .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-            userRepository.save(
-                    User.builder()
-                            .userId(giver.getUserId())
-                            .imgUrl(giver.getImgUrl())
-                            .nickname(giver.getNickname())
-                            .longitude(giver.getLongitude())
-                            .latitude(giver.getLatitude())
-                            .role(giver.getRole())
-                            .address(giver.getAddress())
-                            .kkm(giver.getKkm() + 2)
-                            .build()
-            );
+            giver.updateKkm(giver.getKkm() + 2);
         }
-        reviewRepository.save(
-                request.toEntity(trade)
-
-        );
-        userRepository.save(
-                User.builder()
-                        .userId(receiver.getUserId())
-                        .imgUrl(receiver.getImgUrl())
-                        .nickname(receiver.getNickname())
-                        .longitude(receiver.getLongitude())
-                        .latitude(receiver.getLatitude())
-                        .role(receiver.getRole())
-                        .address(receiver.getAddress())
-                        .kkm(receiver.getKkm() + 1)
-                        .build()
-        );
+        reviewRepository.save(request.toEntity(trade, user));
+        receiver.updateKkm(receiver.getKkm() + 1);
     }
 }

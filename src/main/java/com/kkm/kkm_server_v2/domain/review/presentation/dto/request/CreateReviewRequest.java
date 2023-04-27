@@ -3,6 +3,7 @@ package com.kkm.kkm_server_v2.domain.review.presentation.dto.request;
 import com.kkm.kkm_server_v2.domain.review.domain.Review;
 import com.kkm.kkm_server_v2.domain.review.domain.enums.RecieveKkomak;
 import com.kkm.kkm_server_v2.domain.trade.domain.Trade;
+import com.kkm.kkm_server_v2.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,12 @@ public class CreateReviewRequest {
     private RecieveKkomak kkm;
     private Long sourceId;
 
-    public Review toEntity(Trade source) {
+    public Review toEntity(Trade source, User owner) {
         return Review.builder()
                 .content(this.content)
                 .kkm(this.kkm)
                 .source(source)
+                .owner(owner)
                 .build();
     }
 }

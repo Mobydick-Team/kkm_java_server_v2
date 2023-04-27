@@ -109,6 +109,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+    public void updateKkm(int kkm){
+        this.kkm = kkm;
+    }
 
     @Builder
     public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role, int kkm) {
