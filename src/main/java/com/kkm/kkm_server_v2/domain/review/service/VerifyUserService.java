@@ -10,6 +10,7 @@ import com.kkm.kkm_server_v2.domain.trade.exception.TradeNotCompletedException;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -19,6 +20,7 @@ public class VerifyUserService {
     private final PostRepository postRepository;
     private final TradeRepository tradeRepository;
 
+    @Transactional
     public Trade execute(User user, Long sourceId) {
         Post post = postRepository.findById(sourceId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);

@@ -8,6 +8,7 @@ import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class FindMyReviewService {
     private final UserFacade userFacade;
     private final ReviewRepository reviewRepository;
 
+    @Transactional
     public FindUserReviewListResponse execute() {
         User user = userFacade.getCurrentUser();
         List<Review> reviewList = reviewRepository.findAllByOwner(user);

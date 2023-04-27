@@ -10,6 +10,7 @@ import com.kkm.kkm_server_v2.domain.user.exception.UserNotFoundException;
 import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class CreateReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public void execute(CreateReviewRequest request) {
         User user = userFacade.getCurrentUser();
         Trade trade = verifyUserService.execute(user, request.getSourceId());

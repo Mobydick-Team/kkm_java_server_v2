@@ -9,6 +9,7 @@ import com.kkm.kkm_server_v2.domain.user.domain.repository.UserRepository;
 import com.kkm.kkm_server_v2.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ public class FindUserReviewService {
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
 
+    @Transactional
     public FindUserReviewListResponse execute(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> UserNotFoundException.EXCEPTION);
         List<Review> reviewList = reviewRepository.findAllByOwner(user);
