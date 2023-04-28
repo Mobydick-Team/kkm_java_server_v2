@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/user/check/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/auth/kakao/info").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/kakao/login").permitAll()
-                .anyRequest().denyAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(authDetailsService, jwtTokenProvider, jwtValidateService),
