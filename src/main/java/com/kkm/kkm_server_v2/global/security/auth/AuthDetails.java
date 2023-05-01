@@ -22,7 +22,7 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.user.getPassword();
+        return this.user.getUserId();
     }
 
     @Override
