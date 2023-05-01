@@ -20,7 +20,6 @@ public class PostResponse {
     private PostCategory category;
     private PostStatus status;
 
-    //TODO status 추가
     public static PostResponse of(Post post, PostStatus status) {
         return PostResponse.builder()
                 .postId(post.getPostId())

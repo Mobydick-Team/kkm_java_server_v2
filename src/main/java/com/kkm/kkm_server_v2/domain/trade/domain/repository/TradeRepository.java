@@ -10,4 +10,6 @@ import java.util.List;
 public interface TradeRepository extends JpaRepository<Trade, Long> {
     @Query("select t from Trade t where t.postId = :post order by t.tradeTime desc")
     List<Trade> findAllByPostIdOrderByTradeTime(Post post);
+
+    Trade findByPostIdAndReceiverId(Post post, Long receiverId);
 }
