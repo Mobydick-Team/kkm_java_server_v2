@@ -38,7 +38,7 @@ public class ReviewController {
         return findUserReviewService.execute(id);
     }
 
-    @GetMapping("/my")
+    @GetMapping("/")
     public FindUserReviewListResponse getMyReview() {
         return findMyReviewService.execute();
     }
