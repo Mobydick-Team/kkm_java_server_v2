@@ -5,6 +5,7 @@ import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.AlreadyPullPostException;
 import com.kkm.kkm_server_v2.domain.post.exception.PostAccessWrongException;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
+import com.kkm.kkm_server_v2.domain.post.facade.PostFacade;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
@@ -18,22 +19,18 @@ import java.time.LocalDateTime;
 public class PullPostService {
 
     private final UserFacade userFacade;
+    private final PostFacade postFacade;
     private final PostRepository postRepository;
 
     @Transactional
     public void execute(Long postId) {
-        User author = userFacade.getCurrentUser();
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        User user = userFacade.getCurrentUser();
+        Post post = postFacade.findById(postId);
 
-        if(post.getAuthor().equals(author))
-            throw PostAccessWrongException.EXCEPTION;
+        post.validatePermission(user);
+        post.validateDate();
 
-        if(LocalDateTime.now().isAfter(post.getPullDate().plusDays(3)))
-            throw AlreadyPullPostException.EXCEPTION;
-
-        post.updatePullDate();
-        postRepository.save(post);
+        post.pull();
     }
 
 }

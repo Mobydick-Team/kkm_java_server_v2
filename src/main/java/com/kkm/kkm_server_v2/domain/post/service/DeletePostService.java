@@ -4,6 +4,7 @@ import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.PostAccessWrongException;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
+import com.kkm.kkm_server_v2.domain.post.facade.PostFacade;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeletePostService {
 
     private final UserFacade userFacade;
+    private final PostFacade postFacade;
     private final PostRepository postRepository;
 
     @Transactional
     public void execute(Long postId) {
         User user = userFacade.getCurrentUser();
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        Post post = postFacade.findById(postId);
 
-        if (!post.getAuthor().equals(user))
-            throw PostAccessWrongException.EXCEPTION;
+        post.validatePermission(user);
 
         postRepository.delete(post);
     }

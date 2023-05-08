@@ -125,7 +125,7 @@ public class PostController {
         return distancePostService.execute(page, size, longitude, latitude, distance);
     }
 
-    @PatchMapping("/pull/{id}")
+    @PatchMapping("/{id}/pull")
     public void pullPost(
             @PathVariable("id") Long id
     ) {
