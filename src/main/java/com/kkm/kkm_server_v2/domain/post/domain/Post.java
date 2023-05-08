@@ -68,7 +68,7 @@ public class Post extends BaseTime {
     private boolean ripped; // 찢어짐
 
     private LocalDateTime pullDate;
-    public void updatePullDate() {
+    public void pull() {
         this.pullDate = LocalDateTime.now();
     }
 
