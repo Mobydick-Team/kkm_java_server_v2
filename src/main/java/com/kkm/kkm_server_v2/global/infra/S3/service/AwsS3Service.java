@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.kkm.kkm_server_v2.global.infra.S3.config.AwsProperties;
+import com.kkm.kkm_server_v2.global.infra.S3.config.AwsS3Config;
 import com.kkm.kkm_server_v2.global.infra.S3.exception.FileUploadFailedException;
 import com.kkm.kkm_server_v2.global.infra.S3.exception.ResponseStatusException;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class AwsS3Service {
 
     private final AwsProperties awsProperties;
 
-    private final AmazonS3Client amazonS3;
+    private final AwsS3Config amazonS3;
 
     public List<String> uploadFile(List<MultipartFile> multipartFile) {
         return multipartFile.stream().map(item -> {
@@ -34,7 +35,7 @@ public class AwsS3Service {
             objectMetadata.setContentType(item.getContentType());
 
             try (InputStream inputStream = item.getInputStream()) {
-                amazonS3.putObject(new PutObjectRequest(awsProperties.getBucket(), fileName, inputStream, objectMetadata)
+                amazonS3.amazonS3Client().putObject(new PutObjectRequest(awsProperties.getBucket(), fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
             } catch (IOException e) {
                 throw FileUploadFailedException.EXCEPTION;
@@ -44,7 +45,7 @@ public class AwsS3Service {
     }
 
     public void deleteFile(String fileName) {
-        amazonS3.deleteObject(new DeleteObjectRequest(awsProperties.getBucket(), fileName));
+        amazonS3.amazonS3Client().deleteObject(new DeleteObjectRequest(awsProperties.getBucket(), fileName));
     }
 
     private String createFileName(String fileName) {
