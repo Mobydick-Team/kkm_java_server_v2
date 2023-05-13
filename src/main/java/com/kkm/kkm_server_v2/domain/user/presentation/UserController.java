@@ -11,6 +11,7 @@ import com.kkm.kkm_server_v2.domain.user.service.UpdateUserInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -40,7 +42,7 @@ public class UserController {
     @Operation(summary = "회원가입")
     @PostMapping("/signup")
     public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart MultipartFile profileImg) {
-
+        log.info(String.valueOf(profileImg));
         signUpService.execute(request, divideImageService.execute(profileImg));
     }
 
