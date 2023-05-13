@@ -13,4 +13,5 @@ public interface JjamRepository extends JpaRepository<Jjam, Long> {
 
     @Query("SELECT j.post FROM Jjam j WHERE j.agent = :user")
     List<Post> findAllByAgent(User user);
+    Jjam findByAgentAndPost(User user, Post post);
 }
