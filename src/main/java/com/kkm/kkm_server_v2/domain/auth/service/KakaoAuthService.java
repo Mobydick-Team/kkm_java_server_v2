@@ -4,8 +4,10 @@ import com.kkm.kkm_server_v2.domain.auth.presentation.dto.response.KakaoUserInfo
 import com.kkm.kkm_server_v2.global.infra.kakao.KakaoInfo;
 import com.kkm.kkm_server_v2.global.infra.kakao.KakaoLoginClient;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class KakaoAuthService {
@@ -20,6 +22,9 @@ public class KakaoAuthService {
                 code
         );
 
-        return new KakaoUserInfoResponse(Long.valueOf(kakaoLoginClient.getProfile("Bearer " + accessToken)));
+        log.info("accessToken : " + accessToken);
+        String id = kakaoLoginClient.getProfile("Bearer " + accessToken);
+        log.info("userData : " + id);
+        return new KakaoUserInfoResponse(Long.valueOf(id));
     }
 }
