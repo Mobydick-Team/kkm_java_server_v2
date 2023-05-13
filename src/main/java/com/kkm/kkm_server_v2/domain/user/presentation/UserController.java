@@ -53,7 +53,7 @@ public class UserController {
 
     @Operation(summary = "유저 정보 업데이트")
     @PatchMapping("/update/info")
-    public void UpdateUserInfo(@RequestPart(value = "data") @Valid UpdateUserInfoRequest request, @RequestPart MultipartFile profileImg) throws Exception {
+    public void UpdateUserInfo(@RequestPart(value = "data") @Valid UpdateUserInfoRequest request, @RequestPart List<MultipartFile> profileImg) throws Exception {
 
         updateUserInfoService.execute(request, divideImageService.execute(profileImg));
     }
