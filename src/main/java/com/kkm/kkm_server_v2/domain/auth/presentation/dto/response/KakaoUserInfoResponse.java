@@ -8,5 +8,5 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class KakaoUserInfoResponse {
-    private String userId;
+    private Long id;
 }
