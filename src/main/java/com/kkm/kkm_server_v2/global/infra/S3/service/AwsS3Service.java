@@ -1,6 +1,6 @@
 package com.kkm.kkm_server_v2.global.infra.S3.service;
 
-import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -24,7 +24,7 @@ public class AwsS3Service {
 
     private final AwsProperties awsProperties;
 
-    private final AmazonS3 amazonS3;
+    private final AmazonS3Client amazonS3;
 
     public List<String> uploadFile(List<MultipartFile> multipartFile) {
         return multipartFile.stream().map(item -> {
