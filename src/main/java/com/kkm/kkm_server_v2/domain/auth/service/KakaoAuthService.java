@@ -6,6 +6,8 @@ import com.kkm.kkm_server_v2.global.infra.kakao.KakaoInfoClient;
 import com.kkm.kkm_server_v2.global.infra.kakao.KakaoLoginClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -17,16 +19,25 @@ public class KakaoAuthService {
     private final KakaoInfoClient kakaoInfoClient;
 
     public KakaoUserInfoResponse getKakaoProfile(String code) {
-        String accessToken = kakaoLoginClient.getAccessToken(
+        String response = kakaoLoginClient.getAccessToken(
                 "authorization_code",
                 kakaoInfo.getClientId(),
                 kakaoInfo.getRedirectUri(),
                 code
         );
 
-        log.info("accessToken : " + accessToken);
-        String id = kakaoInfoClient.getProfile("Bearer " + accessToken);
-        log.info("userData : " + id);
-        return new KakaoUserInfoResponse(Long.valueOf(id));
+        try {
+            String accessToken = new JSONObject(response)
+                    .get("access_token")
+                    .toString();
+
+            log.info("accessToken : " + accessToken);
+            String id = kakaoInfoClient.getProfile("Bearer " + accessToken);
+            log.info("userData : " + id);
+            return new KakaoUserInfoResponse(Long.valueOf(id));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
