@@ -40,5 +40,6 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/test
 
 .DS_Store
