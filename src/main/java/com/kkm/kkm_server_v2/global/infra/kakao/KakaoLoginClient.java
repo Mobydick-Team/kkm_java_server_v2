@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "oauth-token-client", url = "https://kauth.kakao.com")
@@ -19,9 +20,9 @@ public interface KakaoLoginClient {
             @RequestParam("code") String code
     );
 
-    @PostMapping(value = "/v2/user/me", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/v2/user/me")
     @JsonProperty("id")
     Long getProfile(
-            @RequestParam("access_token") String accessToken
+            @RequestHeader("Authorization") String accessToken
     );
 }
