@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
-@Slf4j
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -41,8 +41,7 @@ public class UserController {
 
     @Operation(summary = "회원가입")
     @PostMapping("/signup")
-    public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart MultipartFile profileImg) {
-        log.info(String.valueOf(profileImg));
+    public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart List<MultipartFile> profileImg) {
         signUpService.execute(request, divideImageService.execute(profileImg));
     }
 
