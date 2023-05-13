@@ -28,8 +28,8 @@ public class EndTradeService {
         User giver = userRepository.findById(trade.getGiverId()).orElseThrow(() -> UserNotFoundException.EXCEPTION);
         User receiver = userRepository.findById(trade.getReceiverId()).orElseThrow(() -> UserNotFoundException.EXCEPTION);
         Post post = postRepository.findById(trade.getPostId().getPostId()).orElseThrow(() -> PostNotFoundException.EXCEPTION);
-        trade.setStatus(TradeStatus.DONE);
-        post.setStatus(PostStatus.ACTIVE);
+        trade.updateStatus(TradeStatus.DONE);
+        post.updateStatus(PostStatus.ACTIVE);
         giver.updateTradeCount(giver.getTradeCount() + 1);
         receiver.updateTradeCount(receiver.getTradeCount() + 1);
     }

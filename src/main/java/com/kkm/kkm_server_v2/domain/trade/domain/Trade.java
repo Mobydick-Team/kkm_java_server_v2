@@ -40,8 +40,7 @@ public class Trade extends BaseTime {
     private LocalDateTime tradeTime;
     @Enumerated(EnumType.STRING)
     private TradeStatus status;
-
-    public void setStatus(TradeStatus status) {
+    public void updateStatus(TradeStatus status) {
         this.status = status;
     }
 

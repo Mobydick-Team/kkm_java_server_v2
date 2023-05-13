@@ -53,10 +53,6 @@ public class Post extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
-    public void setStatus(PostStatus status) {
-        this.status = status;
-    }
-
     public void updateStatus(PostStatus status) {
         this.status = status;
     }

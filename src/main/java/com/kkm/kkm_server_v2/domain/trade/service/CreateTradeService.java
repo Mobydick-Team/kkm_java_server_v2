@@ -22,7 +22,7 @@ public class CreateTradeService {
         Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> PostNotFoundException.EXCEPTION);
         if (post.getStatus().equals(PostStatus.ACTIVE)) {
             tradeRepository.save(request.toEntity(post));
-            post.setStatus(PostStatus.DEACTIVATED);
+            post.updateStatus(PostStatus.DEACTIVATED);
         } else throw TradeNotCompletedException.EXCEPTION;
     }
 }
