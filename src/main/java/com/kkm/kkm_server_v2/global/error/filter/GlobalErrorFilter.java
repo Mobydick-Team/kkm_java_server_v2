@@ -7,7 +7,6 @@ import com.kkm.kkm_server_v2.global.error.exception.ErrorProperty;
 import com.kkm.kkm_server_v2.global.error.exception.KkmException;
 import com.kkm.kkm_server_v2.global.security.jwt.exception.ExpiredTokenException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-@Slf4j
 @RequiredArgsConstructor
 public class GlobalErrorFilter extends OncePerRequestFilter {
 
@@ -40,7 +38,6 @@ public class GlobalErrorFilter extends OncePerRequestFilter {
                 setErrorResponse(((KkmException) e.getCause()).getErrorProperty(), response);
             } else {
                 e.printStackTrace();
-                log.info("error");
                 setErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR, response);
             }
         }
