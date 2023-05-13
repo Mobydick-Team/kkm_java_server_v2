@@ -53,6 +53,11 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    private int tradeCount;
+
+    public void updateTradeCount(int tradeCount) {
+        this.tradeCount = tradeCount;
+    }
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> postList;
@@ -63,6 +68,14 @@ public class User {
 
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
+
+    public List<Post> getJjamPostList() {
+        List<Post> postList = new ArrayList<>();
+        for (Jjam jjam : getJjamList()) {
+            postList.add(jjam.getPost());
+        }
+        return postList;
+    }
 
     public void addJjam(Jjam jjam) {
         getJjamList().add(jjam);
