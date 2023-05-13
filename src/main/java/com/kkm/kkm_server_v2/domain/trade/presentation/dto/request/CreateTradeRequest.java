@@ -2,6 +2,7 @@ package com.kkm.kkm_server_v2.domain.trade.presentation.dto.request;
 
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.trade.domain.Trade;
+import com.kkm.kkm_server_v2.domain.trade.domain.enums.TradeStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class CreateTradeRequest {
                 .receiverId(this.receiverId)
                 .postId(post)
                 .tradeTime(this.tradeTime)
+                .status(TradeStatus.DOING)
                 .build();
     }
 }

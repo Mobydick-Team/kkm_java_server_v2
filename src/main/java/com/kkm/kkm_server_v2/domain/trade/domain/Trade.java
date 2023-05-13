@@ -12,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,11 +38,13 @@ public class Trade extends BaseTime {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime tradeTime;
-
+    @Enumerated(EnumType.STRING)
     private TradeStatus status;
+
     public void setStatus(TradeStatus status) {
         this.status = status;
     }
+
     @ManyToOne
     @JoinColumn(name = "fk_post")
     private Post postId;
