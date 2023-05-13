@@ -19,10 +19,4 @@ public interface KakaoLoginClient {
             @RequestParam("redirect_uri") String redirectUri,
             @RequestParam("code") String code
     );
-
-    @PostMapping(value = "/v2/user/me", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @JsonProperty("id")
-    String getProfile(
-            @RequestHeader("Authorization") String accessToken
-    );
 }
