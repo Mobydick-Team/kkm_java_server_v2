@@ -31,10 +31,10 @@ public class KakaoAuthService {
                     .get("access_token")
                     .toString();
 
-            log.info("accessToken : " + accessToken);
-            String id = kakaoInfoClient.getProfile("Bearer " + accessToken);
-            log.info("userData : " + id);
-            return new KakaoUserInfoResponse(Long.valueOf(id));
+            String profile = new JSONObject(kakaoInfoClient.getProfile("Bearer " + accessToken))
+                    .get("id")
+                    .toString();
+            return new KakaoUserInfoResponse(Long.valueOf(profile));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
