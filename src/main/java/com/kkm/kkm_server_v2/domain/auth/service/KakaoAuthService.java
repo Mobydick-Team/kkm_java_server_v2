@@ -20,6 +20,6 @@ public class KakaoAuthService {
                 code
         );
 
-        return kakaoLoginClient.getProfile("Bearer " + accessToken);
+        return new KakaoUserInfoResponse(kakaoLoginClient.getProfile("Bearer " + accessToken));
     }
 }
