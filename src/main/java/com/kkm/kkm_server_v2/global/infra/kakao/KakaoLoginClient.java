@@ -19,7 +19,8 @@ public interface KakaoLoginClient {
     );
 
     @GetMapping("/v2/user/me")
-    KakaoUserInfoResponse getProfile(
+    @JsonProperty("id")
+    Long getProfile(
             @RequestParam("access_token") String accessToken
     );
 }
