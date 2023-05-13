@@ -38,6 +38,9 @@ public class Trade extends BaseTime {
     private LocalDateTime tradeTime;
 
     private TradeStatus status;
+    public void setStatus(TradeStatus status) {
+        this.status = status;
+    }
     @ManyToOne
     @JoinColumn(name = "fk_post")
     private Post postId;
