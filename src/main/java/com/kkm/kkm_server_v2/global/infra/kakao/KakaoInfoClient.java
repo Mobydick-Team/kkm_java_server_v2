@@ -11,7 +11,7 @@ public interface KakaoInfoClient {
 
     @PostMapping("/v2/user/me")
     @JsonProperty("id")
-    Long getProfile(
+    String getProfile(
             @RequestHeader("Authorization") String accessToken
     );
 
