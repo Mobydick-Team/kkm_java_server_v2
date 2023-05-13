@@ -18,7 +18,7 @@ public interface KakaoLoginClient {
             @RequestParam("code") String code
     );
 
-    @GetMapping("/v2/user/me")
+    @PostMapping("/v2/user/me")
     @JsonProperty("id")
     String getProfile(
             @RequestParam("access_token") String accessToken
