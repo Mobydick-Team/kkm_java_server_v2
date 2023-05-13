@@ -20,7 +20,7 @@ public interface KakaoLoginClient {
 
     @PostMapping("/v2/user/me")
     @JsonProperty("id")
-    String getProfile(
+    Long getProfile(
             @RequestParam("access_token") String accessToken
     );
 }
