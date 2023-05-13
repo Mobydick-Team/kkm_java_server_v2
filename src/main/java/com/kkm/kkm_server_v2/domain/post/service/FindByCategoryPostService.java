@@ -2,11 +2,9 @@ package com.kkm.kkm_server_v2.domain.post.service;
 
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
-import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostListResponse;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
-import com.kkm.kkm_server_v2.domain.trade.service.VerifyTradeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 public class FindByCategoryPostService {
 
     private final PostRepository postRepository;
-    private final VerifyTradeService verifyTradeService;
 
     @Transactional(readOnly = true)
     public PostListResponse execute(int page, int size, PostCategory category) {
@@ -32,10 +29,7 @@ public class FindByCategoryPostService {
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
                 .hasMorePage(list.getTotalPages() > list.getNumber() + 1)
-                .list(list.stream().map(item -> {
-                    PostStatus status = verifyTradeService.execute(item);
-                    return PostResponse.of(item, status);
-                }).collect(Collectors.toList()))
+                .list(list.stream().map(PostResponse::of).collect(Collectors.toList()))
                 .build();
 
     }
