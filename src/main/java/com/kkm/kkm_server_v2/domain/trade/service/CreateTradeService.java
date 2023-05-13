@@ -16,13 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CreateTradeService {
     private final PostRepository postRepository;
     private final TradeRepository tradeRepository;
-    private final VerifyTradeService verifyTradeService;
 
     @Transactional
     public void execute(CreateTradeRequest request) {
         Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> PostNotFoundException.EXCEPTION);
-        if (verifyTradeService.execute(post).equals(PostStatus.ACTIVE)) {
+        if (post.getStatus().equals(PostStatus.ACTIVE)) {
             tradeRepository.save(request.toEntity(post));
+            post.setStatus(PostStatus.DEACTIVATED);
         } else throw TradeNotCompletedException.EXCEPTION;
     }
 }
