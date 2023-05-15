@@ -1,6 +1,5 @@
 package com.kkm.kkm_server_v2.domain.user.presentation.dto.response;
 
-import com.kkm.kkm_server_v2.domain.jjam.service.IsJjammedService;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class MyPageResponse {
-    private final IsJjammedService isJjammedService;
 
     private String name;
     private String profileImage;
