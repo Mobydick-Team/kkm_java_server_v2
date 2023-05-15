@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_user")
@@ -70,11 +71,7 @@ public class User {
     private List<Jjam> jjamList;
 
     public List<Post> getJjamPostList() {
-        List<Post> postList = new ArrayList<>();
-        for (Jjam jjam : getJjamList()) {
-            postList.add(jjam.getPost());
-        }
-        return postList;
+        return getJjamList().stream().map(Jjam::getPost).collect(Collectors.toList());
     }
 
     public void addJjam(Jjam jjam) {
