@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum TradeErrorProperty implements ErrorProperty {
+    TRADE_NOT_FOUND(HttpStatus.NOT_FOUND, "거래를 찾을 수 없습니다."),
     TRADE_NOT_COMPLETED(HttpStatus.FORBIDDEN, "이전 거래가 아직 끝나지 않았습니다.");
     private final HttpStatus status;
     private final String message;

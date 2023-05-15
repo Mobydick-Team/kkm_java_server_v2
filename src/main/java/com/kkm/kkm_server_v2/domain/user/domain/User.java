@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_user")
@@ -53,6 +54,11 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    private int tradeCount;
+
+    public void updateTradeCount(int tradeCount) {
+        this.tradeCount = tradeCount;
+    }
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> postList;
@@ -63,6 +69,10 @@ public class User {
 
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
+
+    public List<Post> getJjamPostList() {
+        return getJjamList().stream().map(Jjam::getPost).collect(Collectors.toList());
+    }
 
     public void addJjam(Jjam jjam) {
         getJjamList().add(jjam);
