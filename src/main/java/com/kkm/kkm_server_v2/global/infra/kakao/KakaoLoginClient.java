@@ -1,9 +1,7 @@
 package com.kkm.kkm_server_v2.global.infra.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.kkm.kkm_server_v2.domain.auth.presentation.dto.response.KakaoUserInfoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,10 +14,5 @@ public interface KakaoLoginClient {
             @RequestParam("client_id") String clientId,
             @RequestParam("redirect_uri") String redirectUri,
             @RequestParam("code") String code
-    );
-
-    @GetMapping("/v2/user/me")
-    KakaoUserInfoResponse getProfile(
-            @RequestParam("access_token") String accessToken
     );
 }

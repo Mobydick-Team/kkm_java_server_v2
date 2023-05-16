@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -42,8 +43,7 @@ public class UserController {
 
     @Operation(summary = "회원가입")
     @PostMapping("/signup")
-    public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart MultipartFile profileImg) {
-
+    public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart List<MultipartFile> profileImg) {
         signUpService.execute(request, divideImageService.execute(profileImg));
     }
 
@@ -55,7 +55,7 @@ public class UserController {
 
     @Operation(summary = "유저 정보 업데이트")
     @PatchMapping("/update/info")
-    public void UpdateUserInfo(@RequestPart(value = "data") @Valid UpdateUserInfoRequest request, @RequestPart MultipartFile profileImg) throws Exception {
+    public void UpdateUserInfo(@RequestPart(value = "data") @Valid UpdateUserInfoRequest request, @RequestPart List<MultipartFile> profileImg) throws Exception {
 
         updateUserInfoService.execute(request, divideImageService.execute(profileImg));
     }
