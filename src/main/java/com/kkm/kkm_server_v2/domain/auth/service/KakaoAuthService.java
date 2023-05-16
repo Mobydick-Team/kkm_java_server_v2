@@ -35,9 +35,7 @@ public class KakaoAuthService {
             String profile = new JSONObject(kakaoInfoClient.getProfile("Bearer " + accessToken))
                     .get("id")
                     .toString();
-            KakaoUserInfoResponse kakaoUserInfoResponse = KakaoUserInfoResponse.builder()
-                    .id(Long.valueOf(profile))
-                    .build();
+
             if (userRepository.findByUserId(profile).isPresent()) {
                 return UserInfoResponse.builder()
                         .kakaoUserInfoResponse(kakaoUserInfoResponse)
