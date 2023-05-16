@@ -23,8 +23,7 @@ public class MyPageService {
 
     @Transactional
     public MyPageResponse execute() {
-        User user = userRepository.findByUserId(userFacade.getCurrentUser().getUserId())
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        User user = userFacade.getCurrentUser();
         return MyPageResponse.of(user, new PostListResponse((
                 user.getPostList().stream().map(post ->
                         PostResponse.of(post, isJjammedService.execute(user, post))
