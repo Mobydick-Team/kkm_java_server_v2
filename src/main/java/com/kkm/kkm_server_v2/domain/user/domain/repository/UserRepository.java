@@ -16,6 +16,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findByNickname(String nickname);
 
-    @Query(value = "SELECT u FROM User u JOIN FETCH u.postList JOIN FETCH u.jjamList JOIN FETCH u.reviewList WHERE u.userId=:userId")
+    @Query(value = "SELECT u FROM User u JOIN FETCH u.postList JOIN FETCH u.jjamList JOIN FETCH u.reviewList WHERE u.userId=:userId",
+            nativeQuery = true)
     User fetchFindByUserId(String userId);
 }
