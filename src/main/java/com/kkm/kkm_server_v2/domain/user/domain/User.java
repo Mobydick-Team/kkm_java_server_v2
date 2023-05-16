@@ -3,6 +3,8 @@ package com.kkm.kkm_server_v2.domain.user.domain;
 import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.review.domain.Review;
+import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostListResponse;
+import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -68,22 +70,29 @@ public class User {
         getPostList().add(post);
     }
 
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
 
     public List<Post> getJjamPostList() {
         return getJjamList().stream().map(Jjam::getPost).collect(Collectors.toList());
     }
 
+    public PostListResponse getJjamPostResponse() {
+        return new PostListResponse((
+                getJjamPostList().stream().map(post ->
+                        PostResponse.of(post, true)
+                ).collect(Collectors.toList())));
+    }
+
     public void addJjam(Jjam jjam) {
         getJjamList().add(jjam);
     }
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviewList;
 
-    public String getUsername() {
-        return null;
+    public int getReviewSize() {
+        return getReviewList().size();
     }
 
     public void updateKkm(int kkm) {

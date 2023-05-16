@@ -17,16 +17,16 @@ public class MyPageResponse {
     private PostListResponse myPostList;
     private PostListResponse myJjamList;
 
-    public static MyPageResponse of(User user, PostListResponse myPostList, PostListResponse myJjamList) {
+    public static MyPageResponse of(User user, PostListResponse myPostList) {
         return MyPageResponse.builder()
                 .name(user.getNickname())
                 .profileImage(user.getImgUrl())
                 .address(user.getAddress())
                 .tradeCount(user.getTradeCount())
-                .reviewCount(user.getReviewList().size())
+                .reviewCount(user.getReviewSize())
                 .kkm(user.getKkm())
                 .myPostList(myPostList)
-                .myJjamList(myJjamList)
+                .myJjamList(user.getJjamPostResponse())
                 .build();
     }
 }

@@ -29,10 +29,7 @@ public class MyPageService {
                 user.getPostList().stream().map(post ->
                         PostResponse.of(post, isJjammedService.execute(user, post))
                 ).collect(Collectors.toList())
-        )), new PostListResponse((
-                user.getJjamPostList().stream().map(post ->
-                        PostResponse.of(post, true)
-                ).collect(Collectors.toList()))));
+        )));
         //        ))
 
     }
