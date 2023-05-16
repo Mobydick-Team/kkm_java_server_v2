@@ -21,7 +21,6 @@ public class MyPageService {
     private final UserRepository userRepository;
     private final IsJjammedService isJjammedService;
 
-    @Transactional
     public MyPageResponse execute() {
         User user = userFacade.getCurrentUser();
         return MyPageResponse.of(user, new PostListResponse((
