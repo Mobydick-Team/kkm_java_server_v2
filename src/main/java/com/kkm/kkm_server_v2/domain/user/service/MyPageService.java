@@ -23,7 +23,7 @@ public class MyPageService {
 
     @Transactional
     public MyPageResponse execute() {
-        User user = userRepository.fetchFindByUserId(userFacade.getCurrentUser().getUserId());
+        User user = userFacade.getCurrentUser();
 
         return MyPageResponse.of(user, new PostListResponse((
                 user.getPostList().stream().map(post ->

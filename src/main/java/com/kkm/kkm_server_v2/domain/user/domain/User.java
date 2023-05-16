@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,6 +61,7 @@ public class User {
         this.tradeCount = tradeCount;
     }
 
+    @BatchSize(size = 1000)
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> postList;
 
@@ -67,6 +69,7 @@ public class User {
         getPostList().add(post);
     }
 
+    @BatchSize(size = 1000)
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
 
@@ -78,6 +81,7 @@ public class User {
         getJjamList().add(jjam);
     }
 
+    @BatchSize(size = 1000)
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviewList;
 
