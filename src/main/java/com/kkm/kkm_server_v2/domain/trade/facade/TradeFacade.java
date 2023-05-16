@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TradeFacade {
 
-    @Transactional
     public Trade getRecentTrade(List<Trade> tradeList) {
         return tradeList.get(0);
     }

@@ -30,6 +30,7 @@ public class UpdateUserInfoRequest {
                 .imgUrl(imgUrl)
                 .nickname(nickname)
                 .role(user.getRole())
+                .kkm(user.getKkm())
                 .build();
     }
 }

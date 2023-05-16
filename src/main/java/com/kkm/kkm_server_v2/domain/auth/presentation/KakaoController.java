@@ -1,8 +1,8 @@
 package com.kkm.kkm_server_v2.domain.auth.presentation;
 
 import com.kkm.kkm_server_v2.domain.auth.presentation.dto.request.LoginRequest;
-import com.kkm.kkm_server_v2.domain.auth.presentation.dto.response.KakaoUserInfoResponse;
 import com.kkm.kkm_server_v2.domain.auth.presentation.dto.response.TokenResponse;
+import com.kkm.kkm_server_v2.domain.auth.presentation.dto.response.UserInfoResponse;
 import com.kkm.kkm_server_v2.domain.auth.service.KakaoAuthService;
 import com.kkm.kkm_server_v2.domain.auth.service.KakaoUserExistService;
 import com.kkm.kkm_server_v2.domain.auth.service.LoginService;
@@ -32,7 +32,7 @@ public class KakaoController {
 
     @Operation(summary = "정보 가져오기")
     @GetMapping("/info")
-    public KakaoUserInfoResponse GetKakaoUserInfo(@RequestParam String code) {
+    public UserInfoResponse GetKakaoUserInfo(@RequestParam String code) {
         return kakaoAuthService.getKakaoProfile(code);
     }
 

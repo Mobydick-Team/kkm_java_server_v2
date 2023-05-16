@@ -3,8 +3,10 @@ package com.kkm.kkm_server_v2.domain.user.presentation;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.SignUpRequest;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.UpdateAddressRequest;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.UpdateUserInfoRequest;
+import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.MyPageResponse;
 import com.kkm.kkm_server_v2.domain.user.service.CheckUserService;
 import com.kkm.kkm_server_v2.domain.user.service.DivideImageService;
+import com.kkm.kkm_server_v2.domain.user.service.MyPageService;
 import com.kkm.kkm_server_v2.domain.user.service.SignUpService;
 import com.kkm.kkm_server_v2.domain.user.service.UpdateAddressService;
 import com.kkm.kkm_server_v2.domain.user.service.UpdateUserInfoService;
@@ -38,6 +40,7 @@ public class UserController {
     private final UpdateUserInfoService updateUserInfoService;
     private final UpdateAddressService updateAddressService;
     private final DivideImageService divideImageService;
+    private final MyPageService myPageService;
 
     @Operation(summary = "회원가입")
     @PostMapping("/signup")
@@ -62,6 +65,12 @@ public class UserController {
     @PutMapping("/update/address")
     public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request) {
         updateAddressService.execute(request);
+    }
+
+    @Operation(summary = "마이페이지")
+    @GetMapping("/mypage")
+    public MyPageResponse GetMyPage() {
+        return myPageService.execute();
     }
 
 }

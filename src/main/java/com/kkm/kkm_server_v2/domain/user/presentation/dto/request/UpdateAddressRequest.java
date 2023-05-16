@@ -37,6 +37,7 @@ public class UpdateAddressRequest {
                 .imgUrl(user.getImgUrl())
                 .nickname(user.getNickname())
                 .role(user.getRole())
+                .kkm(user.getKkm())
                 .build();
     }
 }

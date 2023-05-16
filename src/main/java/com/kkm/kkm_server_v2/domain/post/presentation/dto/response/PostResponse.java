@@ -20,8 +20,7 @@ public class PostResponse {
     private PostCategory category;
     private PostStatus status;
 
-    //TODO status 추가
-    public static PostResponse of(Post post, PostStatus status) {
+    public static PostResponse of(Post post) {
         return PostResponse.builder()
                 .postId(post.getPostId())
                 .title(post.getTitle())
@@ -29,7 +28,7 @@ public class PostResponse {
                 .price(post.getPrice())
                 .process(post.getProcess())
                 .category(post.getCategory())
-                .status(status)
+                .status(post.getStatus())
                 .build();
     }
 
