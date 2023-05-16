@@ -21,17 +21,19 @@ public class MyPageService {
     private final UserRepository userRepository;
     private final IsJjammedService isJjammedService;
 
+    @Transactional
     public MyPageResponse execute() {
-        User user = userFacade.getCurrentUser();
-        return MyPageResponse.of(user, null, null);
-        //new PostListResponse((
-        //                user.getPostList().stream().map(post ->
-        //                        PostResponse.of(post, isJjammedService.execute(user, post))
-        //                ).collect(Collectors.toList())
-        //        )), new PostListResponse((
-        //                user.getJjamPostList().stream().map(post ->
-        //                        PostResponse.of(post, true)
-        //                ).collect(Collectors.toList())
+        User user = userRepository.fetchFindByUserId(userFacade.getCurrentUser().getUserId())
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        return MyPageResponse.of(user, new PostListResponse((
+                user.getPostList().stream().map(post ->
+                        PostResponse.of(post, isJjammedService.execute(user, post))
+                ).collect(Collectors.toList())
+        )), new PostListResponse((
+                user.getJjamPostList().stream().map(post ->
+                        PostResponse.of(post, true)
+                ).collect(Collectors.toList()))));
         //        ))
 
     }

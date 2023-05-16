@@ -24,7 +24,7 @@ public class FindUserReviewResponse {
                 .thumbnailUrl(review.getSource().getPostId().getImageList().get(0).getUrl())
                 .title(review.getSource().getPostId().getTitle())
                 .userImgUrl(review.getOwner().getImgUrl())
-                .userName(review.getOwner().getUsername())
+                .userName(review.getOwner().getNickname())
                 .build();
     }
 }

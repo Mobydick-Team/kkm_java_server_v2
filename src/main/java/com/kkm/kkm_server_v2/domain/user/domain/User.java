@@ -81,10 +81,6 @@ public class User {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviewList;
 
-    public String getUsername() {
-        return null;
-    }
-
     public void updateKkm(int kkm) {
         this.kkm = kkm;
     }
