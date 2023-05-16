@@ -68,7 +68,7 @@ public class User {
         getPostList().add(post);
     }
 
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Jjam> jjamList;
 
     public List<Post> getJjamPostList() {
