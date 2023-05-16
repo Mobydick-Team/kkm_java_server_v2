@@ -36,6 +36,10 @@ public class KakaoAuthService {
                     .get("id")
                     .toString();
 
+            KakaoUserInfoResponse kakaoUserInfoResponse = KakaoUserInfoResponse.builder()
+                    .id(Long.valueOf(profile))
+                    .build();
+
             if (userRepository.findByUserId(profile).isPresent()) {
                 return UserInfoResponse.builder()
                         .kakaoUserInfoResponse(kakaoUserInfoResponse)
