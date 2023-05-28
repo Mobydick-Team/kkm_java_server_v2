@@ -1,4 +1,4 @@
-name: Dasarang CI/CD
+name: Mobydick CI/CD
 
 on:
   push:
