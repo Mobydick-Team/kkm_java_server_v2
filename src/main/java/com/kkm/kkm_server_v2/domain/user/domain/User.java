@@ -70,7 +70,7 @@ public class User {
         getPostList().add(post);
     }
 
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Jjam> jjamList;
 
     public List<Post> getJjamPostList() {
@@ -88,7 +88,7 @@ public class User {
         getJjamList().add(jjam);
     }
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Review> reviewList;
 
     public int getReviewSize() {

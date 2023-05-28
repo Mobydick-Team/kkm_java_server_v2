@@ -16,12 +16,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findByNickname(String nickname);
 
-    @Query(value = "SELECT * FROM tb_user u " +
-            "NATURAL JOIN tb_post p ON u.id = p.fk_user " +
-            "NATURAL JOIN tb_jjam j ON u.id = j.fk_user " +
-            "NATURAL JOIN tb_review r ON u.id = r.fk_user " +
-            "WHERE id = :id",
-        nativeQuery = true)
-    Optional<User> findUserById(Long id);
-
 }
