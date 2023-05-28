@@ -31,7 +31,6 @@ public class MyPageService {
                         PostResponse.of(post, isJjammedService.execute(user, post))
                 ).collect(Collectors.toList())
         )));
-        //        ))
 
     }
 }
