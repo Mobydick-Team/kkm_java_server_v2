@@ -39,7 +39,7 @@ jobs:
     needs: build
     steps:
       - name: AWS Deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.8
         id: deploy-prod
         if: contains(github.ref, 'master')
         with:
@@ -52,5 +52,5 @@ jobs:
             script: |
                 sudo docker ps -q --filter 'name=${{ secrets.CONTAINER_NAME }}' | xargs -r docker stop
                 sudo docker ps -aq --filter 'name=${{ secrets.CONTAINER_NAME }}' | xargs -r docker rm
-                sudo docker run -d --name ${{ secrets.CONTAINER_NAME }} -p 3034:3034 --net kkm ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
+                sudo docker run -d --name ${{ secrets.CONTAINER_NAME }} -p 3034:3034 --net mobydick ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
 
