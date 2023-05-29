@@ -15,7 +15,7 @@ public class UpdateAddressService {
 
     @Transactional
     public void execute(UpdateAddressRequest request) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(true);
         user.updateAddress(request.getAddress(), request.getLatitude(), request.getLongitude());
     }
 }

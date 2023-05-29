@@ -22,7 +22,7 @@ public class CreateReviewService {
 
     @Transactional
     public void execute(CreateReviewRequest request) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(false);
         Trade trade = verifyUserService.execute(user, request.getSourceId());
         User receiver = userRepository.findById(trade.getReceiverId())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);

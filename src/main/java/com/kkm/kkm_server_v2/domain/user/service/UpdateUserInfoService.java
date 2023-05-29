@@ -15,7 +15,7 @@ public class UpdateUserInfoService {
 
     @Transactional
     public void execute(UpdateUserInfoRequest request, String imgUrl) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(true);
         user.updateUserInfo(request.getNickname(), imgUrl);
     }
 }

@@ -24,7 +24,7 @@ public class LoadUserJjamsService {
 
     @Transactional
     public LoadUserJjamsListResponse execute() {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(false);
         List<Post> posts = jjamRepository.findAllByAgent(user);
         return LoadUserJjamsListResponse.builder()
                 .list(posts.stream().map(item -> {

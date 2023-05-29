@@ -18,13 +18,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MyPageService {
     private final UserFacade userFacade;
-    private final UserRepository userRepository;
     private final IsJjammedService isJjammedService;
 
     @Transactional
     public MyPageResponse execute() {
-        User user = userRepository.findById(userFacade.getCurrentUser().getId())
-                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+        User user = userFacade.getCurrentUser(true);
 
         return MyPageResponse.of(user, new PostListResponse((
                 user.getPostList().stream().map(post ->

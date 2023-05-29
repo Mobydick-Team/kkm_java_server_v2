@@ -19,7 +19,7 @@ public class DeletePostService {
 
     @Transactional
     public void execute(Long postId) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(false);
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 

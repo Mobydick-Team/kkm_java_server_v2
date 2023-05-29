@@ -25,7 +25,7 @@ public class CreatePostService {
 
     @Transactional
     public void execute(CreatePostRequest request) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(true);
 
         Post post = request.toEntity();
         if(!request.getUrls().isEmpty()) {

@@ -21,7 +21,7 @@ public class FindMyReviewService {
 
     @Transactional
     public FindUserReviewListResponse execute() {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(false);
         List<Review> reviewList = reviewRepository.findAllByOwner(user);
         return FindUserReviewListResponse.builder()
                 .list(reviewList.stream().map(FindUserReviewResponse::of).collect(Collectors.toList()))
