@@ -5,16 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UpdateAddressRequest {
 
-    @NotBlank
-    private double latitude;
+    @NotNull
+    private Double latitude;
 
-    @NotBlank
-    private double longitude;
+    @NotNull
+    private Double longitude;
 
     @NotBlank
     private String address;
