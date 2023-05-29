@@ -1,0 +1,11 @@
+name: "❔ QUESTION"
+description: "기능이나 코드에 대해 질문이 있을 때 작성해 주세요!"
+labels: "❔ QUESTION"
+body:
+  - type: textarea
+    attributes:
+      label: 💬 QUESTION
+      description: 무엇이 궁금한지 자세히 작성해 주세요.
+      placeholder: 꼬꼬막 개발자들은 다 예쁘고 잘생겼나요?
+    validations:
+      required: true

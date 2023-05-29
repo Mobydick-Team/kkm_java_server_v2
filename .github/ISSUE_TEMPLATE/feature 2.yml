@@ -1,0 +1,22 @@
+name: "⚡️ FEATURE"
+description: "새로운 작업 사항을 작성해주세요!"
+labels: "⚡️ FEATURE"
+body:
+  - type: textarea
+    attributes:
+      label: ✍️ DESCRIPTION
+      description: 새로운 작업 사항을 설명해주세요.
+      placeholder: 메인 페이지를 퍼블리싱해야 해요.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔨 TO DO
+      description: 기능을 개발하기 위해서 할 일을 작성해 주세요.
+      placeholder: ◻︎ 메인 페이지 반응형
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: ETC
+      description: 예외 사항이나 추가 설명이 있을 때 작성해 주세요.

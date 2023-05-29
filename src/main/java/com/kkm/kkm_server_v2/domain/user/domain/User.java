@@ -103,6 +103,12 @@ public class User {
         this.imgUrl = imgUrl;
     }
 
+    public void updateAddress(String address, double latitude, double longitude) {
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Builder
     public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role, int kkm) {
         this.nickname = nickname;
