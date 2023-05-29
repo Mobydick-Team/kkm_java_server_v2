@@ -53,3 +53,4 @@ jobs:
                 sudo docker ps -q --filter 'name=${{ secrets.CONTAINER_NAME }}' | xargs -r docker stop
                 sudo docker ps -aq --filter 'name=${{ secrets.CONTAINER_NAME }}' | xargs -r docker rm
                 sudo docker run -d --name ${{ secrets.CONTAINER_NAME }} -p 3034:3034 --net kkm ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
+              
