@@ -98,6 +98,11 @@ public class User {
         this.kkm = kkm;
     }
 
+    public void updateUserInfo(String nickname, String imgUrl) {
+        this.nickname = nickname;
+        this.imgUrl = imgUrl;
+    }
+
     @Builder
     public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role, int kkm) {
         this.nickname = nickname;

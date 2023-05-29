@@ -18,8 +18,6 @@ public class UpdateUserInfoService {
     @Transactional
     public void execute(UpdateUserInfoRequest request, String imgUrl) {
         User user = userFacade.getCurrentUser();
-        userRepository.save(
-                request.toEntity(user, imgUrl)
-        );
+        user.updateUserInfo(request.getNickname(), imgUrl);
     }
 }
