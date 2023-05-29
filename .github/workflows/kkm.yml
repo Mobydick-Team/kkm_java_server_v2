@@ -39,7 +39,7 @@ jobs:
     needs: build
     steps:
       - name: AWS Deploy
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@master
         id: deploy-prod
         if: contains(github.ref, 'master')
         with:
