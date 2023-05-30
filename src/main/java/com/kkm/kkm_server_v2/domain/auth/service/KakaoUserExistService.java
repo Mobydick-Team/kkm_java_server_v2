@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class KakaoUserExistService {
     private final UserFacade userFacade;
 
-    public boolean execute(String userId) {
-        return userFacade.existsUserByUserId(userId);
+    public void execute(String userId) {
+        userFacade.existsUserByUserId(userId);
     }
 }

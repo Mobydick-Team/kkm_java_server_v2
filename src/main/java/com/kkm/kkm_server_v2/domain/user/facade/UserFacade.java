@@ -33,7 +33,7 @@ public class UserFacade {
     }
 
     @Transactional(readOnly = true)
-    public boolean existsUserByUserId(String userId) {
-        return !userRepository.existsUserByUserId(userId);
+    public void existsUserByUserId(String userId) {
+        if (!userRepository.existsUserByUserId(userId)) throw UserNotFoundException.EXCEPTION;
     }
 }

@@ -3,6 +3,7 @@ package com.kkm.kkm_server_v2.domain.user.presentation;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.SignUpRequest;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.UpdateAddressRequest;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.UpdateUserInfoRequest;
+import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.KakaoUserExistResponse;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.MyPageResponse;
 import com.kkm.kkm_server_v2.domain.user.service.CheckUserService;
 import com.kkm.kkm_server_v2.domain.user.service.DivideImageService;
@@ -50,8 +51,8 @@ public class UserController {
 
     @Operation(summary = "닉네임 중복 확인")
     @GetMapping("/check/{nickname}")
-    public void IsNicknameExist(@PathVariable String nickname) {
-        checkUserService.execute(nickname);
+    public KakaoUserExistResponse IsNicknameExist(@PathVariable String nickname) {
+        return checkUserService.execute(nickname);
     }
 
     @Operation(summary = "유저 정보 업데이트")
