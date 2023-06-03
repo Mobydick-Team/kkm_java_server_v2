@@ -1,26 +1,22 @@
-package com.kkm.kkm_server_v2.domain.post.service;
+package com.kkm.kkm_server_v2.domain.post.facade;
 
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
-import com.kkm.kkm_server_v2.domain.post.facade.PostFacade;
-import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class FindPostService {
+public class PostFacade {
 
-    private final PostFacade postFacade;
     private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
-    public PostResponse execute(Long postId) {
-        Post post = postRepository.findById(postId)
+    public Post findById(Long postId) {
+        return postRepository.findById(postId)
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
-        return PostResponse.of(post);
     }
 
 }

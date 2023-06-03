@@ -21,7 +21,7 @@ public class DistancePostService {
     private final PostRepository postRepository;
     @Transactional
     public PostListResponse execute(int page, int size, double longitude, double latitude, int distance) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "modifiedDateTime");
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
         Page<Post> list = postRepository.findByDistance(longitude, latitude, distance, pageable);
 
         return PostListResponse.builder()

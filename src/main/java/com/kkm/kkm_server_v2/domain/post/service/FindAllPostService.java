@@ -22,7 +22,7 @@ public class FindAllPostService {
 
     @Transactional(readOnly = true)
     public PostListResponse execute(int page, int size) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "modifiedDateTime");
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
         Page<Post> list = postRepository.findAll(pageable);
 
         return PostListResponse.builder()

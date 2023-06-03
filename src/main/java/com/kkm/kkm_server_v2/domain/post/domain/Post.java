@@ -3,6 +3,9 @@ package com.kkm.kkm_server_v2.domain.post.domain;
 import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
+import com.kkm.kkm_server_v2.domain.post.exception.AlreadyPullPostException;
+import com.kkm.kkm_server_v2.domain.post.exception.PostAccessWrongException;
+import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.kkm.kkm_server_v2.domain.trade.domain.Trade;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
@@ -23,6 +26,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +69,12 @@ public class Post extends BaseTime {
 
     private boolean ripped; // 찢어짐
 
+    private LocalDateTime pullDate;
+    public void pull() {
+        this.pullDate = LocalDateTime.now();
+    }
+
+
     @ManyToOne
     @JoinColumn(name = "fk_user")
     private User author;
@@ -92,18 +102,27 @@ public class Post extends BaseTime {
         getJjamList().add(jjam);
     }
 
-    public void updatePost(String title, String content, int price, int deposit, String process, PostCategory category,
-                           boolean crumpled, boolean discoloration, boolean pollution, boolean ripped) {
-        this.title = title;
-        this.content = content;
-        this.price = price;
-        this.deposit = deposit;
-        this.process = process;
-        this.category = category;
-        this.crumpled = crumpled;
-        this.discoloration = discoloration;
-        this.pollution = pollution;
-        this.ripped = ripped;
+    public void updatePost(UpdatePostRequest data) {
+        this.title = data.getTitle();
+        this.content = data.getContent();
+        this.price = data.getPrice();
+        this.deposit = data.getDeposit();
+        this.process = data.getProcess();
+        this.category = data.getCategory();
+        this.crumpled = data.isCrumpled();
+        this.discoloration = data.isDiscoloration();
+        this.pollution = data.isPollution();
+        this.ripped = data.isRipped();
+    }
+
+    public void validatePermission(User author) {
+        if(author.equals(this.author))
+            throw PostAccessWrongException.EXCEPTION;
+    }
+
+    public void validateDate() {
+        if(LocalDateTime.now().isAfter(this.pullDate.plusDays(3)))
+            throw AlreadyPullPostException.EXCEPTION;
     }
 
     @Builder
@@ -119,6 +138,7 @@ public class Post extends BaseTime {
         this.discoloration = discoloration;
         this.pollution = pollution;
         this.ripped = ripped;
+        this.pullDate = LocalDateTime.now();
         this.status = PostStatus.ACTIVE;
         this.imageList = new ArrayList<>();
     }
