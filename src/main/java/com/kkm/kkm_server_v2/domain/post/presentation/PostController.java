@@ -137,6 +137,7 @@ public class PostController {
         return distancePostService.execute(page, size, longitude, latitude, distance);
     }
 
+    @Operation(summary = "게시글 끌어올리기")
     @PatchMapping("/{id}/pull")
     public void pullPost(
             @PathVariable("id") Long id
