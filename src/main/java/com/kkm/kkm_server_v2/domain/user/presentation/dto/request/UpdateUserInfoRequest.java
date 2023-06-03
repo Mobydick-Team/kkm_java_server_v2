@@ -13,23 +13,4 @@ public class UpdateUserInfoRequest {
     @NotBlank
     private String nickname;
 
-    @NotBlank
-    private String userId;
-
-    public UpdateUserInfoRequest(String nickname, String userId) {
-        this.nickname = nickname;
-        this.userId = userId;
-    }
-
-    public User toEntity(User user, String imgUrl) {
-        return User.builder()
-                .userId(userId)
-                .latitude(user.getLatitude())
-                .longitude(user.getLongitude())
-                .address(user.getAddress())
-                .imgUrl(imgUrl)
-                .nickname(nickname)
-                .role(user.getRole())
-                .build();
-    }
 }

@@ -47,6 +47,7 @@ public class SignUpRequest {
                 .nickname(nickname)
                 .imgUrl(imgUrl)
                 .role(Role.USER)
+                .kkm(0)
                 .build();
     }
 }

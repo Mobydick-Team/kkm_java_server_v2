@@ -16,4 +16,5 @@ public class KkmServerV2Application {
         SpringApplication.run(KkmServerV2Application.class, args);
     }
 
+
 }

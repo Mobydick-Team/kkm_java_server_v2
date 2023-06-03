@@ -29,9 +29,9 @@ public class FindByCategoryPostService {
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
                 .hasMorePage(list.getTotalPages() > list.getNumber() + 1)
-                .list(list.map(PostResponse::of).stream()
-                        .collect(Collectors.toList()))
+                .list(list.stream().map(PostResponse::of).collect(Collectors.toList()))
                 .build();
+
     }
 
 }

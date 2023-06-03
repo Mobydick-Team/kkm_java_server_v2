@@ -21,6 +21,8 @@ public class LoginService {
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.generateAccessToken(user.getUserId()))
                 .refreshToken(jwtTokenProvider.generateRefreshToken(user.getUserId()))
+                .name(user.getNickname())
+                .userId(user.getUserId())
                 .build();
     }
 

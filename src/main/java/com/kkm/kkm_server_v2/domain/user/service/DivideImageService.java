@@ -12,10 +12,8 @@ import java.util.List;
 public class DivideImageService {
     private final AwsS3Service awsS3Service;
 
-    public String execute(MultipartFile profileImg) {
-        List<MultipartFile> list = null;
-        list.add(profileImg);
-        List<String> imgList = awsS3Service.uploadFile(list);
+    public String execute(List<MultipartFile> images) {
+        List<String> imgList = awsS3Service.uploadFile(images);
         return imgList.get(0);
     }
 }

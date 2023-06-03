@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.service;
 
+import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
 import com.kkm.kkm_server_v2.domain.post.facade.PostFacade;
@@ -17,7 +18,9 @@ public class FindPostService {
 
     @Transactional(readOnly = true)
     public PostResponse execute(Long postId) {
-        return PostResponse.of(postFacade.findById(postId));
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
+        return PostResponse.of(post);
     }
 
 }

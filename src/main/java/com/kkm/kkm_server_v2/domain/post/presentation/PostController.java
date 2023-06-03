@@ -16,6 +16,8 @@ import com.kkm.kkm_server_v2.domain.post.service.PullPostService;
 import com.kkm.kkm_server_v2.domain.post.service.SearchPostService;
 import com.kkm.kkm_server_v2.domain.post.service.UpdatePostService;
 import com.kkm.kkm_server_v2.domain.post.service.UploadImageService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +38,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/post")
 @RequiredArgsConstructor
+@Tag(name = "게시글 서버")
 public class PostController {
 
     private final CreatePostService createPostService;
@@ -49,6 +52,7 @@ public class PostController {
     private final DistancePostService distancePostService;
     private final PullPostService pullPostService;
 
+    @Operation(summary = "게시글 생성")
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(
@@ -57,6 +61,7 @@ public class PostController {
         createPostService.execute(request);
     }
 
+    @Operation(summary = "이미지 업로드")
     @PostMapping("/image")
     @ResponseStatus(HttpStatus.CREATED)
     public ImageResponse uploadImage(
@@ -65,6 +70,7 @@ public class PostController {
         return uploadImageService.execute(files);
     }
 
+    @Operation(summary = "게시글 업데이트")
     @PatchMapping("/{id}")
     public void updatePost(
             @PathVariable("id") Long id,
@@ -73,6 +79,7 @@ public class PostController {
          updatePostService.execute(id, request);
     }
 
+    @Operation(summary = "게시글 삭제")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost(
@@ -81,6 +88,7 @@ public class PostController {
         deletePostService.execute(id);
     }
 
+    @Operation(summary = "게시글 조회")
     @GetMapping("/{id}")
     public PostResponse getPost(
             @PathVariable("id") Long id
@@ -88,6 +96,7 @@ public class PostController {
         return findPostService.execute(id);
     }
 
+    @Operation(summary = "게시글 리스트 조회")
     @GetMapping("/list")
     public PostListResponse getAllPost(
             @RequestParam("page") int page,
@@ -96,6 +105,7 @@ public class PostController {
         return findAllPostService.execute(page,size);
     }
 
+    @Operation(summary = "게시글 카테고리별 조회")
     @GetMapping("/category")
     public PostListResponse getAllPostByCategory(
             @RequestParam("page") int page,
@@ -105,6 +115,7 @@ public class PostController {
         return findByCategoryPostService.execute(page, size, category);
     }
 
+    @Operation(summary = "게시글 검색")
     @GetMapping("/search")
     public PostListResponse searchPost(
             @RequestParam("page") int page,
@@ -114,6 +125,7 @@ public class PostController {
         return searchPostService.execute(page, size, content);
     }
 
+    @Operation(summary = "입력한 거리에 있는 게시글 조회")
     @GetMapping("/distance")
     public PostListResponse distancePost(
             @RequestParam("page") int page,

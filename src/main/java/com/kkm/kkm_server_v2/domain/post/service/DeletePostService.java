@@ -21,11 +21,11 @@ public class DeletePostService {
 
     @Transactional
     public void execute(Long postId) {
-        User user = userFacade.getCurrentUser();
-        Post post = postFacade.findById(postId);
+        User user = userFacade.getCurrentUser(false);
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         post.validatePermission(user);
-
         postRepository.delete(post);
     }
 

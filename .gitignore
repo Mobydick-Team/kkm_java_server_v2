@@ -40,8 +40,6 @@ out/
 
 ### VS Code ###
 .vscode/
-
-**/application.properties
-**/application.yml
+/src/test
 
 .DS_Store

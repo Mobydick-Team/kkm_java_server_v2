@@ -5,14 +5,21 @@ plugins {
 }
 
 group = 'com.kkm'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
 }
 
+ext {
+	set('springCloudVersion', "2021.0.2")
+}
+
 dependencies {
+	implementation group: 'org.json', name: 'json', version: '20090211'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -28,7 +35,6 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'com.querydsl:querydsl-jpa'
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
 	annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
@@ -37,4 +43,8 @@ dependencies {
 
 }
 
-
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

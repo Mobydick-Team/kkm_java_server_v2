@@ -18,7 +18,7 @@ public class DeleteJjamService {
 
     @Transactional
     public void execute(Long jjamId) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getCurrentUser(false);
         Jjam jjam = jjamRepository.findById(jjamId)
                 .orElseThrow(() -> JjamNotFountException.EXCEPTION);
         if (!jjam.getAgent().equals(user))

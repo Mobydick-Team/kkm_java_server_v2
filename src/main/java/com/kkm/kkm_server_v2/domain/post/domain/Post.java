@@ -6,6 +6,7 @@ import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
 import com.kkm.kkm_server_v2.domain.post.exception.AlreadyPullPostException;
 import com.kkm.kkm_server_v2.domain.post.exception.PostAccessWrongException;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
+import com.kkm.kkm_server_v2.domain.trade.domain.Trade;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
@@ -56,7 +57,6 @@ public class Post extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
-
     public void updateStatus(PostStatus status) {
         this.status = status;
     }
@@ -94,6 +94,9 @@ public class Post extends BaseTime {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
+
+    @OneToMany(mappedBy = "postId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Trade> tradeList;
 
     public void addJjam(Jjam jjam) {
         getJjamList().add(jjam);

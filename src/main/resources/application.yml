@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: kkm
+  profiles:
+    active: config
+  config:
+    import: optional:configserver:http://172.18.0.2:8888

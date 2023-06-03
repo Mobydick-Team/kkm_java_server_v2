@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class DistancePostService {
 
     private final PostRepository postRepository;
-
     @Transactional
     public PostListResponse execute(int page, int size, double longitude, double latitude, int distance) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
@@ -28,9 +27,9 @@ public class DistancePostService {
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
                 .hasMorePage(list.getTotalPages() > list.getNumber() + 1)
-                .list(list.map(PostResponse::of).stream()
-                        .collect(Collectors.toList()))
+                .list(list.stream().map(PostResponse::of).collect(Collectors.toList()))
                 .build();
+
     }
 
 }
