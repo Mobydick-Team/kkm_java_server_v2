@@ -21,7 +21,7 @@ public class DeleteJjamService {
         User user = userFacade.getCurrentUser(false);
         Jjam jjam = jjamRepository.findById(jjamId)
                 .orElseThrow(() -> JjamNotFountException.EXCEPTION);
-        if (!jjam.getAgent().equals(user))
+        if (!jjam.getAgent().getId().equals(user.getId()))
             throw JjamAccessWrongException.EXCEPTION;
         jjamRepository.delete(jjam);
 
