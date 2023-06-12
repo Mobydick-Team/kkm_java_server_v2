@@ -15,9 +15,5 @@ public class UpdatePostRequest {
     private int deposit;
     private String process;
     private PostCategory category;
-    private boolean crumpled; // 구겨짐
-    private boolean discoloration; // 변색
-    private boolean pollution; // 오염
-    private boolean ripped; // 찢어짐
 
 }

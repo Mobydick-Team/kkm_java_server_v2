@@ -2,7 +2,6 @@ package com.kkm.kkm_server_v2.domain.post.service;
 
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
-import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
 import com.kkm.kkm_server_v2.domain.post.facade.PostFacade;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
 import lombok.RequiredArgsConstructor;

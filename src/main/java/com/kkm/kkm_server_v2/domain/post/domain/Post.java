@@ -61,14 +61,6 @@ public class Post extends BaseTime {
         this.status = status;
     }
 
-    private boolean crumpled; // 구겨짐
-
-    private boolean discoloration; // 변색
-
-    private boolean pollution; // 오염
-
-    private boolean ripped; // 찢어짐
-
     private LocalDateTime pullDate;
     public void pull() {
         this.pullDate = LocalDateTime.now();
@@ -109,10 +101,6 @@ public class Post extends BaseTime {
         this.deposit = data.getDeposit();
         this.process = data.getProcess();
         this.category = data.getCategory();
-        this.crumpled = data.isCrumpled();
-        this.discoloration = data.isDiscoloration();
-        this.pollution = data.isPollution();
-        this.ripped = data.isRipped();
     }
 
     public void validatePermission(User author) {
@@ -126,18 +114,13 @@ public class Post extends BaseTime {
     }
 
     @Builder
-    public Post(String title, String content, int price, int deposit, String process, PostCategory category,
-                boolean crumpled, boolean discoloration, boolean pollution, boolean ripped) {
+    public Post(String title, String content, int price, int deposit, String process, PostCategory category) {
         this.title = title;
         this.content = content;
         this.price = price;
         this.deposit = deposit;
         this.process = process;
         this.category = category;
-        this.crumpled = crumpled;
-        this.discoloration = discoloration;
-        this.pollution = pollution;
-        this.ripped = ripped;
         this.pullDate = LocalDateTime.now();
         this.status = PostStatus.ACTIVE;
         this.imageList = new ArrayList<>();
