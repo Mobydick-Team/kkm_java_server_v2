@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 @RequiredArgsConstructor
@@ -28,9 +29,7 @@ public class VerifyUserService {
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
         Trade trade = tradeRepository.findByPostIdAndReceiverId(post, user.getId());
         if (trade == null) throw ReviewAccessWrongException.EXCEPTION;
-        System.out.println("trade : "+ trade.getTradeTime());
-        System.out.println("now : "+ LocalDateTime.now());
-        if (trade.getTradeTime().isBefore(LocalDateTime.now())) throw TradeNotCompletedException.EXCEPTION;
+        if (trade.getTradeTime().isAfter(LocalDateTime.now(ZoneId.of("Asia/Seoul")))) throw TradeNotCompletedException.EXCEPTION;
         return trade;
     }
 }
