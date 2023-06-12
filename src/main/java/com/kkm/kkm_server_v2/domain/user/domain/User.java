@@ -70,7 +70,7 @@ public class User {
     }
 
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Jjam> jjamList;
+    private List<Jjam> jjamList = new ArrayList<>();
 
     public List<Post> getJjamPostList() {
         return getJjamList().stream().map(Jjam::getPost).collect(Collectors.toList());
