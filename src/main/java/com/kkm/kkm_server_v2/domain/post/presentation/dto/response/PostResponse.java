@@ -16,7 +16,6 @@ public class PostResponse {
     private String title;
     private String content;
     private int price;
-    private String process;
     private PostCategory category;
     private PostStatus status;
 
@@ -26,7 +25,6 @@ public class PostResponse {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .price(post.getPrice())
-                .process(post.getProcess())
                 .category(post.getCategory())
                 .status(post.getStatus())
                 .build();

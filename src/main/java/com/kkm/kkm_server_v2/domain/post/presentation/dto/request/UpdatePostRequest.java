@@ -13,7 +13,6 @@ public class UpdatePostRequest {
     private String content;
     private int price;
     private int deposit;
-    private String process;
     private PostCategory category;
 
 }

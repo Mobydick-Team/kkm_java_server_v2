@@ -50,8 +50,6 @@ public class Post extends BaseTime {
     @ColumnDefault("0")
     private int deposit;
 
-    private String process; // 거래 방법 추후 변경 예정
-
     @Enumerated(EnumType.STRING)
     private PostCategory category;
 
@@ -99,7 +97,6 @@ public class Post extends BaseTime {
         this.content = data.getContent();
         this.price = data.getPrice();
         this.deposit = data.getDeposit();
-        this.process = data.getProcess();
         this.category = data.getCategory();
     }
 
@@ -114,12 +111,11 @@ public class Post extends BaseTime {
     }
 
     @Builder
-    public Post(String title, String content, int price, int deposit, String process, PostCategory category) {
+    public Post(String title, String content, int price, int deposit, PostCategory category) {
         this.title = title;
         this.content = content;
         this.price = price;
         this.deposit = deposit;
-        this.process = process;
         this.category = category;
         this.pullDate = LocalDateTime.now();
         this.status = PostStatus.ACTIVE;

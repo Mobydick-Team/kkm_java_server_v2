@@ -16,7 +16,6 @@ public class CreatePostRequest {
     private String content;
     private int price;
     private int deposit;
-    private String process;
     private PostCategory category;
     private List<String> urls;
 
@@ -26,7 +25,6 @@ public class CreatePostRequest {
                 .content(this.content)
                 .price(this.price)
                 .deposit(this.deposit)
-                .process(this.process)
                 .category(this.category)
                 .build();
     }
