@@ -1,6 +1,7 @@
 package com.kkm.kkm_server_v2.domain.user.domain;
 
 import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
+import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.review.domain.Review;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostListResponse;
@@ -102,6 +103,10 @@ public class User {
         this.nickname = nickname;
         this.imgUrl = imgUrl;
     }
+
+    @OneToMany(mappedBy = "userLocation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Location> locationList;
+
 
     public void updateAddress(String address, double latitude, double longitude) {
         this.address = address;
