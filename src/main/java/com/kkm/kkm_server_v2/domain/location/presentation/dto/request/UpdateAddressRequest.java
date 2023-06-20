@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UpdateAddressRequest {
     @NotNull
-    private Long id;
+    private Long LocationId;
 
     @NotNull
     private Double latitude;

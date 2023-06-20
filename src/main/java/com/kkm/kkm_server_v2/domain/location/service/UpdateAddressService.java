@@ -19,7 +19,7 @@ public class UpdateAddressService {
     @Transactional
     public void execute(UpdateAddressRequest request) {
         User user = userFacade.getCurrentUser(false);
-        Location location = locationFacade.findByIdAndUserLocation(request.getId(), user);
+        Location location = locationFacade.findByIdAndUserLocation(request.getLocationId(), user);
         location.updateLocation(request.getAddress(), request.getLatitude(), request.getLongitude());
     }
 }
