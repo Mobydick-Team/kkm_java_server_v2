@@ -18,9 +18,10 @@ public class CreateLocationService {
 
     @Transactional
     public void execute(CreateLocationRequest request) {
+        boolean defaultValue = false;
         User user = userFacade.getCurrentUser(false);
-        locationFacade.countLocation(user);
+        if (locationFacade.countLocation(user) == 0) defaultValue = true;
         locationFacade.checkLocation(user, request.getAddress());
-        locationRepository.save(request.toEntity(user));
+        locationRepository.save(request.toEntity(user, defaultValue));
     }
 }

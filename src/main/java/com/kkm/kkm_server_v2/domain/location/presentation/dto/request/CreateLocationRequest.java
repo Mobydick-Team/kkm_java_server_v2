@@ -12,13 +12,13 @@ public class CreateLocationRequest {
     private double latitude;
     private double longitude;
 
-    public Location toEntity(User user) {
+    public Location toEntity(User user, boolean defaultValue) {
         return Location.builder()
                 .address(address)
                 .latitude(latitude)
                 .longitude(longitude)
                 .userLocation(user)
-                .selected(false)
+                .selected(defaultValue)
                 .build();
     }
 }

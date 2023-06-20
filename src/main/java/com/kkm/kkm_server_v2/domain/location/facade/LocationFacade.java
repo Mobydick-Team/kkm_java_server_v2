@@ -16,10 +16,12 @@ public class LocationFacade {
     private final LocationRepository locationRepository;
 
     @Transactional
-    public void countLocation(User user) {
-        if (locationRepository.findAllByUserLocation(user).size() >= 3) {
+    public int countLocation(User user) {
+        int count = locationRepository.findAllByUserLocation(user).size();
+        if (count >= 3) {
             throw LocationCountExceedException.EXCEPTION;
         }
+        return count;
     }
 
     @Transactional
