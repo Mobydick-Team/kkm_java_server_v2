@@ -76,7 +76,7 @@ public class PostController {
             @PathVariable("id") Long id,
             @RequestBody UpdatePostRequest request
     ) {
-         updatePostService.execute(id, request);
+        updatePostService.execute(id, request);
     }
 
     @Operation(summary = "게시글 삭제")
@@ -102,7 +102,7 @@ public class PostController {
             @RequestParam("page") int page,
             @RequestParam("size") int size
     ) {
-        return findAllPostService.execute(page,size);
+        return findAllPostService.execute(page, size);
     }
 
     @Operation(summary = "게시글 카테고리별 조회")
@@ -130,11 +130,9 @@ public class PostController {
     public PostListResponse distancePost(
             @RequestParam("page") int page,
             @RequestParam("size") int size,
-            @RequestParam("longitude") double longitude,
-            @RequestParam("latitude") double latitude,
             @RequestParam("distance") int distance
     ) {
-        return distancePostService.execute(page, size, longitude, latitude, distance);
+        return distancePostService.execute(page, size, distance);
     }
 
     @Operation(summary = "게시글 끌어올리기")

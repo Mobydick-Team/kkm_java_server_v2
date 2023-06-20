@@ -33,4 +33,9 @@ public class LocationFacade {
         return locationRepository.findByIdAndUserLocation(id, user)
                 .orElseThrow(() -> LocationNotFoundException.EXCEPTION);
     }
+    @Transactional
+    public Location findBySelectedAndUserLocation(User user) {
+        return locationRepository.findByUserLocationAndSelected(user, true)
+                .orElseThrow(() -> LocationNotFoundException.EXCEPTION);
+    }
 }

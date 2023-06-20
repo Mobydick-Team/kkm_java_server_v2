@@ -13,4 +13,5 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
     List<Location> findAllByUserLocation(User user);
     Optional<Location> findByUserLocationAndAddress(User user, String address);
     Optional<Location> findByIdAndUserLocation(Long id, User user);
+    Optional<Location> findByUserLocationAndSelected(User user, boolean selected);
 }
