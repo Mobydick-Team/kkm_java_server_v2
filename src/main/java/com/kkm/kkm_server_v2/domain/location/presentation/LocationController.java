@@ -1,8 +1,10 @@
 package com.kkm.kkm_server_v2.domain.location.presentation;
 
+import com.kkm.kkm_server_v2.domain.location.presentation.dto.request.ChangeSelectedLocationRequest;
 import com.kkm.kkm_server_v2.domain.location.presentation.dto.request.CreateLocationRequest;
 import com.kkm.kkm_server_v2.domain.location.presentation.dto.request.UpdateAddressRequest;
 import com.kkm.kkm_server_v2.domain.location.presentation.dto.response.LoadLocationListResponse;
+import com.kkm.kkm_server_v2.domain.location.service.ChangeSelectedLocationService;
 import com.kkm.kkm_server_v2.domain.location.service.CreateLocationService;
 import com.kkm.kkm_server_v2.domain.location.service.LoadLocationService;
 import com.kkm.kkm_server_v2.domain.location.service.UpdateAddressService;
@@ -26,6 +28,7 @@ public class LocationController {
     private final CreateLocationService createLocationService;
     private final UpdateAddressService updateAddressService;
     private final LoadLocationService loadLocationService;
+    private final ChangeSelectedLocationService changeSelectedLocationService;
 
     @Operation(summary = "주소 등록")
     @PostMapping("/add")
@@ -43,5 +46,11 @@ public class LocationController {
     @GetMapping("/my")
     public LoadLocationListResponse getLocationList() {
         return loadLocationService.execute();
+    }
+
+    @Operation(summary = "선택 주소 변경")
+    @PostMapping("/change")
+    public void changeLocation(@RequestBody ChangeSelectedLocationRequest request) {
+        changeSelectedLocationService.execute(request);
     }
 }

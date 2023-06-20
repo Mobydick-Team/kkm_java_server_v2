@@ -45,6 +45,9 @@ public class Location {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+    public void updateSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     @Builder
     public Location(String address, double latitude, double longitude, User userLocation, boolean selected) {
