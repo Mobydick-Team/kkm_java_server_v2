@@ -55,11 +55,15 @@ public class Post extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
+    private double longitude;
+    private double latitude;
+
     public void updateStatus(PostStatus status) {
         this.status = status;
     }
 
     private LocalDateTime pullDate;
+
     public void pull() {
         this.pullDate = LocalDateTime.now();
     }
@@ -81,6 +85,10 @@ public class Post extends BaseTime {
                 getImageList().add(item)
         ).close();
     }
+    public void addAddress(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
@@ -101,17 +109,17 @@ public class Post extends BaseTime {
     }
 
     public void validatePermission(User author) {
-        if(author.equals(this.author))
+        if (author.equals(this.author))
             throw PostAccessWrongException.EXCEPTION;
     }
 
     public void validateDate() {
-        if(LocalDateTime.now().isAfter(this.pullDate.plusDays(3)))
+        if (LocalDateTime.now().isAfter(this.pullDate.plusDays(3)))
             throw AlreadyPullPostException.EXCEPTION;
     }
 
     @Builder
-    public Post(String title, String content, int price, int deposit, PostCategory category) {
+    public Post(String title, String content, int price, int deposit, PostCategory category, double longitude, double latitude) {
         this.title = title;
         this.content = content;
         this.price = price;
@@ -120,5 +128,7 @@ public class Post extends BaseTime {
         this.pullDate = LocalDateTime.now();
         this.status = PostStatus.ACTIVE;
         this.imageList = new ArrayList<>();
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 }
