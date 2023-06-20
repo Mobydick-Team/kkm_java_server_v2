@@ -1,5 +1,7 @@
 package com.kkm.kkm_server_v2.domain.user.service;
 
+import com.kkm.kkm_server_v2.domain.location.domain.repository.LocationRepository;
+import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.domain.user.domain.repository.UserRepository;
 import com.kkm.kkm_server_v2.domain.user.exception.UserAlreadyExistsException;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.SignUpRequest;
@@ -12,14 +14,16 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class SignUpService {
     private final UserRepository userRepository;
+    private final LocationRepository locationRepository;
 
     @Transactional
     public void execute(SignUpRequest request, String imgUrl) {
         userRepository.findByUserId(request.getUserId())
-                        .ifPresent(m -> {
-                            throw UserAlreadyExistsException.EXCEPTION;
-                        });
+                .ifPresent(m -> {
+                    throw UserAlreadyExistsException.EXCEPTION;
+                });
 
-        userRepository.save(request.toEntity(imgUrl));
+        User user = userRepository.save(request.toEntityUser(imgUrl));
+        locationRepository.save(request.toEntityLocation(user, true));
     }
 }
