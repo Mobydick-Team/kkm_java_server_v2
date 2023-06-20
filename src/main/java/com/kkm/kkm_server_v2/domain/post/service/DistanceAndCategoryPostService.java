@@ -31,8 +31,12 @@ public class DistanceAndCategoryPostService {
         User user = userFacade.getCurrentUser(false);
         Location location = locationFacade.findBySelectedAndUserLocation(user);
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
-        Page<Post> list = postRepository.findByDistanceAndCategory(location.getLongitude(), location.getLatitude(), distance, category, pageable);
-
+        Page<Post> list;
+        if (category == PostCategory.ALL) {
+            list = postRepository.findByDistance(location.getLongitude(), location.getLatitude(), distance, pageable);
+        } else {
+            list = postRepository.findByDistanceAndCategory(location.getLongitude(), location.getLatitude(), distance, category, pageable);
+        }
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
                 .hasMorePage(list.getTotalPages() > list.getNumber() + 1)
