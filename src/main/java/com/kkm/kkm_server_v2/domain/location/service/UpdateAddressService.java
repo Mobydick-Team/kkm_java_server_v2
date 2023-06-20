@@ -17,9 +17,9 @@ public class UpdateAddressService {
     private final LocationFacade locationFacade;
 
     @Transactional
-    public void execute(UpdateAddressRequest request) {
+    public void execute(UpdateAddressRequest request, Long id) {
         User user = userFacade.getCurrentUser(false);
-        Location location = locationFacade.findByIdAndUserLocation(request.getLocationId(), user);
+        Location location = locationFacade.findByIdAndUserLocation(id, user);
         location.updateLocation(request.getAddress(), request.getLatitude(), request.getLongitude());
     }
 }

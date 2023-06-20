@@ -1,6 +1,5 @@
 package com.kkm.kkm_server_v2.domain.location.presentation;
 
-import com.kkm.kkm_server_v2.domain.location.presentation.dto.request.ChangeSelectedLocationRequest;
 import com.kkm.kkm_server_v2.domain.location.presentation.dto.request.CreateLocationRequest;
 import com.kkm.kkm_server_v2.domain.location.presentation.dto.request.UpdateAddressRequest;
 import com.kkm.kkm_server_v2.domain.location.presentation.dto.response.LoadLocationListResponse;
@@ -12,8 +11,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,26 +31,26 @@ public class LocationController {
     private final ChangeSelectedLocationService changeSelectedLocationService;
 
     @Operation(summary = "주소 등록")
-    @PostMapping("/add")
+    @PostMapping("")
     public void AddLocation(@RequestBody CreateLocationRequest request) {
         createLocationService.execute(request);
     }
 
     @Operation(summary = "주소 업데이트")
-    @PutMapping("/update")
-    public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request) {
-        updateAddressService.execute(request);
+    @PatchMapping("/{id}")
+    public void UpdateAddress(@PathVariable("id") Long id, @RequestBody @Valid UpdateAddressRequest request) {
+        updateAddressService.execute(request, id);
     }
 
     @Operation(summary = "주소 조회")
-    @GetMapping("/my")
+    @GetMapping("")
     public LoadLocationListResponse getLocationList() {
         return loadLocationService.execute();
     }
 
     @Operation(summary = "선택 주소 변경")
-    @PostMapping("/change")
-    public void changeLocation(@RequestBody ChangeSelectedLocationRequest request) {
-        changeSelectedLocationService.execute(request);
+    @PostMapping("/{id}")
+    public void changeLocation(@PathVariable("id") Long id) {
+        changeSelectedLocationService.execute(id);
     }
 }
