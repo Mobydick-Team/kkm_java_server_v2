@@ -10,6 +10,7 @@ import com.kkm.kkm_server_v2.domain.location.service.UpdateAddressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,11 @@ public class LocationController {
     @Operation(summary = "선택 주소 변경")
     @PostMapping("/{id}")
     public void changeLocation(@PathVariable("id") Long id) {
+        changeSelectedLocationService.execute(id);
+    }
+    @Operation(summary = "주소 삭제")
+    @DeleteMapping("/{id}")
+    public void deleteLocation(@PathVariable("id") Long id) {
         changeSelectedLocationService.execute(id);
     }
 }

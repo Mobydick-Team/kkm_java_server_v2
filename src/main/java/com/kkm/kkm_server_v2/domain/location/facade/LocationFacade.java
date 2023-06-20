@@ -6,6 +6,7 @@ import com.kkm.kkm_server_v2.domain.location.exception.LocationAlreadyExistExcep
 import com.kkm.kkm_server_v2.domain.location.exception.LocationAlreadySelectedException;
 import com.kkm.kkm_server_v2.domain.location.exception.LocationCountExceedException;
 import com.kkm.kkm_server_v2.domain.location.exception.LocationNotFoundException;
+import com.kkm.kkm_server_v2.domain.location.exception.LocationSelectedCannotDeleteException;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -47,6 +48,12 @@ public class LocationFacade {
     public void preventSameLocation(Location location, Location selectedLocation) {
         if (location.equals(selectedLocation)) {
             throw LocationAlreadySelectedException.EXCEPTION;
+        }
+    }
+
+    public void deleteLocationCheck(Location location) {
+        if (location.isSelected()) {
+            throw LocationSelectedCannotDeleteException.EXCEPTION;
         }
     }
 }
