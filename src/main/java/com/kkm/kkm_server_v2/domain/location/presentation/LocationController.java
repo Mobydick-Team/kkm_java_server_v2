@@ -34,7 +34,7 @@ public class LocationController {
     }
 
     @Operation(summary = "주소 업데이트")
-    @PutMapping("/update/address")
+    @PutMapping("/update")
     public void UpdateAddress(@RequestBody @Valid UpdateAddressRequest request) {
         updateAddressService.execute(request);
     }
