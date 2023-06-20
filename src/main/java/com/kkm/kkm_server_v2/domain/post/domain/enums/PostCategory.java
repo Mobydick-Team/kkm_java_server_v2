@@ -12,7 +12,8 @@ public enum PostCategory {
     OUTER("아우터"),
     ACCESSORY("액세서리"),
     BAG("가방"),
-    SHOES("신발");
+    SHOES("신발"),
+    ALL("전체");
 
     private final String name;
 }

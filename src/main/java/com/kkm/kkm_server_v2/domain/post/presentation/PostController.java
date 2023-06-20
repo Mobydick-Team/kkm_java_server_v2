@@ -8,6 +8,7 @@ import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostListRespo
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
 import com.kkm.kkm_server_v2.domain.post.service.CreatePostService;
 import com.kkm.kkm_server_v2.domain.post.service.DeletePostService;
+import com.kkm.kkm_server_v2.domain.post.service.DistanceAndCategoryPostService;
 import com.kkm.kkm_server_v2.domain.post.service.DistancePostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindAllPostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindByCategoryPostService;
@@ -51,6 +52,7 @@ public class PostController {
     private final SearchPostService searchPostService;
     private final DistancePostService distancePostService;
     private final PullPostService pullPostService;
+    private final DistanceAndCategoryPostService distanceAndCategoryPostService;
 
     @Operation(summary = "게시글 생성")
     @PostMapping("")
@@ -141,6 +143,16 @@ public class PostController {
             @PathVariable("id") Long id
     ) {
         pullPostService.execute(id);
+    }
+    @Operation(summary = "게시글 카테고리 + 거리 조회")
+    @GetMapping("/list")
+    public PostListResponse getAllPostByCategoryAndLocation(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("category") PostCategory category,
+            @RequestParam("distance") int distance
+    ) {
+        return distanceAndCategoryPostService.execute(page, size, category, distance);
     }
 
 }

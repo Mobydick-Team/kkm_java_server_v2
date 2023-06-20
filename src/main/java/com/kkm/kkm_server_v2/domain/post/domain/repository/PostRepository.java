@@ -17,4 +17,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE ST_Distance_Sphere(POINT(:longitude, :latitude), POINT(p.longitude, p.latitude)) <= :distance")
     Page<Post> findByDistance(double longitude, double latitude, int distance, Pageable pageable);
 
+    @Query("SELECT p FROM Post p WHERE ST_Distance_Sphere(POINT(:longitude, :latitude), POINT(p.longitude, p.latitude)) <= :distance and p.category = :category")
+    Page<Post> findByDistanceAndCategory(double longitude, double latitude, int distance, PostCategory category, Pageable pageable);
 }
