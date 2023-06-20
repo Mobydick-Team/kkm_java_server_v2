@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class LocationFacade {
     private final LocationRepository locationRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public int countLocation(User user) {
         int count = locationRepository.findAllByUserLocation(user).size();
         if (count >= 3) {
@@ -25,20 +25,20 @@ public class LocationFacade {
         return count;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public void checkLocation(User user, String address) {
         locationRepository.findByUserLocationAndAddress(user, address).ifPresent(location -> {
             throw LocationAlreadyExistException.EXCEPTION;
         });
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Location findByIdAndUserLocation(Long id, User user) {
         return locationRepository.findByIdAndUserLocation(id, user)
                 .orElseThrow(() -> LocationNotFoundException.EXCEPTION);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Location findBySelectedAndUserLocation(User user) {
         return locationRepository.findByUserLocationAndSelected(user, true)
                 .orElseThrow(() -> LocationNotFoundException.EXCEPTION);
@@ -48,6 +48,5 @@ public class LocationFacade {
         if (location.equals(selectedLocation)) {
             throw LocationAlreadySelectedException.EXCEPTION;
         }
-
     }
 }

@@ -22,12 +22,12 @@ public class UserFacade {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION) : auth.getUser();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public User findUserByUserId(String userId) {
         return userRepository.findByUserId(userId).orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public boolean isUserExistByNickName(String nickname) {
         return userRepository.existsUserByNickname(nickname);
     }
