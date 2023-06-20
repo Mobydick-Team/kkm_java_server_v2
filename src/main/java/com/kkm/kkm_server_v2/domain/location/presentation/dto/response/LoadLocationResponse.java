@@ -13,6 +13,7 @@ public class LoadLocationResponse {
     private String address;
     private Double latitude;
     private Double longitude;
+    private boolean selected;
 
     public static LoadLocationResponse of(Location location) {
         return LoadLocationResponse.builder()
@@ -20,6 +21,7 @@ public class LoadLocationResponse {
                 .address(location.getAddress())
                 .latitude(location.getLatitude())
                 .longitude(location.getLongitude())
+                .selected(location.isSelected())
                 .build();
     }
 }
