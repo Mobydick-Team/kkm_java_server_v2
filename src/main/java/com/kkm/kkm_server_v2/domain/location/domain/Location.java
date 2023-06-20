@@ -40,6 +40,12 @@ public class Location {
     @Column(nullable = false)
     private boolean selected;
 
+    public void updateLocation(String address, double latitude, double longitude) {
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     @Builder
     public Location(String address, double latitude, double longitude, User userLocation, boolean selected) {
         this.address = address;

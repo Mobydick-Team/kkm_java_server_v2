@@ -1,4 +1,4 @@
-package com.kkm.kkm_server_v2.domain.user.presentation.dto.request;
+package com.kkm.kkm_server_v2.domain.location.presentation.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UpdateAddressRequest {
+    @NotNull
+    private Long id;
 
     @NotNull
     private Double latitude;
