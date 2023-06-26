@@ -24,12 +24,7 @@ public class FindByCategoryPostService {
     @Transactional(readOnly = true)
     public PostListResponse execute(int page, int size, PostCategory category) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
-        Page<Post> list;
-        if (category == PostCategory.ALL) {
-            list = postRepository.findAll(pageable);
-        } else {
-            list = postRepository.findByCategory(category, pageable);
-        }
+        Page<Post> list = category == PostCategory.ALL ? postRepository.findAll(pageable) : postRepository.findByCategory(category, pageable);
 
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
