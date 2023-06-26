@@ -29,8 +29,8 @@ public class CreateJjamService {
                 .post(post)
                 .agent(user)
                 .build();
-        user.addJjam(jjam);
         jjamRepository.save(jjam);
+//        user.addJjam(jjam);
 
     }
 

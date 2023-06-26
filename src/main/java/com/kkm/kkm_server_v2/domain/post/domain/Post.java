@@ -50,26 +50,20 @@ public class Post extends BaseTime {
     @ColumnDefault("0")
     private int deposit;
 
-    private String process; // 거래 방법 추후 변경 예정
-
     @Enumerated(EnumType.STRING)
     private PostCategory category;
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
+    private double longitude;
+    private double latitude;
+
     public void updateStatus(PostStatus status) {
         this.status = status;
     }
 
-    private boolean crumpled; // 구겨짐
-
-    private boolean discoloration; // 변색
-
-    private boolean pollution; // 오염
-
-    private boolean ripped; // 찢어짐
-
     private LocalDateTime pullDate;
+
     public void pull() {
         this.pullDate = LocalDateTime.now();
     }
@@ -91,6 +85,10 @@ public class Post extends BaseTime {
                 getImageList().add(item)
         ).close();
     }
+    public void addAddress(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jjam> jjamList;
@@ -107,39 +105,30 @@ public class Post extends BaseTime {
         this.content = data.getContent();
         this.price = data.getPrice();
         this.deposit = data.getDeposit();
-        this.process = data.getProcess();
         this.category = data.getCategory();
-        this.crumpled = data.isCrumpled();
-        this.discoloration = data.isDiscoloration();
-        this.pollution = data.isPollution();
-        this.ripped = data.isRipped();
     }
 
     public void validatePermission(User author) {
-        if(author.equals(this.author))
+        if (author.equals(this.author))
             throw PostAccessWrongException.EXCEPTION;
     }
 
     public void validateDate() {
-        if(LocalDateTime.now().isAfter(this.pullDate.plusDays(3)))
+        if (LocalDateTime.now().isAfter(this.pullDate.plusDays(3)))
             throw AlreadyPullPostException.EXCEPTION;
     }
 
     @Builder
-    public Post(String title, String content, int price, int deposit, String process, PostCategory category,
-                boolean crumpled, boolean discoloration, boolean pollution, boolean ripped) {
+    public Post(String title, String content, int price, int deposit, PostCategory category, double longitude, double latitude) {
         this.title = title;
         this.content = content;
         this.price = price;
         this.deposit = deposit;
-        this.process = process;
         this.category = category;
-        this.crumpled = crumpled;
-        this.discoloration = discoloration;
-        this.pollution = pollution;
-        this.ripped = ripped;
         this.pullDate = LocalDateTime.now();
         this.status = PostStatus.ACTIVE;
         this.imageList = new ArrayList<>();
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 }
