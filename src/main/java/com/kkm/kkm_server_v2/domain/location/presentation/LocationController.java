@@ -49,7 +49,7 @@ public class LocationController {
         return loadLocationService.execute();
     }
 
-    @Operation(summary = "선택 주소 변경")
+    @Operation(summary = "현재 선택된 주소 변경")
     @PostMapping("/{id}")
     public void changeLocation(@PathVariable("id") Long id) {
         changeSelectedLocationService.execute(id);
