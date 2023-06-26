@@ -55,7 +55,7 @@ public class PostController {
     private final DistanceAndCategoryPostService distanceAndCategoryPostService;
 
     @Operation(summary = "게시글 생성")
-    @PostMapping("")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(
             @RequestBody CreatePostRequest request

@@ -32,7 +32,7 @@ public class LocationController {
     private final ChangeSelectedLocationService changeSelectedLocationService;
 
     @Operation(summary = "주소 등록")
-    @PostMapping("")
+    @PostMapping()
     public void AddLocation(@RequestBody CreateLocationRequest request) {
         createLocationService.execute(request);
     }
@@ -44,7 +44,7 @@ public class LocationController {
     }
 
     @Operation(summary = "주소 조회")
-    @GetMapping("")
+    @GetMapping()
     public LoadLocationListResponse getLocationList() {
         return loadLocationService.execute();
     }
