@@ -40,13 +40,14 @@ public class Location {
     @Column(nullable = false)
     private boolean selected;
 
+    public void updateSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     public void updateLocation(String address, double latitude, double longitude) {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-    public void updateSelected(boolean selected) {
-        this.selected = selected;
     }
 
     @Builder
