@@ -54,6 +54,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers(HttpMethod.POST, "/user/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/signup/request").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/signup/image").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/check/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/auth/kakao/info").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/kakao/login").permitAll()
