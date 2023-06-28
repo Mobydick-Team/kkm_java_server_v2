@@ -1,4 +1,4 @@
-package com.kkm.kkm_server_v2.domain.user.presentation.dto.request;
+package com.kkm.kkm_server_v2.domain.location.presentation.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;

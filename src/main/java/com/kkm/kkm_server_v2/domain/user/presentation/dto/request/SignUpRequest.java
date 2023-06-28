@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.user.presentation.dto.request;
 
+import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.user.domain.Role;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import lombok.AccessLevel;
@@ -30,24 +31,31 @@ public class SignUpRequest {
     @NotBlank
     private String address;
 
-    public SignUpRequest(String nickname, String userId, double latitude, double longitude, String address) {
-        this.nickname = nickname;
-        this.userId = userId;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.address = address;
-    }
 
-    public User toEntity(String imgUrl) {
+    public User toEntityUser(String imgUrl) {
         return User.builder()
                 .userId(userId)
-                .address(address)
-                .latitude(latitude)
-                .longitude(longitude)
                 .nickname(nickname)
                 .imgUrl(imgUrl)
                 .role(Role.USER)
                 .kkm(0)
+                .build();
+    }
+    public User toEntityUserWithoutImg() {
+        return User.builder()
+                .userId(userId)
+                .nickname(nickname)
+                .role(Role.USER)
+                .kkm(0)
+                .build();
+    }
+    public Location toEntityLocation(User user, boolean defaultValue) {
+        return Location.builder()
+                .address(address)
+                .latitude(latitude)
+                .longitude(longitude)
+                .userLocation(user)
+                .selected(defaultValue)
                 .build();
     }
 }

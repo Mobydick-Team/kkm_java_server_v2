@@ -14,7 +14,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.title LIKE CONCAT('%', :content, '%') OR p.content LIKE CONCAT('%', :content, '%')")
     Page<Post> findByTitleOrContent(String content, Pageable pageable);
 
-    @Query("SELECT p FROM Post p WHERE ST_Distance_Sphere(POINT(:longitude, :latitude), POINT(p.author.longitude, p.author.latitude)) <= :distance")
+    @Query("SELECT p FROM Post p WHERE ST_Distance_Sphere(POINT(:longitude, :latitude), POINT(p.longitude, p.latitude)) <= :distance")
     Page<Post> findByDistance(double longitude, double latitude, int distance, Pageable pageable);
 
+    @Query("SELECT p FROM Post p WHERE ST_Distance_Sphere(POINT(:longitude, :latitude), POINT(p.longitude, p.latitude)) <= :distance and p.category = :category")
+    Page<Post> findByDistanceAndCategory(double longitude, double latitude, int distance, PostCategory category, Pageable pageable);
 }

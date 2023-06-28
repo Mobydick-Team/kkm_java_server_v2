@@ -23,7 +23,7 @@ public class ReviewController {
     private final FindMyReviewService findMyReviewService;
     private final FindUserReviewService findUserReviewService;
 
-    @PostMapping("")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(
             @RequestBody CreateReviewRequest request
@@ -38,7 +38,7 @@ public class ReviewController {
         return findUserReviewService.execute(id);
     }
 
-    @GetMapping("")
+    @GetMapping()
     public FindUserReviewListResponse getMyReview() {
         return findMyReviewService.execute();
     }

@@ -1,6 +1,7 @@
 package com.kkm.kkm_server_v2.domain.user.domain;
 
 import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
+import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.review.domain.Review;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostListResponse;
@@ -39,17 +40,12 @@ public class User {
     @Column(unique = true, nullable = false)
     private String userId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String imgUrl;
 
-    @Column(nullable = false)
-    private double latitude;
-
-    @Column(nullable = false)
-    private double longitude;
-
-    @Column(nullable = false)
-    private String address;
+    public void updateImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     @Column(nullable = false)
     private int kkm;
@@ -103,20 +99,14 @@ public class User {
         this.imgUrl = imgUrl;
     }
 
-    public void updateAddress(String address, double latitude, double longitude) {
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    @OneToMany(mappedBy = "userLocation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Location> locationList;
 
     @Builder
-    public User(String nickname, String userId, String imgUrl, double latitude, double longitude, String address, Role role, int kkm) {
+    public User(String nickname, String userId, String imgUrl, Role role, int kkm) {
         this.nickname = nickname;
         this.userId = userId;
         this.imgUrl = imgUrl;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.address = address;
         this.role = role;
         this.postList = new ArrayList<>();
         this.kkm = kkm;
