@@ -7,6 +7,7 @@ import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.MyPageRespons
 import com.kkm.kkm_server_v2.domain.user.service.CheckUserService;
 import com.kkm.kkm_server_v2.domain.user.service.DivideImageService;
 import com.kkm.kkm_server_v2.domain.user.service.MyPageService;
+import com.kkm.kkm_server_v2.domain.user.service.SignUpDivideRequestService;
 import com.kkm.kkm_server_v2.domain.user.service.SignUpService;
 import com.kkm.kkm_server_v2.domain.user.service.UpdateUserInfoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +38,22 @@ public class UserController {
     private final UpdateUserInfoService updateUserInfoService;
     private final DivideImageService divideImageService;
     private final MyPageService myPageService;
+    private final SignUpDivideRequestService signUpDivideRequestService;
 
     @Operation(summary = "회원가입")
     @PostMapping("/signup")
     public void Signup(@RequestPart(value = "data") @Valid SignUpRequest request, @RequestPart List<MultipartFile> profileImg) {
         signUpService.execute(request, divideImageService.execute(profileImg));
+    }
+    @Operation(summary = "분리된 회원 가입")
+    @PostMapping("/signup/request")
+    public void SignupRequest(@RequestBody @Valid SignUpRequest request) {
+        signUpDivideRequestService.execute(request);
+    }
+    @Operation(summary = "이미지 업데이트")
+    @PostMapping("/update/image")
+    public void SignupImage(@RequestPart List<MultipartFile> profileImg){
+        divideImageService.execute(profileImg);
     }
 
     @Operation(summary = "닉네임 중복 확인")
