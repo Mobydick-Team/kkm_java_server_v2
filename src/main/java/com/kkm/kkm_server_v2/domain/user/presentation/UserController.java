@@ -10,6 +10,7 @@ import com.kkm.kkm_server_v2.domain.user.service.MyPageService;
 import com.kkm.kkm_server_v2.domain.user.service.SignUpDivideRequestService;
 import com.kkm.kkm_server_v2.domain.user.service.SignUpService;
 import com.kkm.kkm_server_v2.domain.user.service.UpdateUserInfoService;
+import com.kkm.kkm_server_v2.domain.user.service.UpdateUserProfileImgService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,8 @@ public class UserController {
     private final DivideImageService divideImageService;
     private final MyPageService myPageService;
     private final SignUpDivideRequestService signUpDivideRequestService;
+    private final UpdateUserProfileImgService updateUserProfileImgService;
+
 
     @Operation(summary = "회원가입")
     @PostMapping("/signup")
@@ -53,7 +56,7 @@ public class UserController {
     @Operation(summary = "이미지 업데이트")
     @PostMapping("/update/image")
     public void SignupImage(@RequestPart List<MultipartFile> profileImg){
-        divideImageService.execute(profileImg);
+        updateUserProfileImgService.execute(divideImageService.execute(profileImg));
     }
 
     @Operation(summary = "닉네임 중복 확인")
