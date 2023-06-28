@@ -98,14 +98,14 @@ public class PostController {
         return findPostService.execute(id);
     }
 
-    @Operation(summary = "게시글 리스트 조회")
-    @GetMapping("/list")
-    public PostListResponse getAllPost(
-            @RequestParam("page") int page,
-            @RequestParam("size") int size
-    ) {
-        return findAllPostService.execute(page, size);
-    }
+//    @Operation(summary = "게시글 리스트 조회")
+//    @GetMapping("/list")
+//    public PostListResponse getAllPost(
+//            @RequestParam("page") int page,
+//            @RequestParam("size") int size
+//    ) {
+//        return findAllPostService.execute(page, size);
+//    }
 
     @Operation(summary = "게시글 카테고리별 조회")
     @GetMapping("/category")
