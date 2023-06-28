@@ -57,8 +57,8 @@ public class UserController {
         signUpDivideRequestService.execute(request);
     }
     @Operation(summary = "분리된 회원 가입")
-    @PostMapping("/signup/image")
-    public void SignupProfile(@RequestPart List<MultipartFile> profileImg, @RequestParam String userId) {
+    @PostMapping("/signup/image/{userId}")
+    public void SignupProfile(@RequestPart List<MultipartFile> profileImg,@PathVariable String userId) {
         signUpDivideProfileService.execute(divideImageService.execute(profileImg), userId);
     }
     @Operation(summary = "이미지 업데이트")
