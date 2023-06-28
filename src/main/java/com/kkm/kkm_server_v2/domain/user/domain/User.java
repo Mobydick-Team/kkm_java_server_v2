@@ -40,8 +40,12 @@ public class User {
     @Column(unique = true, nullable = false)
     private String userId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String imgUrl;
+
+    public void updateImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     @Column(nullable = false)
     private int kkm;

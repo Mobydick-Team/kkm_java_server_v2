@@ -41,6 +41,14 @@ public class SignUpRequest {
                 .kkm(0)
                 .build();
     }
+    public User toEntityUserWithoutImg() {
+        return User.builder()
+                .userId(userId)
+                .nickname(nickname)
+                .role(Role.USER)
+                .kkm(0)
+                .build();
+    }
     public Location toEntityLocation(User user, boolean defaultValue) {
         return Location.builder()
                 .address(address)
