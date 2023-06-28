@@ -17,11 +17,11 @@ public class MyPageResponse {
     private PostListResponse myPostList;
     private PostListResponse myJjamList;
 
-    public static MyPageResponse of(User user, PostListResponse myPostList) {
+    public static MyPageResponse of(User user, PostListResponse myPostList,String address) {
         return MyPageResponse.builder()
                 .name(user.getNickname())
                 .profileImage(user.getImgUrl())
-                .address(user.getAddress())
+                .address(address)
                 .tradeCount(user.getTradeCount())
                 .reviewCount(user.getReviewSize())
                 .kkm(user.getKkm())
