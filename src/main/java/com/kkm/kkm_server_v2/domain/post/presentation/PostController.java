@@ -9,9 +9,6 @@ import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
 import com.kkm.kkm_server_v2.domain.post.service.CreatePostService;
 import com.kkm.kkm_server_v2.domain.post.service.DeletePostService;
 import com.kkm.kkm_server_v2.domain.post.service.DistanceAndCategoryPostService;
-import com.kkm.kkm_server_v2.domain.post.service.DistancePostService;
-import com.kkm.kkm_server_v2.domain.post.service.FindAllPostService;
-import com.kkm.kkm_server_v2.domain.post.service.FindByCategoryPostService;
 import com.kkm.kkm_server_v2.domain.post.service.FindPostService;
 import com.kkm.kkm_server_v2.domain.post.service.PullPostService;
 import com.kkm.kkm_server_v2.domain.post.service.SearchPostService;
@@ -47,10 +44,7 @@ public class PostController {
     private final UpdatePostService updatePostService;
     private final DeletePostService deletePostService;
     private final FindPostService findPostService;
-    private final FindAllPostService findAllPostService;
-    private final FindByCategoryPostService findByCategoryPostService;
     private final SearchPostService searchPostService;
-    private final DistancePostService distancePostService;
     private final PullPostService pullPostService;
     private final DistanceAndCategoryPostService distanceAndCategoryPostService;
 
@@ -98,43 +92,16 @@ public class PostController {
         return findPostService.execute(id);
     }
 
-//    @Operation(summary = "게시글 리스트 조회")
-//    @GetMapping("/list")
-//    public PostListResponse getAllPost(
-//            @RequestParam("page") int page,
-//            @RequestParam("size") int size
-//    ) {
-//        return findAllPostService.execute(page, size);
-//    }
-
-    @Operation(summary = "게시글 카테고리별 조회")
-    @GetMapping("/category")
-    public PostListResponse getAllPostByCategory(
-            @RequestParam("page") int page,
-            @RequestParam("size") int size,
-            @RequestParam("category") PostCategory category
-    ) {
-        return findByCategoryPostService.execute(page, size, category);
-    }
-
     @Operation(summary = "게시글 검색")
     @GetMapping("/search")
     public PostListResponse searchPost(
             @RequestParam("page") int page,
             @RequestParam("size") int size,
-            @RequestParam("content") String content
-    ) {
-        return searchPostService.execute(page, size, content);
-    }
-
-    @Operation(summary = "입력한 거리에 있는 게시글 조회")
-    @GetMapping("/distance")
-    public PostListResponse distancePost(
-            @RequestParam("page") int page,
-            @RequestParam("size") int size,
+            @RequestParam("content") String content,
+            @RequestParam("category") PostCategory category,
             @RequestParam("distance") int distance
     ) {
-        return distancePostService.execute(page, size, distance);
+        return searchPostService.execute(page, size, content, category, distance);
     }
 
     @Operation(summary = "게시글 끌어올리기")
@@ -144,6 +111,7 @@ public class PostController {
     ) {
         pullPostService.execute(id);
     }
+
     @Operation(summary = "게시글 카테고리 + 거리 조회")
     @GetMapping("/list")
     public PostListResponse getAllPostByCategoryAndLocation(
