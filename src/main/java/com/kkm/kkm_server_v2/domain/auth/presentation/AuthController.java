@@ -10,6 +10,7 @@ import com.kkm.kkm_server_v2.domain.auth.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,7 +45,7 @@ public class AuthController {
     }
 
     @Operation(summary = "로그아웃")
-    @PostMapping("/logout")
+    @DeleteMapping("/logout")
     public void logout() {
         logoutService.execute();
     }
