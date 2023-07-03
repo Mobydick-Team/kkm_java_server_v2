@@ -91,7 +91,7 @@ public class UserController {
     }
 
     @Operation(summary = "다른 사용자 페이지")
-    @GetMapping("/page/{id}")
+    @GetMapping("/{id}")
     public UserPageResponse GetUserPage(@PathVariable Long id) {
         return userPageService.execute(id);
     }
