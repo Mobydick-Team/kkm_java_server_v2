@@ -32,7 +32,7 @@ public class SearchPostService {
         User user = userFacade.getCurrentUser(false);
         Location location = locationFacade.findBySelectedAndUserLocation(user);
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "pullDate");
-        Page<Post> list = postRepository.findByTitleOrContentAndCategoryAndDistance(content, pageable, category, location.getLongitude(), location.getLatitude(), distance);
+        Page<Post> list = category == PostCategory.ALL ? postRepository.findByTitleOrContentAndDistance(content, pageable, location.getLongitude(), location.getLatitude(), distance) : postRepository.findByTitleOrContentAndCategoryAndDistance(content, pageable, category, location.getLongitude(), location.getLatitude(), distance);
 
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
