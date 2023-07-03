@@ -97,9 +97,11 @@ public class PostController {
     public PostListResponse searchPost(
             @RequestParam("page") int page,
             @RequestParam("size") int size,
-            @RequestParam("content") String content
+            @RequestParam("content") String content,
+            @RequestParam("category") PostCategory category,
+            @RequestParam("distance") int distance
     ) {
-        return searchPostService.execute(page, size, content);
+        return searchPostService.execute(page, size, content, category, distance);
     }
 
     @Operation(summary = "게시글 끌어올리기")
