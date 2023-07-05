@@ -4,6 +4,8 @@ import com.kkm.kkm_server_v2.domain.jjam.domain.Jjam;
 import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.review.domain.Review;
+import com.kkm.kkm_server_v2.domain.user.domain.enums.Role;
+import com.kkm.kkm_server_v2.domain.user.domain.enums.UserStatus;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostListResponse;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostResponse;
 import lombok.AccessLevel;
@@ -53,6 +55,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     private int tradeCount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserStatus status;
 
     public void updateTradeCount(int tradeCount) {
         this.tradeCount = tradeCount;
@@ -110,6 +116,7 @@ public class User {
         this.role = role;
         this.postList = new ArrayList<>();
         this.kkm = kkm;
+        this.status = UserStatus.ACTIVE;
 
     }
 }
