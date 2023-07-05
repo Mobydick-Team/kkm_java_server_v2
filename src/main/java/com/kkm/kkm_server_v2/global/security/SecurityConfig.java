@@ -2,6 +2,7 @@ package com.kkm.kkm_server_v2.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kkm.kkm_server_v2.global.error.filter.GlobalErrorFilter;
+import com.kkm.kkm_server_v2.global.security.access.CustomAccessDecisionManager;
 import com.kkm.kkm_server_v2.global.security.auth.AuthDetailsService;
 import com.kkm.kkm_server_v2.global.security.jwt.JwtTokenProvider;
 import com.kkm.kkm_server_v2.global.security.jwt.JwtValidateService;
@@ -24,11 +25,11 @@ import org.springframework.web.cors.CorsUtils;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
     private final AuthDetailsService authDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtValidateService jwtValidateService;
     private final ObjectMapper mapper;
+    private final CustomAccessDecisionManager customAccessDecisionManager;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -58,7 +59,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/user/signup/image/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/check/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/auth/kakao/info").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth/kakao/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll().accessDecisionManager(customAccessDecisionManager)
                 .anyRequest().authenticated()
 
                 .and()

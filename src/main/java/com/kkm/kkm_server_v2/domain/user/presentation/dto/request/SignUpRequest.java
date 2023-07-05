@@ -1,8 +1,8 @@
 package com.kkm.kkm_server_v2.domain.user.presentation.dto.request;
 
 import com.kkm.kkm_server_v2.domain.location.domain.Location;
-import com.kkm.kkm_server_v2.domain.user.domain.Role;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
+import com.kkm.kkm_server_v2.domain.user.domain.enums.Role;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +41,7 @@ public class SignUpRequest {
                 .kkm(0)
                 .build();
     }
+
     public User toEntityUserWithoutImg() {
         return User.builder()
                 .userId(userId)
@@ -49,6 +50,7 @@ public class SignUpRequest {
                 .kkm(0)
                 .build();
     }
+
     public Location toEntityLocation(User user, boolean defaultValue) {
         return Location.builder()
                 .address(address)
