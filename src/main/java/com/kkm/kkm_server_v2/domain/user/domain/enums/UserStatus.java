@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 public enum UserStatus {
 
     ACTIVE("활성화"),
-    DEACTIVATED("비활성화");
+    DEACTIVATED("비활성화"),
+    DELETED("삭제");
 
     private final String name;
 
