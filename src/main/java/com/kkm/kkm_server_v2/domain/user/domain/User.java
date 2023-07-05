@@ -8,6 +8,7 @@ import com.kkm.kkm_server_v2.domain.user.domain.enums.Role;
 import com.kkm.kkm_server_v2.domain.user.domain.enums.UserStatus;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostListResponse;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.PostResponse;
+import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 @Table(name = "tb_user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class User {
+public class User extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
