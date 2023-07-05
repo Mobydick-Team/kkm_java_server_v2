@@ -14,6 +14,7 @@ public enum UserErrorProperty implements ErrorProperty {
     PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "비밀번호가 틀렸습니다."),
     AUTHORITY_MISMATCH(HttpStatus.FORBIDDEN, "권한이 없습니다."),
     NOT_USER_PAGE(HttpStatus.FORBIDDEN, "마이페이지로 접근해야 합니다."),
+    USER_IS_DEACTIVATED(HttpStatus.FORBIDDEN, "사용자가 비활성화 상태입니다."),
     ;
 
     private final HttpStatus status;
