@@ -5,6 +5,7 @@ import com.kkm.kkm_server_v2.domain.user.presentation.dto.request.UpdateUserInfo
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.KakaoUserExistResponse;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.MyPageResponse;
 import com.kkm.kkm_server_v2.domain.user.presentation.dto.response.UserPageResponse;
+import com.kkm.kkm_server_v2.domain.user.service.AccountDeactivatedService;
 import com.kkm.kkm_server_v2.domain.user.service.CheckUserService;
 import com.kkm.kkm_server_v2.domain.user.service.DivideImageService;
 import com.kkm.kkm_server_v2.domain.user.service.MyPageService;
@@ -46,6 +47,7 @@ public class UserController {
     private final UpdateUserProfileImgService updateUserProfileImgService;
     private final SignUpDivideProfileService signUpDivideProfileService;
     private final UserPageService userPageService;
+    public final AccountDeactivatedService accountDeactivatedService;
 
 
     @Operation(summary = "회원가입")
@@ -94,5 +96,11 @@ public class UserController {
     @GetMapping("/{id}")
     public UserPageResponse GetUserPage(@PathVariable Long id) {
         return userPageService.execute(id);
+    }
+
+    @Operation(summary = "사용자 비활성화")
+    @PostMapping("/deactivate")
+    public void DeactivateUser() {
+        accountDeactivatedService.execute();
     }
 }
