@@ -2,18 +2,19 @@ package com.kkm.kkm_server_v2.global.security.access;
 
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.domain.user.domain.enums.UserStatus;
+import com.kkm.kkm_server_v2.domain.user.exception.UserNotFoundException;
+import com.kkm.kkm_server_v2.domain.user.exception.error.UserIsDeactivateException;
 import com.kkm.kkm_server_v2.global.security.SecurityConfig;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
 @Component
-public class AccessDecisionManager implements org.springframework.security.access.AccessDecisionManager {
+public class CustomAccessDecisionManager implements org.springframework.security.access.AccessDecisionManager {
 
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
@@ -27,24 +28,26 @@ public class AccessDecisionManager implements org.springframework.security.acces
             }
 
             if (authentication == null) {
-                throw new AccessDeniedException("Access is denied");
+                throw UserNotFoundException.EXCEPTION;
             }
             UserStatus userStatus = getUserStatus(authentication);
-            if (userStatus != UserStatus.ACTIVATE) {
-                throw new AccessDeniedException("Access is denied"); // 접근 거부
+            if (userStatus != UserStatus.ACTIVE) {
+                throw UserIsDeactivateException.EXCEPTION;
             }
 
             return; // 접근 허용
         }
 
-        throw new AccessDeniedException("Access is denied"); // 접근 거부
+        throw UserNotFoundException.EXCEPTION;// 접근 거부
     }
 
     private UserStatus getUserStatus(Authentication authentication) {
         Object principal = authentication.getPrincipal();
-        User user = (User) principal;
-        return user.getStatus();
-
+        if (principal instanceof User) {
+            User user = (User) principal;
+            return user.getStatus();
+        }
+        throw UserNotFoundException.EXCEPTION;
     }
 
 
