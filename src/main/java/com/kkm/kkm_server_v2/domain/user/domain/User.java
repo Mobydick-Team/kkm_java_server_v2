@@ -60,6 +60,10 @@ public class User {
     @Column(nullable = false)
     private UserStatus status;
 
+    public void updateStatus(UserStatus status) {
+        this.status = status;
+    }
+
     public void updateTradeCount(int tradeCount) {
         this.tradeCount = tradeCount;
     }
