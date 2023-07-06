@@ -29,6 +29,7 @@ public class LoginService {
         LocalDateTime lastActivity = user.getModifiedDateTime();
         if (user.getStatus() == UserStatus.DEACTIVATED) {
             if (ChronoUnit.DAYS.between(lastActivity, now) >= 30) {
+                System.out.println(lastActivity);
                 userFacade.saveOrUpdateStatus(user, UserStatus.DELETED);
                 throw UserNotFoundException.EXCEPTION;
             } else {
