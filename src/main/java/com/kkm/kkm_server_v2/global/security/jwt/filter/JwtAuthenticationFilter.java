@@ -56,6 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         User user = userFacade.findUserByUserId(userId);
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime lastActivity = user.getModifiedDateTime();
+        System.out.println("lastActivity = " + lastActivity);
         if (user.getStatus() == UserStatus.DEACTIVATED) {
             if (lastActivity != null && ChronoUnit.DAYS.between(lastActivity, now) >= 30) {
                 user.updateStatus(UserStatus.DELETED);
