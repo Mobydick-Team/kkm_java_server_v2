@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -21,6 +23,8 @@ public class LoginService {
 
     private final UserFacade userFacade;
     private final JwtTokenProvider jwtTokenProvider;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Transactional
     public TokenResponse execute(LoginRequest request) {
@@ -29,7 +33,13 @@ public class LoginService {
         LocalDateTime lastActivity = user.getModifiedDateTime();
         if (user.getStatus() == UserStatus.DEACTIVATED) {
             if (ChronoUnit.DAYS.between(lastActivity, now) >= 30) {
-                System.out.println(lastActivity);
+                boolean isPersistent = entityManager.contains(user);
+                if (!isPersistent) {
+                    System.out.println("user is not persistent");
+                }
+                else {
+                    System.out.println("user is persistent");
+                }
                 userFacade.saveOrUpdateStatus(user, UserStatus.DELETED);
                 throw UserNotFoundException.EXCEPTION;
             } else {
