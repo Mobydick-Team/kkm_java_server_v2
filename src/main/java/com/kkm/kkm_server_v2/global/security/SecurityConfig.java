@@ -1,8 +1,6 @@
 package com.kkm.kkm_server_v2.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kkm.kkm_server_v2.domain.user.domain.repository.UserRepository;
-import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import com.kkm.kkm_server_v2.global.error.filter.GlobalErrorFilter;
 import com.kkm.kkm_server_v2.global.security.auth.AuthDetailsService;
 import com.kkm.kkm_server_v2.global.security.jwt.JwtTokenProvider;
@@ -30,8 +28,7 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
     private final JwtValidateService jwtValidateService;
     private final ObjectMapper mapper;
-    private final UserRepository userRepository;
-    private final UserFacade userFacade;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -65,7 +62,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
 
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(authDetailsService, jwtTokenProvider, jwtValidateService, userFacade, userRepository),
+                .addFilterBefore(new JwtAuthenticationFilter(authDetailsService, jwtTokenProvider, jwtValidateService),
                         UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new GlobalErrorFilter(mapper), JwtAuthenticationFilter.class);
 
