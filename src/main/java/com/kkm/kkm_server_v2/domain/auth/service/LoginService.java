@@ -10,6 +10,7 @@ import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
 import com.kkm.kkm_server_v2.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -21,6 +22,7 @@ public class LoginService {
     private final UserFacade userFacade;
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Transactional
     public TokenResponse execute(LoginRequest request) {
         User user = userFacade.findUserByUserId(request.getUserId());
         LocalDateTime now = LocalDateTime.now();
