@@ -1,6 +1,7 @@
 package com.kkm.kkm_server_v2.domain.user.facade;
 
 import com.kkm.kkm_server_v2.domain.user.domain.User;
+import com.kkm.kkm_server_v2.domain.user.domain.enums.UserStatus;
 import com.kkm.kkm_server_v2.domain.user.domain.repository.UserRepository;
 import com.kkm.kkm_server_v2.domain.user.exception.UserNotFoundException;
 import com.kkm.kkm_server_v2.global.security.auth.AuthDetails;
@@ -39,5 +40,9 @@ public class UserFacade {
     @Transactional(readOnly = true)
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
+    @Transactional
+    public void saveOrUpdateStatus(User user, UserStatus status) {
+        user.updateStatus(status);
     }
 }
