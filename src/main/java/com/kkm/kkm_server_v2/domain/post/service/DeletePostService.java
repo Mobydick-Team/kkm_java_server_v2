@@ -25,6 +25,7 @@ public class DeletePostService {
                 .orElseThrow(() -> PostNotFoundException.EXCEPTION);
 
         post.validatePermission(user);
+        postFacade.deleteImages(post);
         postRepository.delete(post);
     }
 
