@@ -43,6 +43,10 @@ public class AwsS3Service {
         }).collect(Collectors.toList());
     }
 
+    public void deleteFiles(List<String> imgUrls) {
+        imgUrls.forEach(this::deleteFile);
+    }
+
     public void deleteFile(String imgUrl) {
         String fileName = imgUrl.substring(imgUrl.lastIndexOf("/") + 1);
         amazonS3.amazonS3Client().deleteObject(new DeleteObjectRequest(awsProperties.getBucket(), fileName));
