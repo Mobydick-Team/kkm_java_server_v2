@@ -1,6 +1,5 @@
 package com.kkm.kkm_server_v2.global.infra.S3.service;
 
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -44,7 +43,8 @@ public class AwsS3Service {
         }).collect(Collectors.toList());
     }
 
-    public void deleteFile(String fileName) {
+    public void deleteFile(String imgUrl) {
+        String fileName = imgUrl.substring(imgUrl.lastIndexOf("/") + 1);
         amazonS3.amazonS3Client().deleteObject(new DeleteObjectRequest(awsProperties.getBucket(), fileName));
     }
 
