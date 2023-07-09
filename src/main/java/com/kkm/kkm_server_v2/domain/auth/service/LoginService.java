@@ -24,7 +24,7 @@ public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, noRollbackFor = UserNotFoundException.class)
     public TokenResponse execute(LoginRequest request) {
         User user = userFacade.findUserByUserId(request.getUserId());
         LocalDateTime now = LocalDateTime.now();
@@ -32,7 +32,6 @@ public class LoginService {
         if (user.getStatus() == UserStatus.DEACTIVATED) {
             if (ChronoUnit.DAYS.between(lastActivity, now) >= 30) {
                 user.updateStatus(UserStatus.DELETED);
-                userRepository.save(user);
                 throw UserNotFoundException.EXCEPTION;
             } else {
                 throw UserIsDeactivateException.EXCEPTION;
@@ -48,6 +47,7 @@ public class LoginService {
                     .userId(user.getUserId())
                     .build();
         }
+
         throw UserNotFoundException.EXCEPTION;
     }
 
