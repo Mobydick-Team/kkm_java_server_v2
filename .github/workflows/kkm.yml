@@ -1,4 +1,4 @@
-name: Mobydick CI/CD
+name: Mobydick CD
 
 on:
   push:
@@ -26,6 +26,7 @@ jobs:
         if: contains(github.ref, 'main')
         shell: bash
         run: |
+          mkdir ./src/main/resources
           cd ./src/main/resources
           touch ./application.yml
           echo "${{ secrets.CONFIG }}" > ./application.yml
