@@ -21,6 +21,14 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+
+      - name: Create application.yml
+        if: contains(github.ref, 'main')
+        shell: bash
+        run: |
+          cd ./src/main/resources
+          touch ./application.yml
+          echo "${{ secrets.CONFIG }}" > ./application.yml
         
       - name: Gradle Build
         run: |
