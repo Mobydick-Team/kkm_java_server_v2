@@ -23,7 +23,7 @@ public class TradeController {
     private final EndTradeService endTradeService;
 
     @Operation(summary = "거래 생성하기")
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createTrade(
             @RequestBody CreateTradeRequest request

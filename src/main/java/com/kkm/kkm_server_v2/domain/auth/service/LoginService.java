@@ -4,7 +4,6 @@ import com.kkm.kkm_server_v2.domain.auth.presentation.dto.request.LoginRequest;
 import com.kkm.kkm_server_v2.domain.auth.presentation.dto.response.TokenResponse;
 import com.kkm.kkm_server_v2.domain.user.domain.User;
 import com.kkm.kkm_server_v2.domain.user.domain.enums.UserStatus;
-import com.kkm.kkm_server_v2.domain.user.domain.repository.UserRepository;
 import com.kkm.kkm_server_v2.domain.user.exception.UserNotFoundException;
 import com.kkm.kkm_server_v2.domain.user.exception.error.UserIsDeactivateException;
 import com.kkm.kkm_server_v2.domain.user.facade.UserFacade;
@@ -22,7 +21,6 @@ public class LoginService {
 
     private final UserFacade userFacade;
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserRepository userRepository;
 
     @Transactional(rollbackFor = Exception.class, noRollbackFor = UserNotFoundException.class)
     public TokenResponse execute(LoginRequest request) {
