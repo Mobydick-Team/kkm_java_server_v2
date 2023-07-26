@@ -20,6 +20,7 @@ public class PostResponse {
     private String title;
     private String content;
     private int price;
+    private int deposit;
     private PostCategory category;
     private PostStatus status;
     private List<String> images;
@@ -30,6 +31,7 @@ public class PostResponse {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .price(post.getPrice())
+                .deposit(post.getDeposit())
                 .category(post.getCategory())
                 .status(post.getStatus())
                 .images(post.getImageList().stream()
