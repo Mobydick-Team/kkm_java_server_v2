@@ -14,6 +14,10 @@ public enum PostCategory {
     BAG("가방"),
     SHOES("신발"),
     GRADUATION("졸업사진"),
+    ONEPIECE("원피스"),
+    FASHION("패션소품"),
+    ETC("기타"),
+    SKIRT("스커트"),
     ALL("전체");
 
     private final String name;
