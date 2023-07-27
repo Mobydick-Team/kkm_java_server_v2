@@ -1,6 +1,7 @@
 package com.kkm.kkm_server_v2.domain.report.domain;
 
 import com.kkm.kkm_server_v2.domain.report.domain.enums.ReportCategory;
+import com.kkm.kkm_server_v2.domain.report.domain.enums.ReportStatus;
 import com.kkm.kkm_server_v2.global.entity.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -34,6 +35,12 @@ public class Report extends BaseTime {
     private Long reporterId;
 
     private Long targetId;
+    @Enumerated(EnumType.STRING)
+    private ReportStatus status;
+
+    public void updateStatus(ReportStatus status) {
+        this.status = status;
+    }
 
     @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReportImage> imageList;
@@ -50,6 +57,7 @@ public class Report extends BaseTime {
         this.reporterId = reporterId;
         this.targetId = targetId;
         this.imageList = new ArrayList<>();
+        this.status = ReportStatus.REVIEWING;
     }
 
 }
