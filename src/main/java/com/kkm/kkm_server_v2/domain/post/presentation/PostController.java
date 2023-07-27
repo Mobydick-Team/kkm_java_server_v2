@@ -4,8 +4,8 @@ import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.CreatePostRequest;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.UpdatePostRequest;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.ImageResponse;
+import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostDetailResponse;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostListResponse;
-import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.PostResponse;
 import com.kkm.kkm_server_v2.domain.post.service.CreatePostService;
 import com.kkm.kkm_server_v2.domain.post.service.DeletePostService;
 import com.kkm.kkm_server_v2.domain.post.service.DistanceAndCategoryPostService;
@@ -86,7 +86,7 @@ public class PostController {
 
     @Operation(summary = "게시글 조회")
     @GetMapping("/{id}")
-    public PostResponse getPost(
+    public PostDetailResponse getPost(
             @PathVariable("id") Long id
     ) {
         return findPostService.execute(id);

@@ -1,5 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.service;
 
+import com.kkm.kkm_server_v2.domain.jjam.service.IsJjammedService;
 import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.location.facade.LocationFacade;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
@@ -25,6 +26,7 @@ public class DistanceAndCategoryPostService {
     private final PostRepository postRepository;
     private final UserFacade userFacade;
     private final LocationFacade locationFacade;
+    private final IsJjammedService isJjammedService;
 
     @Transactional
     public PostListResponse execute(int page, int size, PostCategory category, int distance) {
@@ -35,7 +37,9 @@ public class DistanceAndCategoryPostService {
         return PostListResponse.builder()
                 .currentPage(list.getNumber() + 1)
                 .hasMorePage(list.getTotalPages() > list.getNumber() + 1)
-                .list(list.stream().map(PostResponse::of).collect(Collectors.toList()))
+                .list(list.stream().map(post ->
+                        PostResponse.of(post, isJjammedService.execute(user, post))
+                ).collect(Collectors.toList()))
                 .build();
 
     }

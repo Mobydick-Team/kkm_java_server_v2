@@ -57,6 +57,7 @@ public class Post extends BaseTime {
     private PostStatus status;
     private double longitude;
     private double latitude;
+    private String address;
 
     public void updateStatus(PostStatus status) {
         this.status = status;
@@ -85,9 +86,10 @@ public class Post extends BaseTime {
                 getImageList().add(item)
         ).close();
     }
-    public void addAddress(double latitude, double longitude) {
+    public void addAddress(double latitude, double longitude, String address) {
         this.latitude = latitude;
         this.longitude = longitude;
+        this.address = address;
     }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)

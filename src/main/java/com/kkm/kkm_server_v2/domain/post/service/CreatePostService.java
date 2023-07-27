@@ -38,7 +38,7 @@ public class CreatePostService {
             ).peek(image -> image.setPost(post)).collect(Collectors.toList());
             post.addImage(images);
         }
-        post.addAddress(location.getLatitude(), location.getLongitude());
+        post.addAddress(location.getLatitude(), location.getLongitude(), location.getAddress());
         post.setAuthor(user);
         user.addPost(post);
         postRepository.save(post);
