@@ -41,7 +41,7 @@ public class ReportController {
         return uploadImageService.execute(files);
     }
     @Operation(summary = "신고 상태 변경")
-    @PatchMapping("/")
+    @PatchMapping("")
     public void updateReportStatus(@RequestBody ChangeReportStatusRequest request) {
         changeReportStatusService.execute(request);
     }
