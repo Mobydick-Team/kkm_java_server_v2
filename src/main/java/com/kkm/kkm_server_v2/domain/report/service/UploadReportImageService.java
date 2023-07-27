@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UploadImageService {
+public class UploadReportImageService {
     private final ReportImageRepository reportImageRepository;
     private final AwsS3Service awsS3Service;
 
