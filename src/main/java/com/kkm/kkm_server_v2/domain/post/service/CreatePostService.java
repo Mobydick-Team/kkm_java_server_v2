@@ -2,7 +2,7 @@ package com.kkm.kkm_server_v2.domain.post.service;
 
 import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.location.facade.LocationFacade;
-import com.kkm.kkm_server_v2.domain.post.domain.Image;
+import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.ImageRepository;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
@@ -32,7 +32,7 @@ public class CreatePostService {
         Location location = locationFacade.findBySelectedAndUserLocation(user);
         Post post = request.toEntity();
         if (!request.getUrls().isEmpty()) {
-            List<Image> images = request.getUrls().stream().map(url ->
+            List<PostImage> images = request.getUrls().stream().map(url ->
                     imageRepository.findByUrl(url)
                             .orElseThrow(() -> ImageNotFoundException.EXCEPTION)
             ).peek(image -> image.setPost(post)).collect(Collectors.toList());

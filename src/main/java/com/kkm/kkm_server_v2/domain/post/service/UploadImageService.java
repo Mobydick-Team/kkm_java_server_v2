@@ -1,6 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.service;
 
-import com.kkm.kkm_server_v2.domain.post.domain.Image;
+import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.ImageRepository;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.ImageResponse;
 import com.kkm.kkm_server_v2.global.infra.S3.service.AwsS3Service;
@@ -23,7 +23,7 @@ public class UploadImageService {
     public ImageResponse execute(List<MultipartFile> files) {
         List<String> urls = awsS3Service.uploadFile(files);
 
-        List<Image> images = urls.stream().map(Image::new)
+        List<PostImage> images = urls.stream().map(PostImage::new)
                 .collect(Collectors.toList());
         imageRepository.saveAll(images);
 

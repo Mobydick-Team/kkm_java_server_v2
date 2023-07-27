@@ -1,6 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.presentation.dto.response;
 
-import com.kkm.kkm_server_v2.domain.post.domain.Image;
+import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostCategory;
 import com.kkm.kkm_server_v2.domain.post.domain.enums.PostStatus;
@@ -35,7 +35,7 @@ public class PostResponse {
                 .category(post.getCategory())
                 .status(post.getStatus())
                 .images(post.getImageList().stream()
-                        .map(Image::getUrl)
+                        .map(PostImage::getUrl)
                         .collect(Collectors.toList()))
                 .build();
     }

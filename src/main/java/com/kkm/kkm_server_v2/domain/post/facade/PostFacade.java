@@ -1,6 +1,6 @@
 package com.kkm.kkm_server_v2.domain.post.facade;
 
-import com.kkm.kkm_server_v2.domain.post.domain.Image;
+import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.PostNotFoundException;
@@ -26,7 +26,7 @@ public class PostFacade {
     }
     public void deleteImages(Post post) {
         List<String> imgUrls = post.getImageList().stream()
-                .map(Image::getUrl)
+                .map(PostImage::getUrl)
                 .collect(Collectors.toList());
         awsS3Service.deleteFiles(imgUrls);
     }

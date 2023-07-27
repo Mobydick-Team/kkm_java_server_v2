@@ -78,9 +78,9 @@ public class Post extends BaseTime {
     }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Image> imageList;
+    private List<PostImage> imageList;
 
-    public void addImage(List<Image> images) {
+    public void addImage(List<PostImage> images) {
         images.stream().map(item ->
                 getImageList().add(item)
         ).close();

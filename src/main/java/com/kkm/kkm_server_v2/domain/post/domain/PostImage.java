@@ -17,8 +17,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_image")
-@Getter @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Image {
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class PostImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +30,13 @@ public class Image {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_post")
     private Post post;
+
     public void setPost(Post post) {
         this.post = post;
     }
 
     @Builder
-    public Image(String url) {
+    public PostImage(String url) {
         this.url = url;
     }
 }

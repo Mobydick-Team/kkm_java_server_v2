@@ -1,12 +1,12 @@
 package com.kkm.kkm_server_v2.domain.post.domain.repository;
 
-import com.kkm.kkm_server_v2.domain.post.domain.Image;
+import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface ImageRepository extends JpaRepository<Image, Long> {
+public interface ImageRepository extends JpaRepository<PostImage, Long> {
 
-    Optional<Image> findByUrl(String url);
+    Optional<PostImage> findByUrl(String url);
 
 }
