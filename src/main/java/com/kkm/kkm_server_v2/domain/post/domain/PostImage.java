@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "tb_image")
+@Table(name = "tb_post_image")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostImage {
