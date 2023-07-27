@@ -4,7 +4,7 @@ import com.kkm.kkm_server_v2.domain.location.domain.Location;
 import com.kkm.kkm_server_v2.domain.location.facade.LocationFacade;
 import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
 import com.kkm.kkm_server_v2.domain.post.domain.Post;
-import com.kkm.kkm_server_v2.domain.post.domain.repository.ImageRepository;
+import com.kkm.kkm_server_v2.domain.post.domain.repository.PostImageRepository;
 import com.kkm.kkm_server_v2.domain.post.domain.repository.PostRepository;
 import com.kkm.kkm_server_v2.domain.post.exception.ImageNotFoundException;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.request.CreatePostRequest;
@@ -23,7 +23,7 @@ public class CreatePostService {
 
     private final UserFacade userFacade;
     private final PostRepository postRepository;
-    private final ImageRepository imageRepository;
+    private final PostImageRepository imageRepository;
     private final LocationFacade locationFacade;
 
     @Transactional

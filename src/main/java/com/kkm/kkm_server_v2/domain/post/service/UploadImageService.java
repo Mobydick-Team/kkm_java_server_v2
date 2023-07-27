@@ -1,7 +1,7 @@
 package com.kkm.kkm_server_v2.domain.post.service;
 
 import com.kkm.kkm_server_v2.domain.post.domain.PostImage;
-import com.kkm.kkm_server_v2.domain.post.domain.repository.ImageRepository;
+import com.kkm.kkm_server_v2.domain.post.domain.repository.PostImageRepository;
 import com.kkm.kkm_server_v2.domain.post.presentation.dto.response.ImageResponse;
 import com.kkm.kkm_server_v2.global.infra.S3.service.AwsS3Service;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UploadImageService {
 
-    private final ImageRepository imageRepository;
+    private final PostImageRepository imageRepository;
     private final AwsS3Service awsS3Service;
 
     @Transactional
