@@ -23,7 +23,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Create application.yml
-        if: contains(github.ref, 'main')
+        if: contains(github.ref, 'master')
         shell: bash
         run: |
           mkdir ./src/main/resources
