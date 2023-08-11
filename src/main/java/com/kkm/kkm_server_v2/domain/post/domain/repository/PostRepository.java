@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query("SELECT p FROM Post p WHERE p.title LIKE CONCAT('%', :content, '%') OR p.content LIKE CONCAT('%', :content, '%')")
-    Page<Post> findByTitleOrContent(String content, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE p.title LIKE CONCAT('%', :content, '%') OR p.content LIKE CONCAT('%', :content, '%') and p.category = :category and ST_Distance_Sphere(POINT(:longitude, :latitude), POINT(p.longitude, p.latitude)) <= :distance")
     Page<Post> findByTitleOrContentAndCategoryAndDistance(String content, Pageable pageable, PostCategory category, double longitude, double latitude, int distance);

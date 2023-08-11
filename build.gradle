@@ -12,14 +12,9 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', "2021.0.2")
-}
-
 dependencies {
 	implementation group: 'org.json', name: 'json', version: '20090211'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -41,10 +36,4 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 	implementation 'com.google.code.gson:gson:2.9.0'
 
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
 }
